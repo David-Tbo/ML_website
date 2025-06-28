@@ -1,0 +1,10 @@
+Causal Inference notebooks
+===========================
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   DAGs.ipynb
+   InstrumentalVariables.ipynb
+   PropensityScores.ipynb

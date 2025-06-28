@@ -1,0 +1,686 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clustering: DBSCAN &mdash; My AI website 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Clustering: Gaussian Mixed Mixture (GMM)" href="ML_labDauphine_unsupervised_4_GMM.html" />
+    <link rel="prev" title="Clustering: KMeans" href="ML_labDauphine_unsupervised_2_Kmeans.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            My AI website
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../probabilities/index.html">Probability Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistic/index.html">Statistical Methods</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Machine Learning</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#notebooks">Notebooks</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Unsupervised learning</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#notebooks">Notebooks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">My AI website</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Machine Learning</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Unsupervised learning</a></li>
+      <li class="breadcrumb-item active">Clustering: DBSCAN</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/AI/machine_learning/unsupervised_learning/notebooks/ML_labDauphine_unsupervised_3_DBSCAN.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Clustering:-DBSCAN">
+<h1>Clustering: DBSCAN<a class="headerlink" href="#Clustering:-DBSCAN" title="Permalink to this heading"></a></h1>
+<div class="line-block">
+<div class="line"><strong>DBSCAN</strong> (<strong>D</strong>ensity-<strong>B</strong>ased <strong>S</strong>patial <strong>C</strong>lustering of <strong>A</strong>pplications with <strong>N</strong>oise)</div>
+<div class="line">groups points that are closely packed together (i.e., with many nearby neighbors),</div>
+<div class="line">and marks points that lie alone in low-density regions as noise.</div>
+</div>
+<p>It uses two parameters:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> (epsilon): radius of the neighborhood around a point.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{minPts}\)</span>: minimum number of points (including the point itself) required to form a dense region. <strong>Dataset</strong>:</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Point</p></th>
+<th class="head"><p>Coordinates</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>(1, 1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>(2, 1)</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>(4, 3)</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>(5, 4)</p></td>
+</tr>
+<tr class="row-even"><td><p>E</p></td>
+<td><p>(3, 4)</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Step 0: Choose Parameters</strong></p></li>
+</ul>
+<p>Let’s choose:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\epsilon = 1.5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(minPts = 2\)</span> (to keep it simple for this small dataset).</p></li>
+<li><p><strong>Step 1: Compute Distance Matrix</strong></p></li>
+</ul>
+<p>We compute Euclidean distances (already computed in your HAC example):</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>C</p></th>
+<th class="head"><p>D</p></th>
+<th class="head"><p>E</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>0.0</p></td>
+<td><p>1.0</p></td>
+<td><p>3.6</p></td>
+<td><p>5.0</p></td>
+<td><p>3.6</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>1.0</p></td>
+<td><p>0.0</p></td>
+<td><p>2.8</p></td>
+<td><p>4.2</p></td>
+<td><p>3.2</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>3.6</p></td>
+<td><p>2.8</p></td>
+<td><p>0.0</p></td>
+<td><p>1.4</p></td>
+<td><p>1.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>5.0</p></td>
+<td><p>4.2</p></td>
+<td><p>1.4</p></td>
+<td><p>0.0</p></td>
+<td><p>2.0</p></td>
+</tr>
+<tr class="row-even"><td><p>E</p></td>
+<td><p>3.6</p></td>
+<td><p>3.2</p></td>
+<td><p>1.4</p></td>
+<td><p>2.0</p></td>
+<td><p>0.0</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><strong>Step 2: Identify Core, Border, and Noise Points</strong></p></li>
+</ul>
+<div class="line-block">
+<div class="line">A: Neighbors within <span class="math notranslate nohighlight">\(\epsilon\)</span> = [B] <span class="math notranslate nohighlight">\(\rightarrow\)</span> only 1 neighbor <span class="math notranslate nohighlight">\(\rightarrow\)</span> not core</div>
+<div class="line">B: Neighbors within <span class="math notranslate nohighlight">\(\epsilon\)</span> = [A] <span class="math notranslate nohighlight">\(\rightarrow\)</span> only 1 neighbor <span class="math notranslate nohighlight">\(\rightarrow\)</span> not core</div>
+<div class="line">C: Neighbors within <span class="math notranslate nohighlight">\(\epsilon\)</span> = [D, E] <span class="math notranslate nohighlight">\(\rightarrow\)</span> 2 neighbors <span class="math notranslate nohighlight">\(\rightarrow\)</span> ✅ core</div>
+<div class="line">D: Neighbors within <span class="math notranslate nohighlight">\(\epsilon\)</span> = [C] <span class="math notranslate nohighlight">\(\rightarrow\)</span> only 1 <span class="math notranslate nohighlight">\(\rightarrow\)</span> not core</div>
+<div class="line">E: Neighbors within <span class="math notranslate nohighlight">\(\epsilon\)</span> = [C] <span class="math notranslate nohighlight">\(\rightarrow\)</span> only 1 <span class="math notranslate nohighlight">\(\rightarrow\)</span> not core</div>
+</div>
+<p>So:</p>
+<div class="line-block">
+<div class="line">Core points: C</div>
+<div class="line">Border points: D, E (because they’re close to a core point)</div>
+<div class="line">Noise: A, B (not core, and not close to a core).</div>
+</div>
+<ul class="simple">
+<li><p><strong>Step 3: Form Clusters</strong></p></li>
+</ul>
+<div class="line-block">
+<div class="line">Start with core point C → new cluster Cluster 1</div>
+<div class="line">Add C’s ε-neighbors → D and E</div>
+<div class="line"><span class="math notranslate nohighlight">\(\rightarrow\)</span> D and E are added to Cluster 1 as border points</div>
+</div>
+<p>So:</p>
+<div class="line-block">
+<div class="line">Cluster 1 = {C, D, E}</div>
+<div class="line">A and B remain unclustered (noise)</div>
+</div>
+<p><strong>Final Result</strong>:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Cluster</p></th>
+<th class="head"><p>Points</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>C, D, E</p></td>
+</tr>
+<tr class="row-odd"><td><p>Noise</p></td>
+<td><p>A, B</p></td>
+</tr>
+</tbody>
+</table>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">DBSCAN</span>
+
+<span class="c1"># Step-by-step DBSCAN explanation with a small 2D dataset</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># 1. Define the dataset</span>
+<span class="c1"># Points: A(1,1), B(2,1), C(4,3), D(5,4), E(3,4)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># A</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># B</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>  <span class="c1"># C</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># D</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># E</span>
+<span class="p">])</span>
+<span class="n">labels_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+
+<span class="c1"># 2. Visualize the points</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Step 1: Visualize the data points&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 3. Choose DBSCAN parameters</span>
+<span class="c1"># Let&#39;s set eps=1.5 (radius), min_samples=2 (minimum points to form a cluster)</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">min_samples</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># 4. Visualize the eps-neighborhood for point A</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Point A&#39;</span><span class="p">)</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">eps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;eps-neighborhood&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Step 2: eps-neighborhood of point A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 5. Run DBSCAN</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">min_samples</span><span class="p">)</span>
+<span class="n">db_labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+
+<span class="c1"># 6. Visualize the clustering result</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:purple&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Noise&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Step 3: DBSCAN clustering result&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 7. Print cluster assignments</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is classified as Noise.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is assigned to Cluster </span><span class="si">{</span><span class="n">label</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Explanations (in English) ---</span>
+<span class="c1"># Step 1: We plot the five points in 2D space.</span>
+<span class="c1"># Step 2: We illustrate the eps-neighborhood (radius=1.5) for point A. Any point within this circle is considered a neighbor.</span>
+<span class="c1"># Step 3: We run DBSCAN. Points with at least &#39;min_samples&#39; (here, 2) neighbors (including itself) within eps are core points and can form clusters.</span>
+<span class="c1">#         Points not belonging to any cluster are labeled as noise (black &#39;x&#39;).</span>
+<span class="c1">#         The plot shows the resulting clusters and noise points.</span>
+<span class="c1"># The printed output shows the cluster assignment for each point.</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_3_0.png" src="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_3_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_3_1.png" src="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_3_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_3_2.png" src="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_3_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Point A is assigned to Cluster 1.
+Point B is assigned to Cluster 1.
+Point C is assigned to Cluster 2.
+Point D is assigned to Cluster 2.
+Point E is assigned to Cluster 2.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">DBSCAN</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cdist</span>
+
+<span class="c1"># DBSCAN explanation step-by-step with a small dataset</span>
+
+<span class="c1"># Dataset : 5 points in 2D</span>
+<span class="c1"># | Point | Coordinates |</span>
+<span class="c1"># | ----- | ----------- |</span>
+<span class="c1"># | A     | (1, 1)      |</span>
+<span class="c1"># | B     | (2, 1)      |</span>
+<span class="c1"># | C     | (4, 3)      |</span>
+<span class="c1"># | D     | (5, 4)      |</span>
+<span class="c1"># | E     | (3, 4)      |</span>
+
+
+<span class="c1"># 1. Dataset preparation</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># A</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># B</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>  <span class="c1"># C</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># D</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># E</span>
+<span class="p">])</span>
+<span class="n">labels_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+
+<span class="c1"># 2. Choix des paramètres DBSCAN</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># rayon de voisinage</span>
+<span class="n">min_samples</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># nombre minimum de points pour former un cluster</span>
+
+<span class="c1"># 3. Calcul des voisins pour chaque point</span>
+
+<span class="n">dist_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">cdist</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">points</span><span class="p">),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">labels_names</span><span class="p">,</span>
+    <span class="n">index</span><span class="o">=</span><span class="n">labels_names</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrice des distances euclidiennes :&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dist_matrix</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># 4. Application de DBSCAN</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">min_samples</span><span class="p">)</span>
+<span class="n">db_labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+
+<span class="c1"># 5. Explication étape par étape (en français)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Étape 1 : On considère chaque point individuellement.&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Étape 2 : Pour chaque point, on regarde les voisins dans un rayon eps=</span><span class="si">{</span><span class="n">eps</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
+    <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[</span><span class="n">labels_names</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">))</span> <span class="k">if</span> <span class="n">dist_matrix</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">eps</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> a pour voisins (dans eps) : </span><span class="si">{</span><span class="n">neighbors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Étape 3 : On identifie les points centraux (core points) :&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
+    <span class="n">neighbors_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dist_matrix</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&lt;=</span> <span class="n">eps</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">neighbors_count</span> <span class="o">&gt;=</span> <span class="n">min_samples</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> est un point central (core point) (</span><span class="si">{</span><span class="n">neighbors_count</span><span class="si">}</span><span class="s2"> dans eps).&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> n&#39;est PAS un point central (</span><span class="si">{</span><span class="n">neighbors_count</span><span class="si">}</span><span class="s2"> dans eps).&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Étape 4 : Construction des clusters par propagation :&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> est du bruit (noise).&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> appartient au cluster </span><span class="si">{</span><span class="n">label</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Résumé des clusters</span>
+<span class="n">clusters</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">db_labels</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">clusters</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">label</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Résumé des clusters trouvés :&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">clusters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Matrice des distances euclidiennes :
+      A     B     C     D     E
+A  0.00  1.00  3.61  5.00  3.61
+B  1.00  0.00  2.83  4.24  3.16
+C  3.61  2.83  0.00  1.41  1.41
+D  5.00  4.24  1.41  0.00  2.00
+E  3.61  3.16  1.41  2.00  0.00
+
+Étape 1 : On considère chaque point individuellement.
+Point A : [1 1]
+Point B : [2 1]
+Point C : [4 3]
+Point D : [5 4]
+Point E : [3 4]
+
+Étape 2 : Pour chaque point, on regarde les voisins dans un rayon eps=1.5.
+Point A a pour voisins (dans eps) : [&#39;B&#39;]
+Point B a pour voisins (dans eps) : [&#39;A&#39;]
+Point C a pour voisins (dans eps) : [&#39;D&#39;, &#39;E&#39;]
+Point D a pour voisins (dans eps) : [&#39;C&#39;]
+Point E a pour voisins (dans eps) : [&#39;C&#39;]
+
+Étape 3 : On identifie les points centraux (core points) :
+Point A est un point central (core point) (2 dans eps).
+Point B est un point central (core point) (2 dans eps).
+Point C est un point central (core point) (3 dans eps).
+Point D est un point central (core point) (2 dans eps).
+Point E est un point central (core point) (2 dans eps).
+
+Étape 4 : Construction des clusters par propagation :
+Point A appartient au cluster 1.
+Point B appartient au cluster 1.
+Point C appartient au cluster 2.
+Point D appartient au cluster 2.
+Point E appartient au cluster 2.
+
+Résumé des clusters trouvés :
+Cluster 1 : [&#39;A&#39;, &#39;B&#39;]
+Cluster 2 : [&#39;C&#39;, &#39;D&#39;, &#39;E&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">DBSCAN</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
+
+<span class="c1"># Import necessary libraries</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># cluster.colors equivalent: using matplotlib colormaps</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+
+<span class="c1"># --- DBSCAN ---</span>
+
+<span class="c1"># --- A first simulated example ---</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">400</span>
+
+<span class="c1"># Generate 4 clusters with some noise</span>
+<span class="c1"># In R: runif(4, 0, 1) + rnorm(n, sd = 0.1)</span>
+<span class="c1"># In Python: np.random.uniform + np.random.normal</span>
+<span class="n">x_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">y_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">x_centers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">y_centers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="n">true_clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Plot the data colored by true clusters</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">true_clusters</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simulated data with true clusters&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># --- How to choose hyperparameters? ---</span>
+<span class="c1"># Heuristics:</span>
+<span class="c1"># - Choose minPts = 2p (current recommendations) - or more if data is noisy</span>
+<span class="c1"># - Use a k-NN approach to choose epsilon</span>
+
+<span class="c1"># For the example above, minPts = 4</span>
+<span class="c1"># Plot the k-NN distances to help choose epsilon</span>
+<span class="n">neighbors</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">neighbors_fit</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">neighbors_fit</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">distances</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># 4th neighbor distance</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;4-NN distance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Points sorted by distance&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;k-NN distance plot (k=4)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># From the plot, values around 0.05 seem suitable</span>
+
+<span class="c1"># Run DBSCAN with eps=0.05, minPts=4</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">labels_</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># Noise is labeled as -1 in sklearn, so add 1 for color mapping</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;DBSCAN clustering (eps=0.05, minPts=4)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># Noise is shown in black</span>
+
+<span class="c1"># Note: The k-NN approach for choosing epsilon can be slow if n is large</span>
+<span class="c1"># An alternative is to use a grid search</span>
+<span class="c1"># The Adjusted Rand Index (ARI) is used to compare results to true classes</span>
+<span class="c1"># (This is for illustration only; in real data, the partition is unknown)</span>
+
+<span class="n">minPts_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">eps_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">res_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">minPts_grid</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">minPts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">minPts_grid</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">eps</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">):</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">minPts</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">res_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">true_clusters</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">res_mat</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span>
+           <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">eps_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">eps_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">minPts_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">minPts_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;ARI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;eps&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;minPts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ARI for different DBSCAN parameters&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Example with eps=0.09, minPts=15</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">labels_</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;DBSCAN clustering (eps=0.09, minPts=15)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># --- Explanations ---</span>
+<span class="c1"># - The code simulates 4 clusters and applies DBSCAN clustering.</span>
+<span class="c1"># - The k-NN distance plot helps to select a suitable epsilon value.</span>
+<span class="c1"># - Grid search with ARI helps to compare clustering results to the true labels.</span>
+<span class="c1"># - The final plots show the clustering results for different parameter choices.</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_0.png" src="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_1.png" src="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_2.png" src="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/davidtbo/Library/Mobile Documents/com~apple~CloudDocs/AI/machine_learning/unsupervised_learning/.venv/lib/python3.13/site-packages/sklearn/metrics/cluster/_supervised.py:50: UserWarning: The number of unique classes is greater than 50% of the number of samples.
+  type_pred = type_of_target(labels_pred)
+/Users/davidtbo/Library/Mobile Documents/com~apple~CloudDocs/AI/machine_learning/unsupervised_learning/.venv/lib/python3.13/site-packages/sklearn/metrics/cluster/_supervised.py:50: UserWarning: The number of unique classes is greater than 50% of the number of samples.
+  type_pred = type_of_target(labels_pred)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_4.png" src="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_4.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_5.png" src="../../../../_images/AI_machine_learning_unsupervised_learning_notebooks_ML_labDauphine_unsupervised_3_DBSCAN_5_5.png" />
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ML_labDauphine_unsupervised_2_Kmeans.html" class="btn btn-neutral float-left" title="Clustering: KMeans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ML_labDauphine_unsupervised_4_GMM.html" class="btn btn-neutral float-right" title="Clustering: Gaussian Mixed Mixture (GMM)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David TBO.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

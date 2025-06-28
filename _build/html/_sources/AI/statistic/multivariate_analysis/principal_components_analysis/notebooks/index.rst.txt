@@ -1,0 +1,8 @@
+PCA notebooks
+=============
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   PCA_scratch.ipynb

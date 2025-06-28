@@ -1,0 +1,168 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sammon mapping in Python &mdash; My AI website 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            My AI website
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../probabilities/index.html">Probability Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistic/index.html">Statistical Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Machine Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">My AI website</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Sammon mapping in Python</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/AI/machine_learning/unsupervised_learning/sammon/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sammon-mapping-in-python">
+<h1>Sammon mapping in Python<a class="headerlink" href="#sammon-mapping-in-python" title="Permalink to this heading"></a></h1>
+<p>Date: 18 April 2014</p>
+<section id="sammontest-py">
+<h2>sammontest.py<a class="headerlink" href="#sammontest-py" title="Permalink to this heading"></a></h2>
+<p>Run sammontest.py() with no arguments to test sammon.py
+on Fisher’s iris dataset. You should get an output image
+as the one shown below:</p>
+<p><img alt="alt tag" src="http://i.imgur.com/ngfNeEn.png" /></p>
+</section>
+<section id="sammon-py">
+<h2>sammon.py<a class="headerlink" href="#sammon-py" title="Permalink to this heading"></a></h2>
+<p>Simple python implementation of Sammon’s non-linear mapping
+algorithm [1]. Perform Sammon mapping on dataset x</p>
+<p>y = sammon(x) applies the Sammon nonlinear mapping procedure on
+multivariate data x, where each row represents a pattern and each column
+represents a feature.  On completion, y contains the corresponding
+co-ordinates of each point on the map.  By default, a two-dimensional
+map is created.  Note if x contains any duplicated rows, SAMMON will
+fail (ungracefully).</p>
+<p>[y,E] = sammon(x) also returns the value of the cost function in E (i.e.
+the stress of the mapping).</p>
+<p>An N-dimensional output map is generated by y = sammon(x,n) .</p>
+<p>A set of optimisation options can be specified using optional
+arguments, y = sammon(x,n,[OPTS]):</p>
+<ul class="simple">
+<li><p>maxiter        - maximum number of iterations</p></li>
+<li><p>tolfun         - relative tolerance on objective function</p></li>
+<li><p>maxhalves      - maximum number of step halvings</p></li>
+<li><p>input          - {‘raw’,’distance’} if set to ‘distance’, X is interpreted as a matrix of pairwise distances.</p></li>
+<li><p>display        - 0 to 2. 0 least verbose, 2 max verbose.</p></li>
+<li><p>init           - {‘pca’, ‘random’}</p></li>
+</ul>
+<p>The default options are retrieved by calling sammon(x) with no
+parameters.</p>
+</section>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this heading"></a></h2>
+<p>Tom J. Pollard (https://twitter.com/tompollard)</p>
+<p>Ported from MATLAB implementation by
+Gavin C. Cawley and Nicola L. C. Talbot</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h2>
+<p>[1] Sammon, John W. Jr., “A Nonlinear Mapping for Data
+Structure Analysis”, IEEE Transactions on Computers,
+vol. C-18, no. 5, pp 401-409, May 1969.</p>
+</section>
+<section id="copyright">
+<h2>Copyright<a class="headerlink" href="#copyright" title="Permalink to this heading"></a></h2>
+<p>Copyright   : (c) Dr Gavin C. Cawley, November 2007.</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David TBO.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

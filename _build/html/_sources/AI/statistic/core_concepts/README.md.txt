@@ -1,0 +1,14 @@
+Core concepts
+	- Descriptive statistics
+	- Extreme values
+	- Probability theory
+	- Statistical inference
+		- statistique inférentielle
+		- test du chi-deux
+		- test de Student
+		- Test de corrélation
+		- Test Anova
+		- Boxplot
+		- the logistic regression
+		- estimator of p_hat
+		- boxplot

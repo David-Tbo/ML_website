@@ -1,0 +1,9 @@
+Survival models notebooks
+=========================
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   Cox-model.ipynb
+   Kaplan-Meier.ipynb   
