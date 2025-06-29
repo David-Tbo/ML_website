@@ -1,0 +1,1489 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Université Paris-Dauphine &mdash; My AI website 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            My AI website
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../probabilities/index.html">Probability Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Statistical Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../machine_learning/index.html">Machine Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">My AI website</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Université Paris-Dauphine</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/AI/statistic/modeling/non_linear_models/nonparametric_regression/SNP_DM_DThébault-checkpoint.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Université-Paris-Dauphine">
+<h1>Université Paris-Dauphine<a class="headerlink" href="#Université-Paris-Dauphine" title="Permalink to this heading"></a></h1>
+<section id="Executive-Master-Statistique-et-Big-Data:-Année-2020-2021">
+<h2>Executive Master Statistique et Big Data: Année 2020-2021<a class="headerlink" href="#Executive-Master-Statistique-et-Big-Data:-Année-2020-2021" title="Permalink to this heading"></a></h2>
+</section>
+<section id="Régression-non-paramétrique---Cours-enseigné-par-Céline-Duval">
+<h2>Régression non-paramétrique - Cours enseigné par Céline Duval<a class="headerlink" href="#Régression-non-paramétrique---Cours-enseigné-par-Céline-Duval" title="Permalink to this heading"></a></h2>
+<section id="Devoir-Maison-rédigé-par-David-Thébault">
+<h3>Devoir Maison rédigé par David Thébault<a class="headerlink" href="#Devoir-Maison-rédigé-par-David-Thébault" title="Permalink to this heading"></a></h3>
+</section>
+<section id="Cadre">
+<h3>Cadre<a class="headerlink" href="#Cadre" title="Permalink to this heading"></a></h3>
+<p>On dispose de données $(Xi, Yi)_{1 <span class="math">\leq `i :nbsphinx-math:</span>leq 5000`} $, où les <span class="math notranslate nohighlight">\(X_i\)</span> et les <span class="math notranslate nohighlight">\(Y_i\)</span> sont des réalisations de variables aléatoires réelles admettant la représentation</p>
+<p>$ Y_i = r(X_i) + <span class="math">\sigma`(X_i)\*:nbsphinx-math:</span>xi`_i $ avec $ 1 <span class="math">\leq `i :nbsphinx-math:</span>leq 5000` $</p>
+<ul class="simple">
+<li><p>Les <span class="math notranslate nohighlight">\(\xi_i\)</span> sont indépendantes et identiquement distribuées, avec $E[<span class="math">\xi</span>_1] = 0 $, et <span class="math notranslate nohighlight">\(E[\xi_1^2] = 1\)</span>, et ont une densité <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>La fonction <span class="math notranslate nohighlight">\(x \mapsto \sigma(x)\)</span> est strictement positive. Si <span class="math notranslate nohighlight">\(\sigma\)</span> est constante on parle d’un modèle homoscédastique, sinon le modèle est dit hétéroscédastique.</p></li>
+<li><p>Les <span class="math notranslate nohighlight">\(X_i\)</span> sont indépendantes et identiquement distribuées de densité <span class="math notranslate nohighlight">\(g : [1; 6] \mapsto \mathbb{R}_+\)</span>, et indépendantes des <span class="math notranslate nohighlight">\(\xi_i\)</span>.</p></li>
+<li><p>La fonction <span class="math notranslate nohighlight">\(r : \mathbb{R} \mapsto\mathbb{R}\)</span>, vérifie <span class="math notranslate nohighlight">\(|r(x)| \leq 2\)</span> pour tout <span class="math notranslate nohighlight">\(x \in [1; 6]\)</span>.</p></li>
+</ul>
+<p>On dispose de deux jeux de données, Data1 et Data2, dont la première colonne correspond aux <span class="math notranslate nohighlight">\(X_i\)</span> et la seconde colonne correspond aux <span class="math notranslate nohighlight">\(Y_i\)</span>.</p>
+<ul class="simple">
+<li><p>Data1: Dans ce jeu de données la variance des erreurs ne dépend pas de <span class="math notranslate nohighlight">\(X\)</span> (modèle homoscédastique).</p></li>
+<li><p>Data2 : Les différences avec les donnees Data1 sont la loi <span class="math notranslate nohighlight">\(\mu\)</span> des erreurs <span class="math notranslate nohighlight">\(\xi\)</span> et le fait que <span class="math notranslate nohighlight">\(\sigma\)</span> est non constante (modèle hétéroscédastique).</p></li>
+</ul>
+<p>On a les mêmes valeurs pour les <span class="math notranslate nohighlight">\(X_i\)</span> et la même fonction de régression r dans Data1 et Data2.</p>
+</section>
+<section id="Objectifs">
+<h3>Objectifs<a class="headerlink" href="#Objectifs" title="Permalink to this heading"></a></h3>
+<p>Les objectifs des 3 parties qui suivent sont :</p>
+<ol class="arabic simple">
+<li><p>Reconstruire <span class="math notranslate nohighlight">\(x \mapsto g(x)\)</span> graphiquement et étudier si <span class="math notranslate nohighlight">\(g\)</span> est la densité uniforme ou non.</p></li>
+<li><p>Reconstruire <span class="math notranslate nohighlight">\(x \mapsto r(x)\)</span> graphiquement.</p></li>
+<li><p>Explorer les propriétés de <span class="math notranslate nohighlight">\(x \mapsto \mu(x)\)</span> et <span class="math notranslate nohighlight">\(x \mapsto \sigma(x)\)</span>.</p></li>
+</ol>
+</section>
+<section id="1.-Etude-de-la-densité-g-des-X">
+<h3>1. Etude de la densité g des X<a class="headerlink" href="#1.-Etude-de-la-densité-g-des-X" title="Permalink to this heading"></a></h3>
+<p>Pour cette partie on utilisera la première colonne des données <strong>Data1</strong>.</p>
+<p>1.1. Construire un estimateur à noyau <span class="math notranslate nohighlight">\(\widehat{g_{n,h}(x)}\)</span> de <span class="math notranslate nohighlight">\(g(x)\)</span> pour une fenêtre de lissage <span class="math notranslate nohighlight">\(h &gt; 0\)</span> donnée et représenter graphiquement <span class="math notranslate nohighlight">\(x \mapsto \widehat{g_{n,h}(x)}\)</span> pour différentes valeurs de h que vous choisirez. On discutera la raison pour laquelle ce choix est important.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import des librairies</span>
+
+<span class="kn">from</span> <span class="nn">IPython.core.interactiveshell</span> <span class="kn">import</span> <span class="n">InteractiveShell</span>
+<span class="n">InteractiveShell</span><span class="o">.</span><span class="n">ast_node_interactivity</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1"># gestion de données de type DataFrame</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1"># gestion des tableaux et opérations d&#39;algèbre linéaire de base</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> <span class="c1"># graphes</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span> <span class="c1"># statistics et visualisation</span>
+
+<span class="kn">import</span> <span class="nn">os.path</span> <span class="c1"># gestion des path</span>
+
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span> <span class="c1"># librairie de calcul scientifique basée sur numpy, import du package statistiques</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
+
+<span class="c1"># Deux fonctions (au moins) permettent de faire de l&#39;estimation à noyau sous Python</span>
+<span class="c1"># La première KDEUnivarite</span>
+<span class="kn">from</span> <span class="nn">statsmodels.nonparametric.kde</span> <span class="kn">import</span> <span class="n">KDEUnivariate</span>
+<span class="kn">from</span> <span class="nn">statsmodels.nonparametric.kernel_regression</span> <span class="kn">import</span> <span class="n">KernelReg</span> <span class="c1"># NW et Polynome locaux p=0</span>
+<span class="kn">import</span> <span class="nn">statsmodels.nonparametric.bandwidths</span>
+<span class="c1"># La seconde KernelDensity</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="c1">#from sklearn_extensions.kernel_regression import KernelRegression</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nous allons commencer par charger les données Data1.csv et Data2.csv</span>
+
+<span class="n">path_work_win</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\admin\OneDrive\Documents\Data_Science\10_Régression_non_paramétrique&#39;</span>
+<span class="n">path_win_Data1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_work_win</span><span class="p">,</span> <span class="s1">&#39;Data1.csv&#39;</span><span class="p">)</span>
+<span class="n">path_win_Data2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_work_win</span><span class="p">,</span> <span class="s1">&#39;Data2.csv&#39;</span><span class="p">)</span>
+
+<span class="n">path_win_Data1</span> <span class="o">=</span> <span class="n">path_win_Data1</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="n">path_win_Data1</span> <span class="o">=</span> <span class="n">path_win_Data1</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path_win_Data1</span><span class="p">):</span>
+
+    <span class="n">Data1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_win_Data1</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;absence du fichier: &quot;</span><span class="p">,</span><span class="n">path_win_Data1</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path_win_Data2</span><span class="p">):</span>
+
+    <span class="n">Data2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_win_Data2</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;absence du fichier: &quot;</span><span class="p">,</span><span class="n">path_win_Data2</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Data1</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>X</th>
+      <th>Y1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1.034366</td>
+      <td>1.035967</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>3.643734</td>
+      <td>1.368706</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>5.701457</td>
+      <td>1.030205</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>5.420473</td>
+      <td>1.309923</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>1.009888</td>
+      <td>1.065813</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4995</th>
+      <td>4996</td>
+      <td>3.136566</td>
+      <td>1.069458</td>
+    </tr>
+    <tr>
+      <th>4996</th>
+      <td>4997</td>
+      <td>5.451821</td>
+      <td>0.792698</td>
+    </tr>
+    <tr>
+      <th>4997</th>
+      <td>4998</td>
+      <td>5.716820</td>
+      <td>0.640827</td>
+    </tr>
+    <tr>
+      <th>4998</th>
+      <td>4999</td>
+      <td>1.054115</td>
+      <td>1.395199</td>
+    </tr>
+    <tr>
+      <th>4999</th>
+      <td>5000</td>
+      <td>2.798852</td>
+      <td>1.634857</td>
+    </tr>
+  </tbody>
+</table>
+<p>5000 rows × 3 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">Data1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+pandas.core.frame.DataFrame
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Data1</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(5000, 3)
+</pre></div></div>
+</div>
+<p>Résumé statistique des <span class="math notranslate nohighlight">\(X_i\)</span>, <span class="math notranslate nohighlight">\(Y_i\)</span> des deux jeux de données Data1 et Data2</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Data1</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>X</th>
+      <th>Y1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>5000.000000</td>
+      <td>5000.000000</td>
+      <td>5000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2500.500000</td>
+      <td>3.527486</td>
+      <td>1.235370</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1443.520003</td>
+      <td>1.839532</td>
+      <td>0.585506</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>-4.952235</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1250.750000</td>
+      <td>1.617688</td>
+      <td>0.833701</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2500.500000</td>
+      <td>3.576746</td>
+      <td>1.175970</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3750.250000</td>
+      <td>5.418334</td>
+      <td>1.536368</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>5000.000000</td>
+      <td>6.000000</td>
+      <td>10.325009</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Représentons graphiquemenent, par un histogramme, la variable X.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Data1</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s2">&quot;hist&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x1bc53614040&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_13_1.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_13_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">probability</span> <span class="o">=</span> <span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>La distribution de <span class="math notranslate nohighlight">\(X\)</span> est bimodale. La variable <span class="math notranslate nohighlight">\(X\)</span> ne suit pas la loi normale.</p>
+</section>
+</section>
+<section id="id1">
+<h2>1. Etude de la densité g des X<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p><em>Pour cette partie on utilisera la première colonne des données</em> <strong>Data1</strong>.</p>
+<p><strong>1.1.</strong> Construire un estimateur à noyau <span class="math notranslate nohighlight">\(\widehat{g_{n,h}(x)}\)</span> de <span class="math notranslate nohighlight">\(g(x)\)</span> pour une fenêtre de lissage <span class="math notranslate nohighlight">\(h &gt; 0\)</span> donnée et représenter graphiquement <span class="math notranslate nohighlight">\(x \mapsto \widehat{g_{n,h}(x)}\)</span> pour différentes valeurs de h que vous choisirez. On discutera la raison pour laquelle ce choix est important.</p>
+<p>Pour construire un estimateur à noyau <span class="math notranslate nohighlight">\(\widehat{g_{n,h}(x)}\)</span> de <span class="math notranslate nohighlight">\(g(x)\)</span> pour une fenêtre de lissage <span class="math notranslate nohighlight">\(h &gt; 0\)</span> donnée nous reprenons la fonction vue en cours qui utilise la méthode KDEUnivariate</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_hat</span><span class="p">(</span><span class="n">grid</span> <span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Univariate Kernel Density Estimation with Statsmodels&quot;&quot;&quot;</span>
+    <span class="c1"># grid: grille de points où l&#39;estimateur de $f$ sera évalué</span>
+    <span class="c1"># X: échantillon (X_1,..., X_n)</span>
+    <span class="c1"># h: choix de la taille de la fenêtre</span>
+    <span class="c1"># **kwargs: arguments optionels Par défaut le noyau gaussien est utilisé</span>
+    <span class="n">kde</span> <span class="o">=</span> <span class="n">KDEUnivariate</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">kde</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">bw</span> <span class="o">=</span> <span class="n">h</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">kde</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Nous représentons graphiquement la fonction <span class="math notranslate nohighlight">\(x \mapsto \widehat{g_{n,h}(x)}\)</span> pour différentes valeurs de h, paramètre de lissage.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">g1</span><span class="p">,</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">0.1</span><span class="p">))</span>
+<span class="n">g3</span><span class="p">,</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="n">g5</span><span class="p">,</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">g7</span><span class="p">,</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">0.7</span><span class="p">))</span>
+<span class="n">g9</span><span class="p">,</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">0.9</span><span class="p">))</span>
+<span class="n">g11</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">1.1</span><span class="p">))</span>
+<span class="n">g13</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">1.3</span><span class="p">))</span>
+<span class="n">g15</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g3</span><span class="p">,</span> <span class="n">g5</span><span class="p">,</span> <span class="n">g7</span><span class="p">,</span> <span class="n">g9</span><span class="p">,</span> <span class="n">g11</span><span class="p">,</span> <span class="n">g13</span><span class="p">,</span> <span class="n">g15</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;h = 0,1&#39;</span><span class="p">,</span> <span class="s1">&#39;h = 0,3&#39;</span><span class="p">,</span> <span class="s1">&#39;h = 0,7&#39;</span><span class="p">,</span> <span class="s1">&#39;h = 0,9&#39;</span><span class="p">,</span> <span class="s1">&#39;h = 1,1&#39;</span><span class="p">,</span> <span class="s1">&#39;h = 1,3&#39;</span><span class="p">,</span> <span class="s1">&#39;h = 1,5&#39;</span><span class="p">],</span>
+              <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span> <span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Légende&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;fonction densité&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Représentation de la densité&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x1bc53732d60&gt;
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;X&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;fonction densité&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;Représentation de la densité&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_21_4.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_21_4.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Pour les valeurs de h, <span class="math notranslate nohighlight">\(h \in ]0; 1.5]\)</span>.</p>
+<ul>
+<li><p>La densité est bimodale,</p></li>
+<li><p>Plus h est grand, plus les deux bosses deviennent plates</p></li>
+<li><p>Pour <span class="math notranslate nohighlight">\(h = 0.1\)</span> on observe une plus grande volatilité autour de la moyenne.</p></li>
+</ul>
+</li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">g17</span><span class="p">,</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">1.7</span><span class="p">))</span>
+<span class="n">g19</span><span class="p">,</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mf">1.9</span><span class="p">))</span>
+<span class="n">g100</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">h</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">g17</span><span class="p">,</span> <span class="n">g19</span><span class="p">,</span> <span class="n">g100</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;h = 1,7&#39;</span><span class="p">,</span> <span class="s1">&#39;h = 1,9&#39;</span><span class="p">,</span> <span class="s1">&#39;h = 10&#39;</span><span class="p">],</span>
+              <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span> <span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Légende&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;fonction densité&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Représentation de la densité&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x1bc537700a0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;X&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;fonction densité&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;Représentation de la densité&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_23_4.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_23_4.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Pour <span class="math notranslate nohighlight">\(h &gt; 1,5\)</span> :</p>
+<ul>
+<li><p>la densité est unimodale</p></li>
+<li><p>la variable est centrée,</p></li>
+<li><p>Pour <span class="math notranslate nohighlight">\(h = 10\)</span>, la densité devient quasiment plate.</p></li>
+</ul>
+</li>
+</ul>
+<p>Le choix de h est primordial car si cet hyperparamètre est trop grand, le lissage ne permet pas de reproduire la forme bimodale observée avec l’histogramme. Si h est trop petit, on observe une relativement forte volatilité de la densité autour de la moyenne.</p>
+<p>Les caractéristiques des données semblent être mieux représentées quand <span class="math notranslate nohighlight">\(h \geq 0.1\)</span> et <span class="math notranslate nohighlight">\(h \leq 1.5\)</span>.</p>
+<p>1.2. Représentation graphique de l’estimateur de densité de g</p>
+<ul class="simple">
+<li><p>Nous avons besoin de l’estimateur de la fenêtre h noté $ :nbsphinx-math:<a href="#id2"><span class="problematic" id="id3">`</span></a>widehat{h_n}`$</p></li>
+</ul>
+<ul class="simple">
+<li><p>Rappelons que le biais est petit si h est petit et la densité g régulière. Nous venons aussi de voir que si h est trop petit, la variance est plus grande. Le choix de h sera donc un compromis entre un biais contrôlé et une variance petite.</p></li>
+</ul>
+<ul class="simple">
+<li><p>La règle du pouce de Silverman et celle de Scott nous fournissent une première approximation de h pour les fonctions de densité deux fois dérivable. L’hyperparamètre h1 de Scott se retrouve par la formule suivante: <span class="math notranslate nohighlight">\(h_{est} = 1.06*\sigma(X)*n^{\frac{-1}{2\alpha + 1}}\)</span> avec ici <span class="math notranslate nohighlight">\(\alpha = 2\)</span> pour g deux fois dérivable.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span> <span class="mi">5000</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">statsmodels</span><span class="o">.</span><span class="n">nonparametric</span><span class="o">.</span><span class="n">bandwidths</span><span class="o">.</span><span class="n">bw_scott</span><span class="p">(</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">statsmodels</span><span class="o">.</span><span class="n">nonparametric</span><span class="o">.</span><span class="n">bandwidths</span><span class="o">.</span><span class="n">bw_silverman</span><span class="p">(</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])</span>
+<span class="p">(</span><span class="mf">1.06</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]))</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0.35495697624782646, 0.3546575787072305, 0.3014087071166265)
+</pre></div></div>
+</div>
+<p>Les estimateurs h1 et h2 (Scott et Silverman) de l’hyperparamètre h sont calculés en faisant l’hypothèse que la densité g des <span class="math notranslate nohighlight">\(X_i\)</span> est deux fois dérivable. Mais la fonction de densité peut être dérivable plus de deux fois.</p>
+<p>Si par exemple la densité n’était qu’une fois dérivable, l’estimateur de Scott serait proche de:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span>
+<span class="mf">1.06</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]))</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.11401965315212556
+</pre></div></div>
+</div>
+<p>Estimation de h par validation croisée (leave one out)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bandwidths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+<span class="n">Xnew</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">Xnew</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(5000, 1)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GG</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">),{</span><span class="s1">&#39;bandwidth&#39;</span><span class="p">:</span> <span class="n">bandwidths</span><span class="p">},</span><span class="n">cv</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">GG</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xnew</span><span class="p">)</span>
+<span class="n">h_cv</span> <span class="o">=</span> <span class="n">GG</span><span class="o">.</span><span class="n">best_params_</span><span class="p">[</span><span class="s2">&quot;bandwidth&quot;</span><span class="p">]</span>
+<span class="n">h_cv</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+GridSearchCV(cv=2, estimator=KernelDensity(),
+             param_grid={&#39;bandwidth&#39;: array([0.        , 0.03448276, 0.06896552, 0.10344828, 0.13793103,
+       0.17241379, 0.20689655, 0.24137931, 0.27586207, 0.31034483,
+       0.34482759, 0.37931034, 0.4137931 , 0.44827586, 0.48275862,
+       0.51724138, 0.55172414, 0.5862069 , 0.62068966, 0.65517241,
+       0.68965517, 0.72413793, 0.75862069, 0.79310345, 0.82758621,
+       0.86206897, 0.89655172, 0.93103448, 0.96551724, 1.        ])})
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.034482758620689655
+</pre></div></div>
+</div>
+<p>L’estimateur h_cv de l’hyperparamètre h calculé par la validation croisée est très petit. Comme nous l’avons vu plus haut, la densité g de X pour un h trop petit <span class="math notranslate nohighlight">\((h &lt; 0.3)\)</span> entraîne de la variance autour de la moyenne. Pour éviter cela nous prenons comme estimateur de h, l’estimateur <span class="math notranslate nohighlight">\(\widehat{h_n}\)</span> de Silverman <span class="math notranslate nohighlight">\(h_2 = 0.30\)</span></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utilisation en densité</span>
+<span class="k">def</span> <span class="nf">f_hat</span><span class="p">(</span><span class="n">grid</span> <span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Univariate Kernel Density Estimation with Statsmodels&quot;&quot;&quot;</span>
+    <span class="c1"># grid: grille de points où l&#39;estimateur de $f$ sera évalué</span>
+    <span class="c1"># X: échantillon (X_1,..., X_n)</span>
+    <span class="c1"># h: choix de la taille de la fenêtre</span>
+    <span class="c1"># **kwargs: arguments optionels Par défaut le noyau gaussien est utilisé</span>
+    <span class="n">kde</span> <span class="o">=</span> <span class="n">KDEUnivariate</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">kde</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">bw</span> <span class="o">=</span> <span class="n">h</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">kde</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+
+<span class="n">g1</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h1</span><span class="p">))</span>
+<span class="n">g2</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h2</span><span class="p">))</span>
+<span class="n">g3</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h_cv</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">g3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;h = Scott&#39;</span><span class="p">,</span> <span class="s1">&#39;h = Silverman&#39;</span><span class="p">,</span> <span class="s1">&#39;h = CV&#39;</span><span class="p">],</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span> <span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Légende&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;fonction densité&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Représentation de la densité&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x1bc537f9640&gt;
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;X&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;fonction densité&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 1.0, &#39;Représentation de la densité&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_39_4.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_39_4.png" />
+</div>
+</div>
+<p>Fonction de répartition de la loi uniforme <span class="math notranslate nohighlight">\(U[a;b]\)</span></p>
+<p>1.3. Implémenter un QQ-plot pour vérifier l’hypothèse <em>g</em> est la distribution uniforme</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unif</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">dist</span><span class="o">=</span><span class="n">unif</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((array([1.00083172, 1.00201885, 1.00321877, ..., 6.99678123, 6.99798115,
+         6.99916828]),
+  array([1.        , 1.00000241, 1.00000245, ..., 5.99999668, 5.99999799,
+         5.99999985])),
+ (1.0480601715001256, -0.6647543013787409, 0.9868503047727742))
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_42_1.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_42_1.png" />
+</div>
+</div>
+<p>L’hypothèse que g soit la distribution uniforme est peu probable car la forme de la courbe bleu des quantiles associés aux observations versus les quantiles de la loi uniforme est trop sinusoïdale et s’éloigne régulièrement de la première bissectrice.</p>
+<section id="1.4.-Zone-de-l'espace-où-l'estimation-de-r-sera-plus-précise">
+<h3>1.4. Zone de l’espace où l’estimation de r sera plus précise<a class="headerlink" href="#1.4.-Zone-de-l'espace-où-l'estimation-de-r-sera-plus-précise" title="Permalink to this heading"></a></h3>
+<p>L’estimation de r sera la plus précise là où les <span class="math notranslate nohighlight">\(X_i\)</span> seront les plus nombreux i.e. au voisinage de <span class="math notranslate nohighlight">\(1^+\)</span> et <span class="math notranslate nohighlight">\(6^-\)</span> et nous avons vu qu’à ces voisinages l’estimation de g était fortement dépendante du choix de h.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Data1</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s2">&quot;hist&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x1bc53f6c040&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_46_1.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_46_1.png" />
+</div>
+</div>
+</section>
+<section id="1.5.-Pour-$-k-\geq-1-$,-on-pose-$-c(k)-=-\int_16{xkg(x)dx}-$.-Construire-un-estimateur-$-\widehat{c_n}`^{(k)}$-de-:math:`c(k).-On-pourra-en-particulier-discuter-de-la-qualité-de-l'estimation-en-prenant-k=0.">
+<h3>1.5. Pour $ k <span class="math">\geq 1</span> $, on pose $ c(k) = <span class="math">\int</span>_1<sup>6{x</sup>kg(x)dx} $. Construire un estimateur $ <span class="math">\widehat{c_n}`^{(k)}$ de :math:`c(k)</span>. On pourra en particulier discuter de la qualité de l’estimation en prenant <span class="math notranslate nohighlight">\(k=0\)</span>.<a class="headerlink" href="#1.5.-Pour-$-k-\geq-1-$,-on-pose-$-c(k)-=-\int_16{xkg(x)dx}-$.-Construire-un-estimateur-$-\widehat{c_n}`^{(k)}$-de-:math:`c(k).-On-pourra-en-particulier-discuter-de-la-qualité-de-l'estimation-en-prenant-k=0." title="Permalink to this heading"></a></h3>
+<p>Si la densité <span class="math notranslate nohighlight">\(g(x)\)</span> de <span class="math notranslate nohighlight">\(X\)</span> est la distribution uniforme <span class="math notranslate nohighlight">\(\textit{U}[1,6]\)</span> alors <span class="math notranslate nohighlight">\(c(k) = \mathbb{E}[X^k\mathbb{1}_{[1,6]}(X)]\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(c(k)\)</span> peut-être estimé par la méthode de Monte-Carlo:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">5000</span>
+<span class="n">x</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.8374
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2.9310121372679454
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+11.963687100581012
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+53.771238896759506
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+256.7511157942435
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1276.02486059914
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+6522.603201702394
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+34042.37734224618
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+180542.81795462518
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+969779.0122569969
+</pre></div></div>
+</div>
+<p>Calculons l’estimateur de <span class="math notranslate nohighlight">\(c(k)\)</span> en utilisant cette fois-ci l’estimateur de densité de <span class="math notranslate nohighlight">\(g(x)\)</span> d’hyperparamètre <span class="math notranslate nohighlight">\(h_1\)</span> et en nous plaçant sur l’intervalle <span class="math notranslate nohighlight">\([1,6]\)</span></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">zgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5000</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="o">**</span><span class="n">k</span><span class="o">*</span><span class="n">f_hat</span><span class="p">(</span><span class="n">zgrid</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">h1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.16842634435218015
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.5909939091738798
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2.6446910086810096
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+13.280014967778506
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+70.34797702802754
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+383.2791630052203
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2124.1425117407716
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+11908.701549045498
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+67328.93285667154
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+383129.49474834674
+</pre></div></div>
+</div>
+<p>Les deux estimateurs retournent des valeurs éloignées. La loi uniforme ne semble pas non plus correspondre à la densité de X.</p>
+</section>
+</section>
+<section id="2.-Reconstrucion-de-r(x)">
+<h2>2. Reconstrucion de <span class="math notranslate nohighlight">\(r(x)\)</span><a class="headerlink" href="#2.-Reconstrucion-de-r(x)" title="Permalink to this heading"></a></h2>
+<p><em>Pour cette partie on utilise les données Data1</em></p>
+<p>La représentation des données peut donc s’écrire sous la forme du modèle additif suivant:</p>
+<p>$ Y_i = r(X_i) + <span class="math">\sigma</span><span class="math">\varepsilon</span>_i $ avec $:nbsphinx-math:<cite>sigma `$ constante (modèle homoscédastique) et :math:`r</cite> la fonction de régression.</p>
+<p>2.1. Est-il plausible de penser que <span class="math notranslate nohighlight">\(r\)</span> soit linéaire ?</p>
+<p>Pour répondre à cette question, nous allons commencer par représenter graphiquement les couples $(X_i,Y_i) $ avec $ 1 <span class="math">\leq `i :nbsphinx-math:</span>leq 5000` .$</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;Y1&#39;</span><span class="p">],</span> <span class="s1">&#39;r.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x1bc00010fd0&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_59_1.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_59_1.png" />
+</div>
+</div>
+<p>Le graphe Y contre X semble indiquer que l’hypothèse que r soit linéaire est peu probable</p>
+<p>Nous allons confirmer cette cette première conclusion par la régression linéaire des Moindres Carrés Ordinaires. Cela nous permet d’utiliser la régression linéaire avec Python. Si r est linéaire, r(x) s’écrit comme $ r(x) = ax + b $ avec <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\mathbb{E}(Y_i) = a\mathbb{E}(X_i)\)</span> + b</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Avant d’appliquer la régression linéaire il faut “reshaper” Y1.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;Y1&#39;</span><span class="p">]</span>
+<span class="n">Ynew</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xnew</span><span class="p">,</span><span class="n">Ynew</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+LinearRegression()
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lm</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[-0.14226115]])
+</pre></div></div>
+</div>
+<p>La pente du modèle de régression linéaire est proche de 0. L’hypothèse “r est linéaire” est peu plausible.</p>
+<p>2.2. Construire une estimateur non-paramétrique <span class="math notranslate nohighlight">\(\widehat{r}_{n,h}(x)\)</span> de <span class="math notranslate nohighlight">\(r(x)\)</span> pour une fenêtre de lissage $h &gt; 0 $ bien choisie et le représenter graphiquement.</p>
+<p>Le choix de h s’effectuera par validation croisée avec l’estimateur de régression de Nadaraya-Watson.</p>
+<p>Le principe de la validation croisée consiste à partir de l’échantillon <span class="math notranslate nohighlight">\((X_k,Y_k)_{k\in(1..n),k\neq i}\)</span> privé d’un individu noté i, d’estimer <span class="math notranslate nohighlight">\(\widehat{R}_{(-i),n,h}(x)\)</span> avec h fixé pris dans la grille. A partir de cette estimation, l’erreur moyenne $ err_h = <span class="math">\frac{1}{n}</span><span class="math">\sum</span><span class="math">\limits</span><em>{i=1}^{i=n}({Y_i - :nbsphinx-math:`widehat{R}`</em>{(-i),n,h}(X_i))}^2$ est calculée. On choisit h* comme le h de la grille minimisant cette erreur
+moyenne: $ h^* = :nbsphinx-math:<a href="#id4"><span class="problematic" id="id5">`</span></a>underset{h in grid}{argmin}`(err_h) $</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">Kreg</span> <span class="o">=</span> <span class="n">KernelReg</span><span class="p">(</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;Y1&#39;</span><span class="p">],</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">var_type</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">reg_type</span> <span class="o">=</span> <span class="s1">&#39;ll&#39;</span><span class="p">,</span> <span class="n">bw</span> <span class="o">=</span> <span class="s1">&#39;cv_ls&#39;</span><span class="p">)</span>
+<span class="n">h_cv</span> <span class="o">=</span> <span class="n">Kreg</span><span class="o">.</span><span class="n">bw</span>
+<span class="n">h_cv</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([0.15252058])
+</pre></div></div>
+</div>
+<p>Maintenant que h a été estimé par l’algorithme de Naradaya Watson, nous pouvons déterminer un estimateur de la fonction de régression <span class="math notranslate nohighlight">\(\widehat{r}_{(\alpha,\beta)(x)}\)</span></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Kreg1</span> <span class="o">=</span> <span class="n">KernelReg</span><span class="p">(</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;Y1&#39;</span><span class="p">],</span> <span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">var_type</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">reg_type</span> <span class="o">=</span> <span class="s1">&#39;ll&#39;</span><span class="p">,</span> <span class="n">bw</span> <span class="o">=</span> <span class="n">h_cv</span><span class="p">)</span>
+<span class="n">r_hat1</span><span class="p">,</span> <span class="n">dr_hat1</span> <span class="o">=</span> <span class="n">Kreg1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span><span class="n">Data1</span><span class="p">[</span><span class="s1">&#39;Y1&#39;</span><span class="p">],</span> <span class="s1">&#39;c.&#39;</span><span class="p">)</span>
+<span class="n">g1</span><span class="p">,</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">r_hat1</span><span class="p">)</span>
+<span class="n">g2</span><span class="p">,</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Kreg1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">grid</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_75_0.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_75_0.png" />
+</div>
+</div>
+<p>2.3. <em>(Facultatif)</em> On considère uniquement les valeurs de <span class="math notranslate nohighlight">\(X\)</span> comprise dans [1,3]. Soit la fonction <span class="math notranslate nohighlight">\(r_{\alpha,\beta}(x) = \beta + (x - 2)^\alpha\)</span>, pensez-vous qu’il existe un couple <span class="math notranslate nohighlight">\((\alpha,\beta) \in \mathbb{R}^2\)</span> tel que le modèle $Y_1 = r_{<span class="math">\alpha</span>,:nbsphinx-math:<cite>beta</cite>}(X) + <span class="math">\epsilon `$ soit adapté aux données, pour une erreur :math:</span>epsilon sim mathcal{N}(0,1)` ?</p>
+<p>Si <span class="math notranslate nohighlight">\(\alpha &lt; 0\)</span> la fonction n’est pas définie au point <span class="math notranslate nohighlight">\(x=2\)</span>. Nous nous plaçons donc dans le cas $:nbsphinx-math:<a href="#id6"><span class="problematic" id="id7">`</span></a>alpha <a href="#id8"><span class="problematic" id="id9">`</span></a>&gt; 0 $.</p>
+<p>Il existe certainement un couple <span class="math notranslate nohighlight">\((\alpha,\beta)\)</span> tel que le modèle $Y_1 = r_{<span class="math">\alpha</span>,:nbsphinx-math:<cite>beta</cite>}(X) + :nbsphinx-math:<a href="#id10"><span class="problematic" id="id11">`</span></a>epsilon <a href="#id12"><span class="problematic" id="id13">`</span></a>$ soit adapté aux données. Nous avons ci-dessous représenter le graphe d’une fonction qui pourrait de part sa forme sinusoïdale aplatie, s’adapter aux données.</p>
+<p>Pour estimer le couple <span class="math notranslate nohighlight">\((\alpha,\beta)\)</span>, peut-être pourrait-on dans un premier temps éliminier le paramètre <span class="math notranslate nohighlight">\(\beta\)</span> en estimant la densité de la dérivée de la fonction de régression et notamment sa valeur <span class="math notranslate nohighlight">\(r_{\alpha,\beta}(1)\)</span> pour déterminer un estimateur de <span class="math notranslate nohighlight">\(\alpha\)</span>. Une fois <span class="math notranslate nohighlight">\(\alpha\)</span> estimé par cette méthode, nous pourrions estimer la fonction de régression au point <span class="math notranslate nohighlight">\(x=2\)</span> et ainsi estimer <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg_fun</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="n">reg_fun</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">grid</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x1bc000dd0a0&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_79_1.png" src="../../../../../_images/AI_statistic_modeling_non_linear_models_nonparametric_regression_SNP_DM_DTh%C3%A9bault-checkpoint_79_1.png" />
+</div>
+</div>
+</section>
+<section id="3.-Etude-de-la-densité-\mu-des-\varepsilon_i">
+<h2>3. Etude de la densité <span class="math notranslate nohighlight">\(\mu\)</span> des <span class="math notranslate nohighlight">\(\varepsilon_i\)</span><a class="headerlink" href="#3.-Etude-de-la-densité-\mu-des-\varepsilon_i" title="Permalink to this heading"></a></h2>
+<p>3.1. A partir du jeu de données Data1</p>
+<p>3.1.1.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Data1_first</span> <span class="o">=</span> <span class="n">Data1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2500</span><span class="p">]</span> <span class="c1"># sélection des 2500 premières lignes</span>
+
+<span class="n">Data1_last</span> <span class="o">=</span> <span class="n">Data1</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2500</span><span class="p">:</span><span class="mi">5000</span><span class="p">]</span> <span class="c1"># sélection des 2500 dernières lignes</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Data1_first</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(2500, 3)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h_cv</span> <span class="o">=</span> <span class="mf">0.1525</span> <span class="c1"># repris de la question 2.2</span>
+<span class="n">grid_first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+<span class="n">Kreg2</span> <span class="o">=</span> <span class="n">KernelReg</span><span class="p">(</span><span class="n">Data1_last</span><span class="p">[</span><span class="s1">&#39;Y1&#39;</span><span class="p">],</span> <span class="n">Data1_last</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">var_type</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">reg_type</span> <span class="o">=</span> <span class="s1">&#39;ll&#39;</span><span class="p">,</span> <span class="n">bw</span> <span class="o">=</span> <span class="n">h_cv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">r_hat2</span><span class="p">,</span> <span class="n">dr_hat2</span> <span class="o">=</span> <span class="n">Kreg2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">grid_first</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Eps</span> <span class="o">=</span> <span class="n">Data1_first</span><span class="p">[</span><span class="s1">&#39;Y1&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">Kreg2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">grid_first</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Eps</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0      -0.180661
+1       0.148494
+2      -0.193568
+3       0.082611
+4      -0.165017
+          ...
+2495    0.701753
+2496    0.972601
+2497    0.452946
+2498    0.290325
+2499    0.025483
+Name: Y1, Length: 2500, dtype: float64
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Eps</span> <span class="o">=</span> <span class="n">Data1_first</span><span class="p">[</span><span class="s1">&#39;Y1&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">Kreg2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">grid</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">Eps</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+C:\Users\admin\anaconda3\lib\site-packages\numpy\linalg\linalg.py:1966: RuntimeWarning: overflow encountered in true_divide
+  s = divide(1, s, where=large, out=s)
+C:\Users\admin\anaconda3\lib\site-packages\numpy\linalg\linalg.py:1969: RuntimeWarning: invalid value encountered in matmul
+  res = matmul(transpose(vt), multiply(s[..., newaxis], transpose(u)))
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">&lt;ipython-input-37-50f84a51030c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span><span class="ansi-yellow-intense-fg ansi-bold"> </span>Eps <span class="ansi-yellow-intense-fg ansi-bold">=</span> Data1_first<span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-blue-intense-fg ansi-bold">&#39;Y1&#39;</span><span class="ansi-yellow-intense-fg ansi-bold">]</span> <span class="ansi-yellow-intense-fg ansi-bold">-</span> Kreg2<span class="ansi-yellow-intense-fg ansi-bold">.</span>fit<span class="ansi-yellow-intense-fg ansi-bold">(</span>grid<span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">[</span><span class="ansi-cyan-intense-fg ansi-bold">0</span><span class="ansi-yellow-intense-fg ansi-bold">]</span>
+<span class="ansi-green-fg">      2</span> plt<span class="ansi-yellow-intense-fg ansi-bold">.</span>hist<span class="ansi-yellow-intense-fg ansi-bold">(</span>Eps<span class="ansi-yellow-intense-fg ansi-bold">,</span>bins<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-cyan-intense-fg ansi-bold">100</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\anaconda3\lib\site-packages\pandas\core\ops\common.py</span> in <span class="ansi-cyan-fg">new_method</span><span class="ansi-blue-intense-fg ansi-bold">(self, other)</span>
+<span class="ansi-green-fg">     62</span>         other <span class="ansi-yellow-intense-fg ansi-bold">=</span> item_from_zerodim<span class="ansi-yellow-intense-fg ansi-bold">(</span>other<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">     63</span>
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 64</span><span class="ansi-yellow-intense-fg ansi-bold">         </span><span class="ansi-green-intense-fg ansi-bold">return</span> method<span class="ansi-yellow-intense-fg ansi-bold">(</span>self<span class="ansi-yellow-intense-fg ansi-bold">,</span> other<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">     65</span>
+<span class="ansi-green-fg">     66</span>     <span class="ansi-green-intense-fg ansi-bold">return</span> new_method
+
+<span class="ansi-green-intense-fg ansi-bold">~\anaconda3\lib\site-packages\pandas\core\ops\__init__.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-intense-fg ansi-bold">(left, right)</span>
+<span class="ansi-green-fg">    501</span>         lvalues <span class="ansi-yellow-intense-fg ansi-bold">=</span> extract_array<span class="ansi-yellow-intense-fg ansi-bold">(</span>left<span class="ansi-yellow-intense-fg ansi-bold">,</span> extract_numpy<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">True</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    502</span>         rvalues <span class="ansi-yellow-intense-fg ansi-bold">=</span> extract_array<span class="ansi-yellow-intense-fg ansi-bold">(</span>right<span class="ansi-yellow-intense-fg ansi-bold">,</span> extract_numpy<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-green-intense-fg ansi-bold">True</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 503</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>result <span class="ansi-yellow-intense-fg ansi-bold">=</span> arithmetic_op<span class="ansi-yellow-intense-fg ansi-bold">(</span>lvalues<span class="ansi-yellow-intense-fg ansi-bold">,</span> rvalues<span class="ansi-yellow-intense-fg ansi-bold">,</span> op<span class="ansi-yellow-intense-fg ansi-bold">,</span> str_rep<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    504</span>
+<span class="ansi-green-fg">    505</span>         <span class="ansi-green-intense-fg ansi-bold">return</span> _construct_result<span class="ansi-yellow-intense-fg ansi-bold">(</span>left<span class="ansi-yellow-intense-fg ansi-bold">,</span> result<span class="ansi-yellow-intense-fg ansi-bold">,</span> index<span class="ansi-yellow-intense-fg ansi-bold">=</span>left<span class="ansi-yellow-intense-fg ansi-bold">.</span>index<span class="ansi-yellow-intense-fg ansi-bold">,</span> name<span class="ansi-yellow-intense-fg ansi-bold">=</span>res_name<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\anaconda3\lib\site-packages\pandas\core\ops\array_ops.py</span> in <span class="ansi-cyan-fg">arithmetic_op</span><span class="ansi-blue-intense-fg ansi-bold">(left, right, op, str_rep)</span>
+<span class="ansi-green-fg">    195</span>     <span class="ansi-green-intense-fg ansi-bold">else</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">    196</span>         <span class="ansi-green-intense-fg ansi-bold">with</span> np<span class="ansi-yellow-intense-fg ansi-bold">.</span>errstate<span class="ansi-yellow-intense-fg ansi-bold">(</span>all<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-blue-intense-fg ansi-bold">&#34;ignore&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 197</span><span class="ansi-yellow-intense-fg ansi-bold">             </span>res_values <span class="ansi-yellow-intense-fg ansi-bold">=</span> na_arithmetic_op<span class="ansi-yellow-intense-fg ansi-bold">(</span>lvalues<span class="ansi-yellow-intense-fg ansi-bold">,</span> rvalues<span class="ansi-yellow-intense-fg ansi-bold">,</span> op<span class="ansi-yellow-intense-fg ansi-bold">,</span> str_rep<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    198</span>
+<span class="ansi-green-fg">    199</span>     <span class="ansi-green-intense-fg ansi-bold">return</span> res_values
+
+<span class="ansi-green-intense-fg ansi-bold">~\anaconda3\lib\site-packages\pandas\core\ops\array_ops.py</span> in <span class="ansi-cyan-fg">na_arithmetic_op</span><span class="ansi-blue-intense-fg ansi-bold">(left, right, op, str_rep)</span>
+<span class="ansi-green-fg">    147</span>
+<span class="ansi-green-fg">    148</span>     <span class="ansi-green-intense-fg ansi-bold">try</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 149</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>result <span class="ansi-yellow-intense-fg ansi-bold">=</span> expressions<span class="ansi-yellow-intense-fg ansi-bold">.</span>evaluate<span class="ansi-yellow-intense-fg ansi-bold">(</span>op<span class="ansi-yellow-intense-fg ansi-bold">,</span> str_rep<span class="ansi-yellow-intense-fg ansi-bold">,</span> left<span class="ansi-yellow-intense-fg ansi-bold">,</span> right<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    150</span>     <span class="ansi-green-intense-fg ansi-bold">except</span> TypeError<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-fg">    151</span>         result <span class="ansi-yellow-intense-fg ansi-bold">=</span> masked_arith_op<span class="ansi-yellow-intense-fg ansi-bold">(</span>left<span class="ansi-yellow-intense-fg ansi-bold">,</span> right<span class="ansi-yellow-intense-fg ansi-bold">,</span> op<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\anaconda3\lib\site-packages\pandas\core\computation\expressions.py</span> in <span class="ansi-cyan-fg">evaluate</span><span class="ansi-blue-intense-fg ansi-bold">(op, op_str, a, b, use_numexpr)</span>
+<span class="ansi-green-fg">    206</span>     use_numexpr <span class="ansi-yellow-intense-fg ansi-bold">=</span> use_numexpr <span class="ansi-green-intense-fg ansi-bold">and</span> _bool_arith_check<span class="ansi-yellow-intense-fg ansi-bold">(</span>op_str<span class="ansi-yellow-intense-fg ansi-bold">,</span> a<span class="ansi-yellow-intense-fg ansi-bold">,</span> b<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    207</span>     <span class="ansi-green-intense-fg ansi-bold">if</span> use_numexpr<span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 208</span><span class="ansi-yellow-intense-fg ansi-bold">         </span><span class="ansi-green-intense-fg ansi-bold">return</span> _evaluate<span class="ansi-yellow-intense-fg ansi-bold">(</span>op<span class="ansi-yellow-intense-fg ansi-bold">,</span> op_str<span class="ansi-yellow-intense-fg ansi-bold">,</span> a<span class="ansi-yellow-intense-fg ansi-bold">,</span> b<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    209</span>     <span class="ansi-green-intense-fg ansi-bold">return</span> _evaluate_standard<span class="ansi-yellow-intense-fg ansi-bold">(</span>op<span class="ansi-yellow-intense-fg ansi-bold">,</span> op_str<span class="ansi-yellow-intense-fg ansi-bold">,</span> a<span class="ansi-yellow-intense-fg ansi-bold">,</span> b<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    210</span>
+
+<span class="ansi-green-intense-fg ansi-bold">~\anaconda3\lib\site-packages\pandas\core\computation\expressions.py</span> in <span class="ansi-cyan-fg">_evaluate_numexpr</span><span class="ansi-blue-intense-fg ansi-bold">(op, op_str, a, b)</span>
+<span class="ansi-green-fg">    119</span>
+<span class="ansi-green-fg">    120</span>     <span class="ansi-green-intense-fg ansi-bold">if</span> result <span class="ansi-green-intense-fg ansi-bold">is</span> <span class="ansi-green-intense-fg ansi-bold">None</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 121</span><span class="ansi-yellow-intense-fg ansi-bold">         </span>result <span class="ansi-yellow-intense-fg ansi-bold">=</span> _evaluate_standard<span class="ansi-yellow-intense-fg ansi-bold">(</span>op<span class="ansi-yellow-intense-fg ansi-bold">,</span> op_str<span class="ansi-yellow-intense-fg ansi-bold">,</span> a<span class="ansi-yellow-intense-fg ansi-bold">,</span> b<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">    122</span>
+<span class="ansi-green-fg">    123</span>     <span class="ansi-green-intense-fg ansi-bold">return</span> result
+
+<span class="ansi-green-intense-fg ansi-bold">~\anaconda3\lib\site-packages\pandas\core\computation\expressions.py</span> in <span class="ansi-cyan-fg">_evaluate_standard</span><span class="ansi-blue-intense-fg ansi-bold">(op, op_str, a, b)</span>
+<span class="ansi-green-fg">     68</span>         _store_test_result<span class="ansi-yellow-intense-fg ansi-bold">(</span><span class="ansi-green-intense-fg ansi-bold">False</span><span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">     69</span>     <span class="ansi-green-intense-fg ansi-bold">with</span> np<span class="ansi-yellow-intense-fg ansi-bold">.</span>errstate<span class="ansi-yellow-intense-fg ansi-bold">(</span>all<span class="ansi-yellow-intense-fg ansi-bold">=</span><span class="ansi-blue-intense-fg ansi-bold">&#34;ignore&#34;</span><span class="ansi-yellow-intense-fg ansi-bold">)</span><span class="ansi-yellow-intense-fg ansi-bold">:</span>
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 70</span><span class="ansi-yellow-intense-fg ansi-bold">         </span><span class="ansi-green-intense-fg ansi-bold">return</span> op<span class="ansi-yellow-intense-fg ansi-bold">(</span>a<span class="ansi-yellow-intense-fg ansi-bold">,</span> b<span class="ansi-yellow-intense-fg ansi-bold">)</span>
+<span class="ansi-green-fg">     71</span>
+<span class="ansi-green-fg">     72</span>
+
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>: operands could not be broadcast together with shapes (2500,) (5000,)
+</pre></div></div>
+</div>
+<p>Les <span class="math notranslate nohighlight">\(\tilde{\xi_i}\)</span> semblent suivre une loi normale centrée en 0 de variance 1. On en déduit que <span class="math notranslate nohighlight">\(\sigma(X_i)\)</span> vaut $:nbsphinx-math:<cite>frac{1}{2}</cite> $.</p>
+<p>Pour déduire un estimateur de <span class="math notranslate nohighlight">\(\mu(x)\)</span> on va utiliser l’estimateur de densité</p>
+<p>3.1.2.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu_hat</span> <span class="o">=</span> <span class="n">f_hat</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">Eps</span><span class="p">,</span> <span class="mf">0.1525</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="n">mu_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>3.1.3. (Facultatif)</p>
+<p>L’intérêt d’avoir découpé le jeu de données en deux est de pouvoir valider le modèle provenant du jeu de données J+ en le testant sur le jeu de données J-. Principe de validation croisée.</p>
+<p>3.1.4.</p>
+<p>La densité <span class="math notranslate nohighlight">\(x \mapsto \mu(x)\)</span> peut-être gaussienne ?</p>
+<p>Le graphique ci-dessus montre que la densité des <span class="math notranslate nohighlight">\(\xi_i\)</span> peut-être gaussienne.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Pour</span> <span class="n">le</span> <span class="n">vérifier</span> <span class="n">MCO</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">3.1.5</span><span class="o">.</span> <span class="n">Pour</span> <span class="n">tester</span> <span class="n">si</span> <span class="n">le</span> <span class="n">modèle</span> <span class="n">est</span> <span class="n">homoscédastique</span> <span class="n">nous</span> <span class="n">pouvons</span> <span class="n">étudier</span> <span class="n">le</span> <span class="n">graphique</span> <span class="n">des</span> <span class="n">résidus</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="3.2.-A-partir-du-jeu-de-données-Data2.">
+<h2>3.2. A partir du jeu de données Data2.<a class="headerlink" href="#3.2.-A-partir-du-jeu-de-données-Data2." title="Permalink to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David TBO.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
