@@ -1,9 +1,0 @@
-notebooks
-=========
-
-.. toctree::
-   :maxdepth: 1
-   :titlesonly:
-
-   EDA.ipynb
-   moving_average.ipynb

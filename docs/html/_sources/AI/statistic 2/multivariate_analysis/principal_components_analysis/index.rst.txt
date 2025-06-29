@@ -1,9 +1,0 @@
-Reduction of Dimension material
-===============================
-
-
-.. toctree::
-   :maxdepth: 1
-   :titlesonly:
-
-   notebooks/index
