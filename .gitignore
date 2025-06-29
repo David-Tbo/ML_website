@@ -1,10 +1,4 @@
-docs/_images/
 docs/_sources/
-docs/_static/
-docs/*.html
-docs/*.js
-docs/objects.inv
-docs/searchindex.js
 docs/_build/
 _build/
 docs_src/_sources/
