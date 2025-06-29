@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>&lt;no title&gt; &mdash; My AI website 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            My AI website
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul class="simple">
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">My AI website</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/AI/machine_learning 2/optimization/GradientBoosting/GradientBoosting.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[99]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># Tuto</span>
+<span class="c1"># Tirage aléatoire de 5 entiers compris entre 0 et 10</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Tuto</span>
+<span class="c1"># sequence</span>
+<span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">rho</span>
+
+<span class="c1"># Tuto</span>
+<span class="c1"># convert name to function</span>
+<span class="c1"># h = &#39;DecisionTreeRegressor(random_state=0)&#39;</span>
+<span class="c1"># reg_tree = vars()[h]</span>
+
+<span class="c1"># Tuto</span>
+<span class="c1"># Fonction argmin qui trouve un minimum (fonction convexe)</span>
+<span class="c1"># Exemple:</span>
+<span class="c1"># NB: il faut ajouter le .x à la fin pour avoir l&#39;argmin</span>
+<span class="k">def</span> <span class="nf">carre</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">x0</span><span class="o">=-</span><span class="mi">1</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">carre</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nelder-mead&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;xatol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span><span class="o">.</span><span class="n">x</span>
+
+<span class="c1"># Tuto: np.linspace pour tracer des graphes</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">endpoint</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graphical Representation : </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;blue : with square&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#This uses the same mechansims.</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="n">filepath_or_buffer</span><span class="o">=</span><span class="s2">&quot;http://lib.stat.cmu.edu/datasets/boston&quot;</span><span class="p">,</span>
+    <span class="n">delim_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">skiprows</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;CRIM&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ZN&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;INDUS&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CHAS&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;NOX&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RM&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;AGE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;DIS&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;RAD&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;TAX&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PTRATIO&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;LSTAT&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MEDV&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1">#Flatten all the values into a single long list and remove the nulls</span>
+<span class="n">values_w_nulls</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">all_values</span> <span class="o">=</span> <span class="n">values_w_nulls</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">values_w_nulls</span><span class="p">)]</span>
+
+<span class="c1">#Reshape the values to have 14 columns and make a new df out of them</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">all_values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)),</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">K</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;MEDV&#39;</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">K</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">predict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">x_samp</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">K</span>
+<span class="n">y_samp</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">K</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">K</span><span class="p">):</span>
+    <span class="n">rand_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.8</span><span class="p">))</span>
+    <span class="n">rand_cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.8</span><span class="p">))</span>
+    <span class="n">x_samp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rand_index</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">x_samp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_samp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">rand_cols</span><span class="p">]</span>
+    <span class="n">y_samp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rand_index</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+    <span class="n">regression_tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">model</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">regression_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_samp</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">y_samp</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">predict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_samp</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">predict</span><span class="p">[</span><span class="n">k</span><span class="p">][:</span><span class="mi">12</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">qloss</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function that returns the quadratic loss&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">((</span><span class="n">p</span><span class="o">-</span><span class="n">v</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">qloss_best_cst</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function that returns the constant that Minimize the quadratic loss&#39;&#39;&#39;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">*</span><span class="n">s</span><span class="o">/</span><span class="n">n</span>
+
+<span class="k">def</span> <span class="nf">mrisk</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span> <span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]):</span>
+    <span class="k">return</span> <span class="n">qloss</span><span class="p">(</span><span class="n">g</span> <span class="o">+</span> <span class="n">rho</span><span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">qloss</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span> <span class="n">endpoint</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">mr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rho</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+    <span class="n">mr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mrisk</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graphical Representation : </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Cost function&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">mr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">x0</span><span class="o">=-</span><span class="mi">1</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">mrisk</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nelder-mead&#39;</span><span class="p">,</span>  <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;xatol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span><span class="o">.</span><span class="n">x</span>
+
+<span class="c1"># mloss = np.ones(len(np.arange(0,1.1,0.1)))</span>
+<span class="c1"># for i, rho in enumerate(np.arange(0,1.1,0.1)):</span>
+<span class="c1">#   mloss[i] = mrisk(rho=rho, g= qloss_best_cst(df[&#39;MEDV&#39;]), f=np.ones(len(df[&#39;MEDV&#39;])), y = df[&#39;MEDV&#39;])</span>
+<span class="c1"># plt.plot(np.arange(0,1.1,0.1), mloss)</span>
+<span class="c1"># plt.show()</span>
+
+<span class="c1"># https://docs.scipy.org/doc/scipy/tutorial/optimize.html</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Le coût est de </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mrisk</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span> <span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])))</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># initialisation de la suite</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Le minimum de la fonction de coût est atteint en </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">minimize</span><span class="p">(</span><span class="n">mrisk</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nelder-mead&#39;</span><span class="p">,</span>  <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;xatol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">mrisk</span><span class="p">(</span><span class="n">rho</span><span class="o">=-</span><span class="mf">3e+26</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span> <span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 31
+         Function evaluations: 62
+Graphical Representation :
+ [25.  9.  1.  1.  9. 25.]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_0_1.png" src="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_0_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[21.39037037 21.39037037 21.39037037 21.39037037 30.20681818 30.20681818
+ 47.58333333 13.8        21.39037037 21.39037037 30.20681818 30.20681818]
+Graphical Representation :
+ [1307716.29541502  852316.29541502  498116.29541502  245116.29541502
+   93316.29541502   42716.29541502   93316.29541502  245116.29541502
+  498116.29541502  852316.29541502 1307716.29541502]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_0_3.png" src="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_0_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Optimization terminated successfully.
+         Current function value: 42716.295415
+         Iterations: 32
+         Function evaluations: 66
+Le coût est de 42721.355415019774
+Optimization terminated successfully.
+         Current function value: 42716.295415
+         Iterations: 17
+         Function evaluations: 35
+Le minimum de la fonction de coût est atteint en [-1.44958496e-07]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[99]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4.553999999999955e+55
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[108]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GradientBoosting</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span> <span class="o">=</span> <span class="n">max_depth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resid</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">K</span> <span class="o">=</span> <span class="n">K</span>
+
+    <span class="k">def</span> <span class="nf">qloss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Function that returns the quadratic loss&#39;&#39;&#39;</span>
+        <span class="c1"># return np.dot(np.array(y).T, self.pred)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="nb">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">qloss_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Function that returns the derivative quadratic loss&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pred</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">qloss_best_cst</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Function that returns the constant that Minimize the quadratic loss&#39;&#39;&#39;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">*</span><span class="n">s</span><span class="o">/</span><span class="n">n</span>
+
+    <span class="k">def</span> <span class="nf">bagging</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Fonction that returns une liste obtenue par bagging de K arbres&#39;&#39;&#39;</span>
+        <span class="c1"># Initialisation des poids</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1">#model = dict()</span>
+        <span class="c1">#preds = dict()</span>
+        <span class="n">x_samp</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span>
+        <span class="n">y_samp</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">):</span>
+            <span class="n">rand_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.8</span><span class="p">))</span>
+            <span class="n">rand_cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="mf">0.8</span><span class="p">))</span>
+            <span class="n">x_samp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rand_index</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="c1"># On conserve les features initiales (pas de tirage aléatoire des colonnes)</span>
+            <span class="c1">#x_samp[k] = x_samp[k].iloc[:, rand_cols]</span>
+            <span class="n">y_samp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">rand_index</span><span class="p">]</span>
+            <span class="n">reg_tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_samp</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">y_samp</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+            <span class="c1">#self.preds[k] = self.model[k].predict(x_samp[k])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+
+    <span class="k">def</span> <span class="nf">predict_ens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This function returns the prediction for a given X feature dataset.</span>
+<span class="sd">        Note: The prediction is stored as a global class variable &quot;self.pred&quot;</span>
+<span class="sd">        to call it with quadratic loss functions</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pred</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pred</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">K</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pred</span>
+
+    <span class="k">def</span> <span class="nf">mrisk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span><span class="n">f</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="n">rho</span><span class="o">*</span><span class="n">f</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">qloss</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GradientBoosting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Function that return the GradientBoosting model&#39;&#39;&#39;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">reg_tree</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="c1"># Initialisation du modèle par la constante</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="c1"># Calcul du 1er résidu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resid</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+
+            <span class="c1"># Apprendre le modèle fk sur l&#39;ensemble (x, r):</span>
+            <span class="n">reg_tree</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_depth</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_tree</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+
+            <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+            <span class="c1"># Calculer l&#39;argmin rho de la fonction quadratique:</span>
+            <span class="n">x0</span><span class="o">=-</span><span class="mi">1</span>
+            <span class="n">rho</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mrisk</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nelder-mead&#39;</span><span class="p">,</span>  <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">pred</span><span class="p">),</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;xatol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span><span class="o">.</span><span class="n">x</span>
+
+            <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1"># Mise à jour des nouveaux résidus</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resid</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">pred</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
+
+<span class="n">grb</span> <span class="o">=</span> <span class="n">GradientBoosting</span><span class="p">()</span>
+<span class="n">grb</span><span class="o">.</span><span class="n">bagging</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;MEDV&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])</span>
+<span class="n">grb</span><span class="o">.</span><span class="n">predict_ens</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;MEDV&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">grb</span><span class="o">.</span><span class="n">qloss</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])</span>
+<span class="n">grb</span><span class="o">.</span><span class="n">qloss_d</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])</span>
+<span class="n">grb</span><span class="o">.</span><span class="n">qloss_best_cst</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])</span>
+<span class="n">grb</span><span class="o">.</span><span class="n">mrisk</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])))</span>
+<span class="n">x0</span><span class="o">=-</span><span class="mi">1</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">grb</span><span class="o">.</span><span class="n">mrisk</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nelder-mead&#39;</span><span class="p">,</span>  <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">]))),</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;xatol&#39;</span><span class="p">:</span> <span class="mf">1e-8</span><span class="p">,</span> <span class="s1">&#39;disp&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span><span class="o">.</span><span class="n">x</span>
+<span class="n">grb</span><span class="o">.</span><span class="n">GradientBoosting</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;MEDV&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Optimization terminated successfully.
+         Current function value: 4.340388
+         Iterations: 39
+         Function evaluations: 80
+Optimization terminated successfully.
+         Current function value: 115.773745
+         Iterations: 32
+         Function evaluations: 66
+Optimization terminated successfully.
+         Current function value: 115.986477
+         Iterations: 32
+         Function evaluations: 66
+Optimization terminated successfully.
+         Current function value: 115.853075
+         Iterations: 33
+         Function evaluations: 68
+Optimization terminated successfully.
+         Current function value: 116.892968
+         Iterations: 32
+         Function evaluations: 67
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[108]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{0: array([22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632, 22.53280632, 22.53280632, 22.53280632, 22.53280632,
+        22.53280632]),
+ 1: DecisionTreeRegressor(max_depth=2, random_state=0),
+ 2: DecisionTreeRegressor(max_depth=2, random_state=0),
+ 3: DecisionTreeRegressor(max_depth=2, random_state=0),
+ 4: DecisionTreeRegressor(max_depth=2, random_state=0)}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[106]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_2_0.png" src="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_2_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[109]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;MEDV&#39;</span><span class="p">,</span> <span class="n">use_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[109]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_3_1.png" src="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_3_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[103]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Availability &amp; Price&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;MEDV&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/davidtbo/work/lib/python3.9/site-packages/seaborn/_decorators.py:36: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_4_1.png" src="../../../../_images/AI_machine_learning_2_optimization_GradientBoosting_GradientBoosting_4_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David TBO.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

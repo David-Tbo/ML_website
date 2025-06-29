@@ -1,0 +1,69 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Bien sûr, je peux vous donner des exemples pour illustrer comment l'estimateur du maximum de vraisemblance (EMV) permet de faire des inférences sur la population.\n",
+    "\n",
+    "Exemple 1 : Estimation de la proportion d'une population\n",
+    "\n",
+    "Supposons que nous voulions estimer la proportion p de personnes atteintes d'une certaine maladie dans une population donnée. Nous pouvons utiliser l'EMV pour estimer p à partir d'un échantillon de n personnes tirées au hasard dans la population.\n",
+    "\n",
+    "Si nous observons x personnes atteintes de la maladie dans l'échantillon, alors l'EMV de p est donné par :\n",
+    "\n",
+    "$\\hat{p} = \\frac{x}{n}$\n",
+    "\n",
+    "Cet estimateur permet de faire des inférences sur la population en utilisant l'intervalle de confiance suivant :\n",
+    "\n",
+    "$[\\hat{p} - z_{\\alpha/2} \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}, \\hat{p} + z_{\\alpha/2} \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}]$\n",
+    "\n",
+    "où $z_{\\alpha/2}$ est le quantile d'ordre $1-\\alpha/2$ de la loi normale standard.\n",
+    "\n",
+    "Cet intervalle de confiance permet de donner une estimation de la proportion p de personnes atteintes de la maladie dans la population avec un certain niveau de confiance.\n",
+    "\n",
+    "Exemple 2 : Estimation des paramètres d'une loi normale\n",
+    "\n",
+    "Supposons que nous voulions estimer les paramètres \\mu et \\sigma^2 d'une loi normale à partir d'un échantillon de n observations x_1, x_2, ..., x_n. Nous pouvons utiliser l'EMV pour estimer ces paramètres en maximisant la fonction de vraisemblance suivante :\n",
+    "\n",
+    "$L(\\mu, \\sigma^2 | x_1, x_2, ..., x_n) = \\prod_{i=1}^{n} \\frac{1}{\\sqrt{2\\pi}\\sigma} \\exp\\left(-\\frac{(x_i-\\mu)^2}{2\\sigma^2}\\right)$\n",
+    "\n",
+    "En maximisant cette fonction, nous obtenons les estimateurs suivants :\n",
+    "\n",
+    "$\\hat{\\mu} = \\frac{1}{n} \\sum_{i=1}^{n} x_i$\n",
+    "\n",
+    "$\\hat{\\sigma}^2 = \\frac{1}{n} \\sum_{i=1}^{n} (x_i - \\hat{\\mu})^2$\n",
+    "\n",
+    "Ces estimateurs permettent de faire des inférences sur la population en utilisant les intervalles de confiance suivants :\n",
+    "\n",
+    "$[\\hat{\\mu} - t_{\\alpha/2, n-1} \\frac{\\hat{\\sigma}}{\\sqrt{n}}, \\hat{\\mu} + t_{\\alpha/2, n-1} \\frac{\\hat{\\sigma}}{\\sqrt{n}}]$\n",
+    "\n",
+    "$[(n-1)\\hat{\\sigma}^2 / \\chi^2_{\\alpha/2, n-1}, (n-1)\\hat{\\sigma}^2 / \\chi^2_{1-\\alpha/2, n-1}]$\n",
+    "\n",
+    "où $t_{\\alpha/2, n-1}$ est le quantile d'ordre $1-\\alpha/2$ de la loi de Student à $n-1$ degrés de liberté et $\\chi^2_{\\alpha/2, n-1}$ est le quantile d'ordre $1-\\alpha/2$ de la loi du khi-deux à $n-1$ degrés de liberté.\n",
+    "\n",
+    "Ces intervalles de confiance permettent de donner une estimation des paramètres \\mu et \\sigma^2 de la loi normale avec un certain niveau de confiance.\n",
+    "\n",
+    "En résumé, l'EMV permet de faire des inférences sur la population en utilisant des estimateurs et des intervalles de confiance basés sur l'échantillon observé. Ces inférences peuvent être utilisées pour prendre des décisions ou pour tester des hypothèses sur les paramètres du modèle."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "base",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "name": "python",
+   "version": "3.11.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

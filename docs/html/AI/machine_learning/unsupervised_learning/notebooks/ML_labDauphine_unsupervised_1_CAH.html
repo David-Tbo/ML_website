@@ -22,9 +22,7 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Clustering: KMeans" href="ML_labDauphine_unsupervised_2_Kmeans.html" />
-    <link rel="prev" title="Unsupervised learning" href="../index.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,22 +44,39 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../probabilities/index.html">Probability Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../statistic/index.html">Statistical Methods</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Machine Learning</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#notebooks">Notebooks</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Unsupervised learning</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../index.html#notebooks">Notebooks</a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Clustering: HAC</a><ul>
+<li><a class="reference internal" href="#Reminder:-The-Euclidean-distance">Reminder: The Euclidean distance</a></li>
+<li><a class="reference internal" href="#Single-linkage-clustering---Step-by-step-Explanation">Single linkage clustering - Step-by-step Explanation</a></li>
+<li><a class="reference internal" href="#The-complexity">The complexity</a></li>
+<li><a class="reference internal" href="#⚠️-Limitations-in-High-Dimensional-Spaces">⚠️ Limitations in High-Dimensional Spaces</a></li>
+<li><a class="reference internal" href="#Ward-Linkage-clustering---Step-by-Step-Explanation">Ward Linkage clustering - Step-by-Step Explanation</a></li>
+<li><a class="reference internal" href="#HAC-from-scratch">HAC from scratch</a><ul>
+<li><a class="reference internal" href="#Data">Data</a></li>
+<li><a class="reference internal" href="#Initialization">Initialization</a></li>
+<li><a class="reference internal" href="#Matrix-of-distance">Matrix of distance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#HAC-with-Python-packages">HAC with Python packages</a></li>
+<li><a class="reference internal" href="#HAC-using-Single-linkage-method">HAC using Single linkage method</a><ul>
+<li><a class="reference internal" href="#Evolution-of-the-aggregation-criterion">Evolution of the aggregation criterion</a></li>
+<li><a class="reference internal" href="#Build-the-clustering">Build the clustering</a></li>
+<li><a class="reference internal" href="#Dendrogram-with-the-obtained-partitioning-and-clustering">Dendrogram with the obtained partitioning and clustering</a></li>
+<li><a class="reference internal" href="#Evaluating-Cluster-Quality-Against-Ground-Truth-Labels-with-the-Confusion-Matrix">Evaluating Cluster Quality Against Ground Truth Labels with the Confusion Matrix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#HAC-using-Ward's-Method">HAC using Ward’s Method</a><ul>
+<li><a class="reference internal" href="#Choice-of-a-partition-into-3-classes">Choice of a partition into 3 classes</a></li>
+<li><a class="reference internal" href="#id1">Dendrogram with the obtained partitioning and clustering</a></li>
+<li><a class="reference internal" href="#Confusion-Matrix">Confusion Matrix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#HAC-on-iris-data">HAC on iris data</a></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-
+</div>
         </div>
       </div>
     </nav>
@@ -76,8 +91,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../index.html">Machine Learning</a></li>
-          <li class="breadcrumb-item"><a href="../index.html">Unsupervised learning</a></li>
       <li class="breadcrumb-item active">Clustering: HAC</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/AI/machine_learning/unsupervised_learning/notebooks/ML_labDauphine_unsupervised_1_CAH.ipynb.txt" rel="nofollow"> View page source</a>
@@ -1813,10 +1826,7 @@ array([[29, 20,  1,  0,  0],
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="Unsupervised learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ML_labDauphine_unsupervised_2_Kmeans.html" class="btn btn-neutral float-right" title="Clustering: KMeans" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

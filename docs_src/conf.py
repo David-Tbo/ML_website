@@ -34,17 +34,23 @@ source_suffix = {
 }
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store',
-                    'AI/AI_agents/**',
-                    'AI/Big_Data/**',
-                    'AI/computer_vision/**',
-                    'AI/deep_learning/**',
-                    'AI/LLM/**',
-                    'AI/machine_learning/optimization/**',
-                    'AI/machine_learning/supervised_learning/**',
-                    'AI/NLP/**',
-                    'AI/reinforcement_learning/**',
-                    ]
+exclude_patterns = [
+    '_build',
+    'Thumbs.db',
+    '.DS_Store',
+    'AI/AI_agents/**',
+    'AI/Big_Data/**',
+    'AI/computer_vision/**',
+    'AI/deep_learning/**',
+    'AI/LLM/**',
+    'AI/machine_learning/optimization/**',
+    'AI/machine_learning/supervised_learning/**',
+    'AI/machine_learning 2/supervised_learning/**',
+    'AI/NLP/**',
+    'AI/reinforcement_learning/**',
+    '**/.ipynb_checkpoints/**',
+]
+
 
 
 

@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Probability Distributions &mdash; My AI website 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            My AI website
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Probability Distributions</a><ul>
+<li><a class="reference internal" href="#Discrete-Probability-Distributions">Discrete Probability Distributions</a><ul>
+<li><a class="reference internal" href="#Exercice-1:-Simulating-a-Fair-Die-Roll">Exercice 1: Simulating a Fair Die Roll</a></li>
+<li><a class="reference internal" href="#Exercice-2:-Sum-of-two-dice">Exercice 2: Sum of two dice</a></li>
+<li><a class="reference internal" href="#Exercice-3:-Binomial-Distribution:-coin-toss">Exercice 3: Binomial Distribution: coin toss</a></li>
+<li><a class="reference internal" href="#Exercise-4-—-Normal-Distribution-and-the-68-95-99-Rule"><strong>Exercise 4</strong> — Normal Distribution and the 68-95-99 Rule</a></li>
+<li><a class="reference internal" href="#Exercise-5-—-Bayes’-Theorem-in-Medical-Testing"><strong>Exercise 5</strong> — Bayes’ Theorem in Medical Testing</a></li>
+<li><a class="reference internal" href="#Exercise-6-—-Markov-Chain-Simulation"><strong>Exercise 6</strong> — Markov Chain Simulation</a></li>
+<li><a class="reference internal" href="#Exercise-7---Chi-squared-test:-is-the-die-fair?">Exercise 7 - Chi-squared test: is the die fair?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">My AI website</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Probability Distributions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/AI/probabilities 2/notebooks/distributions.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Probability-Distributions">
+<h1>Probability Distributions<a class="headerlink" href="#Probability-Distributions" title="Permalink to this heading"></a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<section id="Discrete-Probability-Distributions">
+<h2>Discrete Probability Distributions<a class="headerlink" href="#Discrete-Probability-Distributions" title="Permalink to this heading"></a></h2>
+<section id="Exercice-1:-Simulating-a-Fair-Die-Roll">
+<h3>Exercice 1: Simulating a Fair Die Roll<a class="headerlink" href="#Exercice-1:-Simulating-a-Fair-Die-Roll" title="Permalink to this heading"></a></h3>
+<p>Goal:</p>
+<ul class="simple">
+<li><p>Understand discrete uniform distributions and empirical probability.</p></li>
+</ul>
+<p>Task:</p>
+<ul class="simple">
+<li><p>Simulate rolling a fair six-sided die 10,000 times and</p></li>
+<li><p>Estimate the probability of each face.</p></li>
+<li><p>Plot the distribution.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Simulate 10,000 rolls of a fair die</span>
+<span class="n">rolls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="c1"># Count occurrences of each outcome</span>
+<span class="n">values</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">rolls</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span>
+
+<span class="c1"># Plot empirical probabilities</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Empirical Probability of Each Die Face&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Die Face&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/AI_probabilities_2_notebooks_distributions_5_0.png" src="../../../_images/AI_probabilities_2_notebooks_distributions_5_0.png" />
+</div>
+</div>
+</section>
+<section id="Exercice-2:-Sum-of-two-dice">
+<h3>Exercice 2: Sum of two dice<a class="headerlink" href="#Exercice-2:-Sum-of-two-dice" title="Permalink to this heading"></a></h3>
+<p>Goal:</p>
+<ul class="simple">
+<li><p>Understand the convolution of discrete distributions.</p></li>
+</ul>
+<p>Task:</p>
+<ul class="simple">
+<li><p>Simulate rolling two fair dice and</p></li>
+<li><p>plot the distribution of the sum of their faces.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">dice1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">dice2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">sums</span> <span class="o">=</span> <span class="n">dice1</span> <span class="o">+</span> <span class="n">dice2</span>
+
+<span class="c1"># Count occurrences of each outcome</span>
+<span class="n">values</span><span class="p">,</span> <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">sums</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span>
+<span class="c1"># Plot empirical probabilities</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Empirical Probability of Sums of Two Dice&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sum of Two Dice&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/AI_probabilities_2_notebooks_distributions_8_0.png" src="../../../_images/AI_probabilities_2_notebooks_distributions_8_0.png" />
+</div>
+</div>
+</section>
+<section id="Exercice-3:-Binomial-Distribution:-coin-toss">
+<h3>Exercice 3: Binomial Distribution: coin toss<a class="headerlink" href="#Exercice-3:-Binomial-Distribution:-coin-toss" title="Permalink to this heading"></a></h3>
+<p>Goal:</p>
+<ul class="simple">
+<li><p>Apply the binomial distribution to a real-world experiment.</p></li>
+</ul>
+<p>Task:</p>
+<ul class="simple">
+<li><p>Simulate tossing a fair coin 100 times.</p></li>
+<li><p>What is the probability of getting exactly 55 heads?</p></li>
+<li><p>What is the probability of getting at least 60 heads?</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Parameters:</span>
+<span class="c1"># number of trials and success probability</span>
+<span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.5</span>
+<span class="c1"># x the array representing the number of possible successes (0 to n)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Compute binomial probabilities mass function</span>
+<span class="n">pmf</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="c1"># pmf[i] corresponds to P(X = i) for i in x</span>
+
+<span class="c1"># Plot the distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pmf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Binomial Distribution B(100, 0.5)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Heads&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Compute exact and cumulative probabilities</span>
+<span class="n">p_55</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">p_at_least_60</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">binom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">59</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(exactly 55 heads) = </span><span class="si">{</span><span class="n">p_55</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(at least 60 heads) = </span><span class="si">{</span><span class="n">p_at_least_60</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/AI_probabilities_2_notebooks_distributions_11_0.png" src="../../../_images/AI_probabilities_2_notebooks_distributions_11_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+P(exactly 55 heads) = 0.0485
+P(at least 60 heads) = 0.0284
+</pre></div></div>
+</div>
+</section>
+<section id="Exercise-4-—-Normal-Distribution-and-the-68-95-99-Rule">
+<h3><strong>Exercise 4</strong> — Normal Distribution and the 68-95-99 Rule<a class="headerlink" href="#Exercise-4-—-Normal-Distribution-and-the-68-95-99-Rule" title="Permalink to this heading"></a></h3>
+<p>Goal: Understand continuous distributions and the empirical rule.</p>
+<p>Task: Generate values from a standard normal distribution and check how many fall within 1 standard deviation of the mean.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># Generate random data from N(0, 1)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="c1"># Plot histogram with normal curve</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sampled Data&#39;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Theoretical PDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Standard Normal Distribution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Calculate proportion within 1 standard deviation</span>
+<span class="n">within_1std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">data</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Proportion within ±1 standard deviation: </span><span class="si">{</span><span class="n">within_1std</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../../_images/AI_probabilities_2_notebooks_distributions_13_0.png" src="../../../_images/AI_probabilities_2_notebooks_distributions_13_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Proportion within ±1 standard deviation: 68.44%
+</pre></div></div>
+</div>
+</section>
+<section id="Exercise-5-—-Bayes’-Theorem-in-Medical-Testing">
+<h3><strong>Exercise 5</strong> — Bayes’ Theorem in Medical Testing<a class="headerlink" href="#Exercise-5-—-Bayes’-Theorem-in-Medical-Testing" title="Permalink to this heading"></a></h3>
+<p>Goal: Apply Bayes’ theorem in a practical context.</p>
+<p>Task: A medical test has 95% sensitivity, 90% specificity, and the disease prevalence is 1%. Calculate the probability of having the disease given a positive test result.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define given values</span>
+<span class="n">P_disease</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">P_no_disease</span> <span class="o">=</span> <span class="mf">0.99</span>
+<span class="n">P_pos_given_disease</span> <span class="o">=</span> <span class="mf">0.95</span>
+<span class="n">P_pos_given_no_disease</span> <span class="o">=</span> <span class="mf">0.10</span>  <span class="c1"># 1 - specificity</span>
+
+<span class="c1"># Apply Bayes&#39; theorem</span>
+<span class="n">numerator</span> <span class="o">=</span> <span class="n">P_pos_given_disease</span> <span class="o">*</span> <span class="n">P_disease</span>
+<span class="n">denominator</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">+</span> <span class="n">P_pos_given_no_disease</span> <span class="o">*</span> <span class="n">P_no_disease</span>
+<span class="n">P_disease_given_positive</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Probability of having the disease given a positive test: </span><span class="si">{</span><span class="n">P_disease_given_positive</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Probability of having the disease given a positive test: 8.76%
+</pre></div></div>
+</div>
+</section>
+<section id="Exercise-6-—-Markov-Chain-Simulation">
+<h3><strong>Exercise 6</strong> — Markov Chain Simulation<a class="headerlink" href="#Exercise-6-—-Markov-Chain-Simulation" title="Permalink to this heading"></a></h3>
+<p>Goal: Understand simple stochastic processes with transition probabilities.</p>
+<p>Task: A customer switches coffee brands weekly. Simulate their brand preference over 100 weeks using a Markov chain.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define states and transition probabilities</span>
+<span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
+<span class="n">transition</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">},</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">current</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span>
+<span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">current</span><span class="p">]</span>
+
+<span class="c1"># Simulate state transitions over 100 steps</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">99</span><span class="p">):</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">transition</span><span class="p">[</span><span class="n">current</span><span class="p">][</span><span class="s1">&#39;A&#39;</span><span class="p">],</span>
+        <span class="n">transition</span><span class="p">[</span><span class="n">current</span><span class="p">][</span><span class="s1">&#39;B&#39;</span><span class="p">]</span>
+    <span class="p">])</span>
+    <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+
+<span class="c1"># Count how often each state occurred</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;State frequencies over 100 steps: </span><span class="si">{</span><span class="n">counts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+State frequencies over 100 steps: Counter({&#39;A&#39;: 60, np.str_(&#39;B&#39;): 40})
+</pre></div></div>
+</div>
+</section>
+<section id="Exercise-7---Chi-squared-test:-is-the-die-fair?">
+<h3>Exercise 7 - Chi-squared test: is the die fair?<a class="headerlink" href="#Exercise-7---Chi-squared-test:-is-the-die-fair?" title="Permalink to this heading"></a></h3>
+<p>Goal:</p>
+<ul class="simple">
+<li><p>Use hypothesis testing to detect bias.</p></li>
+</ul>
+<p>Task:</p>
+<ul class="simple">
+<li><p>You suspect a die is unfair. Given the outcomes of 600 rolls, use the chi-square test to verify the fairness assumption.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Null hypothesis (H0): The die is fair — each face has equal probability (1/6).</span>
+<span class="c1"># Alternative hypothesis (H1): The die is not fair — some faces occur more frequently than others.</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chisquare</span>
+
+<span class="c1"># Observed frequencies of each face after 600 rolls</span>
+<span class="c1"># face 1 appears 90 times, face 2 appears 100 times, etc.</span>
+<span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># expected if die is fair</span>
+
+<span class="c1"># Perform chi-square test</span>
+<span class="c1"># chi2_stat: the chi-squared statistic, measuring the total deviation</span>
+<span class="c1"># p_value: the probability of seeing this deviation by chance if the die is truly fair</span>
+<span class="n">chi2_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">chisquare</span><span class="p">(</span><span class="n">f_obs</span><span class="o">=</span><span class="n">observed</span><span class="p">,</span> <span class="n">f_exp</span><span class="o">=</span><span class="n">expected</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chi-squared statistic: </span><span class="si">{</span><span class="n">chi2_stat</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Chi-squared statistic: 2.50
+p-value: 0.7765
+</pre></div></div>
+</div>
+<div class="line-block">
+<div class="line">✅ Interpretation</div>
+<div class="line">The chi-squared statistic (2.50) is quite low. This means the differences between observed and expected frequencies are small.</div>
+<div class="line">The p-value (0.7765) is much higher than a typical significance threshold like 0.05 or 0.01.</div>
+</div>
+<div class="line-block">
+<div class="line">📌 Conclusion</div>
+<div class="line">Since p-value = 0.7765 &gt; 0.05, we fail to reject the null hypothesis.</div>
+</div>
+<div class="line-block">
+<div class="line">Conclusion: There is no significant evidence that the die is unfair.</div>
+<div class="line">The observed results are consistent with what we would expect from a fair die.</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David TBO.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

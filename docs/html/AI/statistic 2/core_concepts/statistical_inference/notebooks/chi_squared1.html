@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎯 Purpose of the Chi-Squared Goodness-of-Fit Test &mdash; My AI website 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            My AI website
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">🎯 Purpose of the Chi-Squared Goodness-of-Fit Test</a><ul>
+<li><a class="reference internal" href="#Step-1-—-Chi-squared-Statistic-Formula">Step 1 — Chi-squared Statistic Formula</a></li>
+<li><a class="reference internal" href="#Step-2-—-Compute-the-p-value">Step 2 — Compute the p-value</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">My AI website</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">🎯 Purpose of the Chi-Squared Goodness-of-Fit Test</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/AI/statistic 2/core_concepts/statistical_inference/notebooks/chi_squared1.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="🎯-Purpose-of-the-Chi-Squared-Goodness-of-Fit-Test">
+<h1>🎯 Purpose of the Chi-Squared Goodness-of-Fit Test<a class="headerlink" href="#🎯-Purpose-of-the-Chi-Squared-Goodness-of-Fit-Test" title="Permalink to this heading"></a></h1>
+<p><strong>Question: Does a single categorical variable follow a theoretical distribution?</strong></p>
+<p><strong>It tests whether observed categorical frequencies differ significantly from what we would expect under a theoretical distribution (e.g., a fair die).</strong></p>
+<p><strong>Hypotheses:</strong></p>
+<ul class="simple">
+<li><p><em>Null hypothesis (:math:`H_0`):</em> The observed frequencies match the expected ones.</p></li>
+<li><p><em>Alternative hypothesis (:math:`H_1`):</em> The observed frequencies are different from the expected ones.</p></li>
+</ul>
+<section id="Step-1-—-Chi-squared-Statistic-Formula">
+<h2>Step 1 — Chi-squared Statistic Formula<a class="headerlink" href="#Step-1-—-Chi-squared-Statistic-Formula" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(O_i = \text{observed frequency for category} \ i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(E_i = \text{expected frequency for category} \ i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(k = \text{number of categories}\)</span></p></li>
+</ul>
+<p>The chi-squared statistic is computed as:</p>
+<div class="math notranslate nohighlight">
+\[\chi^2 = \sum_{i=1}^k\dfrac{(O_i - E_i)^2}{E_i}\]</div>
+<p>This measures the total squared deviation between observed and expected frequencies, normalized by the expected count.</p>
+<p>Example:</p>
+<p>Let’s say you roll a die 600 times and get:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Apply the formula:</p>
+<p><span class="math notranslate nohighlight">\(\chi^2 = \dfrac{(90-100)^2}{100} + \dfrac{(100-100)^2}{100} + \dfrac{(110-100)^2}{100} + \ldots + \dfrac{(95-100)^2}{100}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\chi^2 = \dfrac{100}{100} + \dfrac{0}{100} + \dfrac{100}{100} + \dfrac{0}{100} + \dfrac{25}{100} + \dfrac{25}{100} = 2.5\)</span></p>
+</section>
+<section id="Step-2-—-Compute-the-p-value">
+<h2>Step 2 — Compute the p-value<a class="headerlink" href="#Step-2-—-Compute-the-p-value" title="Permalink to this heading"></a></h2>
+<p>Once you have the chi-squared statistic <span class="math notranslate nohighlight">\(\chi^2 = 2.5\)</span>, you calculate the p-value using the chi-squared distribution with:</p>
+<ul class="simple">
+<li><p>degrees of freedom (df) = k − 1 = 6 − 1 = 5</p></li>
+</ul>
+<p>In Python:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span>
+<span class="n">p_value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">chi2</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This gives the probability that a chi-squared value <span class="math notranslate nohighlight">\(\ge 2.5\)</span> occurs by chance, assuming the null hypothesis is true.</p>
+<p>📌 <strong>Summary</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>What it does ?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><ol class="arabic simple">
+<li><p>Chi-squared stat</p></li>
+</ol>
+</td>
+<td><p>Measures how far observed counts devriate from expected</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="arabic simple" start="2">
+<li><p>Degress of freedom</p></li>
+</ol>
+</td>
+<td><p>Number of categories minus 1</p></td>
+</tr>
+<tr class="row-even"><td><ol class="arabic simple" start="3">
+<li><p>p-value</p></li>
+</ol>
+</td>
+<td><p>Probability of seeing that deviation (or worse) by chance</p></td>
+</tr>
+<tr class="row-odd"><td><ol class="arabic simple" start="4">
+<li><p>Decision</p></li>
+</ol>
+</td>
+<td><p>Reject <span class="math notranslate nohighlight">\(H_0\)</span> if p-value &lt; threshold (e.g., 0.05)</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>END</strong></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David TBO.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

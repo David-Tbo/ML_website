@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sphinx guidelines &mdash; My AI website 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../_static/doctools.js?v=888ff710"></script>
+      <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            My AI website
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Sphinx guidelines</a><ul>
+<li><a class="reference internal" href="#How-to-create-a-Sphinx-project-using-Jupyter's-Notebook-files">How to create a Sphinx project using Jupyter’s Notebook files</a></li>
+<li><a class="reference internal" href="#Complements:">Complements:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My AI website</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Sphinx guidelines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/AI/_Sphinx_guidelines 2.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Sphinx-guidelines">
+<h1>Sphinx guidelines<a class="headerlink" href="#Sphinx-guidelines" title="Permalink to this heading"></a></h1>
+<section id="How-to-create-a-Sphinx-project-using-Jupyter's-Notebook-files">
+<h2>How to create a Sphinx project using Jupyter’s Notebook files<a class="headerlink" href="#How-to-create-a-Sphinx-project-using-Jupyter's-Notebook-files" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Using VSCode interface</p></li>
+<li><p>Using Anaconda</p></li>
+</ul>
+<p>It is possible to use a Jupyter Notebook to generate a Sphinx documentation.</p>
+<p>Sphinx has an extension called <code class="docutils literal notranslate"><span class="pre">nbsphinx</span></code> which allows to convert a Jupyter Notebook into a Sphinx documentation.</p>
+<ol class="arabic simple">
+<li><p>Create a new folder named ‘docs’ for example for your Sphinx project and open it in VSCode.</p></li>
+<li><p>Open a terminal in VSCode using the menu “Terminal” &gt; “New Terminal”.</p></li>
+<li><p>Make sure that you have installed Sphinx using the command:</p></li>
+</ol>
+<blockquote>
+<div><p>pip install sphinx</p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>In order to create a new Sphinx project, use the following command</p></li>
+</ol>
+<blockquote>
+<div><p>sphinx-quickstart</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Answer the questions asked by the configuration assistant corresponding to your need.</p></li>
+<li><p>This will create a new <em>source</em> folder “docs” containing the files <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> and <code class="docutils literal notranslate"><span class="pre">index.rst</span></code>.</p></li>
+</ul>
+<div class="line-block">
+<div class="line">In the following example of <code class="docutils literal notranslate"><span class="pre">index.rst</span></code>, the toctree directive manage the index.</div>
+<div class="line">The depth is set to 2.</div>
+<div class="line">The contents is the one available in notebooks/Bernoulli.ipynb Jupyter Notebood.</div>
+</div>
+<blockquote>
+<div><div class="line-block">
+<div class="line">Welcome to the doc’s documentation!</div>
+<div class="line">=====================================</div>
+</div>
+</div></blockquote>
+<blockquote>
+<div><div class="line-block">
+<div class="line">.. toctree::</div>
+<div class="line">:maxdepth: 2</div>
+<div class="line">:caption: Contents:</div>
+</div>
+<p>notebooks/Sphinx_guidelines.ipynb</p>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Install the nbsphinx extension using the pip command:</p></li>
+</ol>
+<blockquote>
+<div><p>pip install nbsphinx</p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>Add the nbsphinx extension into the file <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> by adding the line:</p></li>
+</ol>
+<blockquote>
+<div><p>extensions = [‘nbsphinx’]</p>
+</div></blockquote>
+<p>Like in Python, the comments are precedeed by an asterisk (*)</p>
+<ol class="arabic simple" start="7">
+<li><p>In the <em>source</em> folder “docs”, create a new folder named ‘notebooks’ to store your Jupyter Notebook files.</p></li>
+</ol>
+<ul class="simple">
+<li><p>Copy your Jupyter Notebook in this folder.</p></li>
+<li><p>Add a .rst file <code class="docutils literal notranslate"><span class="pre">mgt_notebook.rst</span></code> for instance in the <em>source</em> folder (projet_sphinx) for each Jupyter Notebook that you want to include in your documentation.</p></li>
+</ul>
+<div class="line-block">
+<div class="line">To display the content of a Jupyter notebook file “Bernoulli.ipynb” and run it within an .rst file, you can use the <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">jupyter-execute::</span></code> directive with the <code class="docutils literal notranslate"><span class="pre">:hide-code:</span></code> option.</div>
+<div class="line">This will execute the code contained in the notebook and display the output, while hiding the code itself. Here is an example:</div>
+</div>
+<blockquote>
+<div><div class="line-block">
+<div class="line">.. jupyter-execute:</div>
+<div class="line">:hide-code</div>
+</div>
+<p>“notebooks/Sphinx_guidelines.ipynb”</p>
+</div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p>In the root folder of your project “projet_Sphinx”, generate the documentation using the command line:</p></li>
+</ol>
+<blockquote>
+<div><p>make html</p>
+</div></blockquote>
+<p>This will create the folder **_build** containing the generated documentation.</p>
+<ol class="arabic simple" start="9">
+<li><p>You can visualize the generated documentation if you open the file <strong>index.html</strong> in the folder **_build/html** with a web navigator.</p></li>
+</ol>
+<p>In our example the architecture of the project folder will be:</p>
+<ul class="simple">
+<li><p>projet_sphinx</p>
+<ul>
+<li><p>Makefile</p></li>
+<li><p>_build</p></li>
+<li><p>static</p></li>
+<li><p>_templates</p></li>
+<li><p>conf.py</p></li>
+<li><p>index.rst</p></li>
+<li><p>make.bat</p></li>
+<li><p>notebook.rst</p></li>
+<li><p>notebooks</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="Complements:">
+<h2>Complements:<a class="headerlink" href="#Complements:" title="Permalink to this heading"></a></h2>
+<p>The minimal content of the <em>conf.py</em> file is:</p>
+<blockquote>
+<div><p># Configuration file for the Sphinx documentation builder.</p>
+<p># – Project information —————————————————–</p>
+<div class="line-block">
+<div class="line">project = ‘My Project’</div>
+<div class="line">copyright = ‘2024, My Name’</div>
+<div class="line">author = ‘My Name’</div>
+</div>
+<p># – General configuration —————————————————</p>
+<p>extensions = [‘nbsphinx’]</p>
+<p># – Options for HTML output ————————————————-</p>
+<p>html_theme = ‘alabaster’</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>The reStructuredText (reST)</p></li>
+</ul>
+<div class="line-block">
+<div class="line">The .rst extension is used for plain text files written in the reStructuredText (reST) markup language. reStructuredText is a lightweight markup language used for authoring technical documentation, books, reports, and other documents.</div>
+<div class="line">It allows for creating structured and readable documents while being easy to write and read.</div>
+</div>
+<div class="line-block">
+<div class="line">.rst files contain plain text formatted with reST directives and roles.</div>
+<div class="line">Directives are special instructions that tell a reST document processor (such as Sphinx) how to process the text.</div>
+<div class="line">Roles are markers that indicate how to interpret a piece of text.</div>
+<div class="line">For example, the :code: role is used to indicate that the following text is computer code.</div>
+</div>
+<p>.rst files can be converted to various output formats, such as HTML, PDF, LaTeX, etc., using document processing tools like Sphinx or Docutils.</p>
+<p>In summary, the .rst extension is used for plain text files written in the reStructuredText markup language, which is a lightweight markup language used for creating structured and readable documents.</p>
+<p>You can then create a Sphinx documentation from your Jupyter Notebook file using the following command:</p>
+<blockquote>
+<div><p>sphinx-build path/to/notebook path/to/output</p>
+</div></blockquote>
+<p>where <em>path/to/notebook</em> is the path to your Jupyter Notebook file and <em>path/to/output</em> is the path to your output folder of the generated documentation.</p>
+<p>When using nbsphinx, the code cells in the Jupyter Notebook file are executed and their results are included in the generated documentation.</p>
+<p>You can also include Markdown cells in your Jupyter Notebook file to add additional documentation.</p>
+<p>For more information on using nbsphinx, you can refer to the official Sphinx documentation: <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/nbsphinx.html">https://www.sphinx-doc.org/en/master/usage/extensions/nbsphinx.html</a></p>
+<p>With the Anaconda interface:</p>
+<ol class="arabic simple">
+<li><p>Create a new folder for your Sphinx project and open it with the Anaconda.</p></li>
+<li><p>Create a new Anaconda environment for your Sphinx project using the menu “Environments” &gt; “Create”.</p></li>
+<li><p>Install Sphinx and the nbsphinx extension in this environment using the command:</p></li>
+</ol>
+<blockquote>
+<div><p>conda install sphinx nbsphinx</p>
+</div></blockquote>
+<p>Error with conda for nbsphinx, preferable to use: pip install nbsphinx</p>
+<ol class="arabic" start="4">
+<li><p>Open a terminal in the Anaconda Navigator using the menu: “Environments” &gt; “Terminal”.</p></li>
+<li><div class="line-block">
+<div class="line">Use the <strong>sphinx-quickstart</strong> commnad to create a new Sphinx project.</div>
+</div>
+</li>
+</ol>
+<ul class="simple">
+<li><p>Answer the questions of hte configuration assistant corresponding to your needs.</p></li>
+<li><p>This will create the source folder containing the files <strong>conf.py</strong> and <strong>index.rst</strong>.</p></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li><p>Add the nbsphinx extension in the conf.py file typing the line:</p></li>
+</ol>
+<blockquote>
+<div><p>extensions = [‘nbsphinx’]</p>
+</div></blockquote>
+<ol class="arabic simple" start="7">
+<li><p>Create a new folder in the source folder for your Jupyter Notebook.</p></li>
+</ol>
+<ul class="simple">
+<li><p>Copy your Jupyter Notebook files in this folder.</p></li>
+<li><p>Add the .rst file in the source folder for each Jupyter Notebook file that you want to include in your documentation.</p></li>
+<li><p>In this file, use the following nbsphinx directive to include the Jupyter Notebook file, for instance:</p></li>
+</ul>
+<blockquote>
+<div></div></blockquote>
+<ol class="arabic simple" start="8">
+<li><p>In the root folder of your project “projet_Sphinx”, generate the documentation using the command line:</p></li>
+</ol>
+<blockquote>
+<div><p>make html</p>
+</div></blockquote>
+<p>This will create the folder **_build** containing the generated documentation.</p>
+<ol class="arabic simple" start="9">
+<li><p>You can visualize the generated documentation if you open the file <strong>index.html</strong> in the folder **_build/html** with a web navigator.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David TBO.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
