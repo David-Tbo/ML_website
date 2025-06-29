@@ -1,0 +1,11 @@
+Bayesian inference and models
+=============================
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   PriorsPosteriors.ipynb
+   MCMC.ipynb
+   BayesianLinearRegression.ipynb
+   BayesianLogisticRegression.ipynb

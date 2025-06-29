@@ -1,0 +1,12 @@
+Multivariate Analysis
+=====================
+
+
+.. toctree::
+   :maxdepth: 2
+   :titlesonly:
+
+   cluster_analysis/index
+   discriminant_analysis/index
+   factor_analysis/index
+   principal_component_analysis/index

@@ -1,0 +1,8 @@
+Functional Data Analysis notebooks
+==================================
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   FDA.ipynb

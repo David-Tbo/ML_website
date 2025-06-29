@@ -1,0 +1,10 @@
+notebooks
+=========
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   BayesTheorem.ipynb
+   Distributions.ipynb
+   RandomVariables.ipynb

@@ -1,0 +1,48 @@
+
+# RAPPORT - VALEURS EXTREMES  
+_Cours enseigné par Jonathan EL METHNI_  
+_Executive Master Statistique et Big Data_  
+_Université Paris Dauphine_
+
+**Auteur : David THEBAULT**  
+**Date : 25 novembre 2020**
+
+```r
+knitr::opts_chunk$set(echo=TRUE,
+                      message=FALSE,
+                      warning = FALSE)
+```
+
+## Avant-propos
+
+Ce rapport s'inscrit dans le cadre de l'Executive Master Statistique et Big Data de l'Université Paris Dauphine et le cours des Valeurs Extrêmes.  
+Les méthodes employées sont reprises du cours enseigné par Jonathan EL METHNI aux étudiants du Master 2 de la session 2020/2021.  
+Cette étude est produite avec le logiciel R.
+
+NB1 : souvent dans ce rapport nous écrirons modèle de Frechet/Weibull pour désigner à la fois le modèle de Frechet ($\gamma>0$) et le modèle de Weibull ($\gamma<0$).  
+NB2 : un rapport plus détaillé sur le jeu de données Marseille est disponible. Ce second rapport sera plus synthétique.
+
+**Ci-après la liste des packages que nous utiliserons**
+
+```r
+require(evd)
+require(evir)
+require(ismev)
+require(extRemes)
+require(fExtremes)
+```
+
+## Introduction
+
+L'indice Dow Jones est le plus vieil indice boursier au monde. C'est l'indice boursier de New York qui regroupe les cotations de 30 sociétés. Son équivalent français est le CAC40.
+
+Le jeu de données _dowjones_ reprend le cours quotidien de l'indice sur 5 ans du 11 septembre 1995 au 7 septembre 2000.
+
+## 1. Le jeu de données dowjones
+
+[...]
+
+## Conclusion
+
+La non-stationnarité de l’indice sur la période observée nous a obligé à stationnariser le log processus. Cela rend moins directe la lecture des résultats.  
+Nous avons pris la valeur absolue de cette transformation et ainsi étudié les variations en valeur absolue. Nous aurions pu également séparer le jeu de données en deux...

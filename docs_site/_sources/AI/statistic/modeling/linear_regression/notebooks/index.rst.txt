@@ -1,0 +1,11 @@
+notebooks
+=========
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   Anova.ipynb		
+   Correlation.ipynb
+   Linear_reg_simple.ipynb		
+   Linear_reg_multiple.ipynb	

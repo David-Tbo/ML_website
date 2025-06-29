@@ -1,0 +1,8 @@
+Statistical inference
+=====================
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   chi_squared2

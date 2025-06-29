@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The logistic regression &mdash; My AI website 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js?v=e031e9a9"></script>
+      <script src="../../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            My AI website
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../probabilities/index.html">Probability Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Statistical Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../machine_learning/index.html">Machine Learning</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">My AI website</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The logistic regression</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/AI/statistic/core_concepts/statistical_inference/notebooks/Bernoulli.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="The-logistic-regression">
+<h1>The logistic regression<a class="headerlink" href="#The-logistic-regression" title="Permalink to this heading"></a></h1>
+<section id="The-model">
+<h2>The model<a class="headerlink" href="#The-model" title="Permalink to this heading"></a></h2>
+<p>The logistic regression is a linear model where we try to estimate a probability instead of a specific value like in simple linear regression.</p>
+<p><span class="math notranslate nohighlight">\(Y_i\)</span> ~ <span class="math notranslate nohighlight">\(B(p_i)\)</span></p>
+<p>Les <span class="math notranslate nohighlight">\(Y_i\)</span> suivent une loi de Bernoulli de paramètre <span class="math notranslate nohighlight">\(p_i\)</span>:</p>
+<p>It means that:</p>
+<p><span class="math notranslate nohighlight">\(P(Y_i=1) = p_i\)</span>, <span class="math notranslate nohighlight">\(P(Y_i = 0) = 1 - p_i\)</span></p>
+<p>Which is equivalent to:</p>
+<p><span class="math notranslate nohighlight">\(P(Y_i = k) = {p_i}^k(1 - p_i)^{1-k}\)</span> pour <span class="math notranslate nohighlight">\(k \in \{0, 1\}\)</span></p>
+</section>
+<section id="Sample-(échantillon)">
+<h2>Sample (<em>échantillon</em>)<a class="headerlink" href="#Sample-(échantillon)" title="Permalink to this heading"></a></h2>
+<p>The joint distribution (<em>loi conjointe</em>) or joint probability of the <span class="math notranslate nohighlight">\((Y_i)_{1, \ldots, n}\)</span> ~ <span class="math notranslate nohighlight">\(B(p_i)\)</span> is given by:</p>
+<p><span class="math notranslate nohighlight">\(P(Y_1=y_1, Y_2=y_2, \ldots, Y_n=y_n) = \underset{1,\ldots, n}\prod P(Y_i=y_i)\)</span> , les <span class="math notranslate nohighlight">\(Y_i\)</span> étant indépendants.</p>
+<p>With <span class="math notranslate nohighlight">\(P(Y_i = y_i) = p_i^{y_i}(1-p_i)^{1-y_i}\)</span> and considering the <span class="math notranslate nohighlight">\(Y_i\)</span> independants and identically distributed <span class="math notranslate nohighlight">\(p_i = p\)</span> , $ <span class="math">\forall `i :nbsphinx-math:</span>in {1, ldots, n}`$</p>
+<p><span class="math notranslate nohighlight">\(\underset{1,\ldots, n}\prod P(Y_i=y_i) = p^{\sum{y_i}}(1-p)^{\sum{1-y_i}} = p^{\sum{y_i}}(1-p)^{n - \sum{y_i}}\)</span></p>
+</section>
+</section>
+<section id="Estimator-of-p-:-\hat{p}">
+<h1>Estimator of p : <span class="math notranslate nohighlight">\(\hat{p}\)</span><a class="headerlink" href="#Estimator-of-p-:-\hat{p}" title="Permalink to this heading"></a></h1>
+<section id="The-likelihood-(vraissemblance)">
+<h2>The likelihood (<em>vraissemblance</em>)<a class="headerlink" href="#The-likelihood-(vraissemblance)" title="Permalink to this heading"></a></h2>
+<p>The likelihood is a function that measures the probability of observing a given sample.</p>
+<p>The likelihood is defined as the joint probability of the data given the model parameters <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(L_{\theta}(Y_1,Y_2,\ldots,Y_n) = \underset{1,\ldots, n}\prod P_{\theta}(Y_i=y_i)\)</span>.</p>
+<p>In our case, <span class="math notranslate nohighlight">\(\theta = p\)</span></p>
+</section>
+<section id="The-Maximum-likelihood-Method">
+<h2>The Maximum likelihood Method<a class="headerlink" href="#The-Maximum-likelihood-Method" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line">The objective of the maximum likelihood method is to find the values of the parameter <span class="math notranslate nohighlight">\(\theta\)</span> that maximize the likelihood for the observed sample X.</div>
+<div class="line">In other words, we aim to find the values of the model parameters that make the observation of the given sample most probable.</div>
+</div>
+<p>The question is where the likelihood reaches its maximum ?</p>
+<section id="The-Log-likelihood">
+<h3>The Log-likelihood<a class="headerlink" href="#The-Log-likelihood" title="Permalink to this heading"></a></h3>
+<div class="line-block">
+<div class="line">Thanks to its monotony, if we transform the likelihood into a log-likelihood, the maximum will be the same.</div>
+<div class="line">In other words, find the maximum of the Likelihood is equivalent to find the maximum of the Log-likelihood.</div>
+</div>
+<p>A <span class="math notranslate nohighlight">\(log\)</span> transformation will simplify the calculation:</p>
+<p><span class="math notranslate nohighlight">\(\log(L_{\theta}(Y_1,Y_2,\ldots,Y_n)) = \log(\underset{1,\ldots, n}\prod P_{\theta}(Y_i=y_i)) = \underset{1,\ldots, n}\sum \log(P_{\theta}(Y_i=y_i))\)</span></p>
+<p><span class="math notranslate nohighlight">\(= \underset{1,\ldots, n}\sum \log (p^{y_i}(1-p)^{1-y_i}) = \underset{1,\ldots, n}\sum [y_i\log(p) + (1-y_i)\log(1-p)]\)</span></p>
+<p><span class="math notranslate nohighlight">\(= \underset{1,\ldots, n}\sum y_i\log(p) + \underset{1,\ldots, n}\sum(1-y_i)\log(1-p) = \underset{1,\ldots, n}\sum y_i\log(p) + \underset{1,\ldots, n}\sum\log(1-p)  - \underset{1,\ldots, n}\sum y_i\log(1-p) = \underset{1,\ldots, n}\sum y_i\log(p) +  n\log(1-p) - \underset{1,\ldots, n}\sum y_i\log(1-p)\)</span></p>
+<p><span class="math notranslate nohighlight">\(= \underset{1,\ldots, n}\sum y_i\log(p) - \underset{1,\ldots, n}\sum y_i\log(1-p) + n\log(1-p) = \underset{1,\ldots, n}\sum y_i\log(\frac{p}{1-p}) + n\log(1-p)\)</span></p>
+<p>We have now:</p>
+<p><span class="math notranslate nohighlight">\(\log(L_{\theta}(Y_1,Y_2,\ldots,Y_n)) = \underset{1,\ldots, n}\sum y_i\log(\frac{p}{1-p}) + n\log(1-p)\)</span></p>
+</section>
+</section>
+<section id="The-Maximum-Log-likelihood-Method">
+<h2>The Maximum Log-likelihood Method<a class="headerlink" href="#The-Maximum-Log-likelihood-Method" title="Permalink to this heading"></a></h2>
+<p>To find where the Log-likelihood reaches its maximum we calculate the derivative of the Log-likelihood:</p>
+<p><span class="math notranslate nohighlight">\(\frac{\partial }{\partial \theta} \log(L_{\theta}(Y_1,Y_2,\ldots,Y_n)) =\frac{\partial }{\partial \theta} \underset{1,\ldots, n}\sum y_i\log(\frac{p}{1-p}) + n\log(1-p)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\theta = p\)</span></p>
+<p>$:nbsphinx-math:<cite>frac{partial }{partial p}</cite> <span class="math">\underset{1,\ldots, n}</span><span class="math">\sum `y_i:nbsphinx-math:</span>log`(<span class="math">\frac{p}{1-p}</span>) + n:nbsphinx-math:<cite>log`(1-p)= :nbsphinx-math:</cite>underset{1,ldots, n}`:nbsphinx-math:<cite>sum  `y_i :nbsphinx-math:</cite>frac{partial }{partial p}` <span class="math">\log`(:nbsphinx-math:</span>frac{p}{1-p}`) + n <span class="math">\frac{\partial }{\partial p}</span> :nbsphinx-math:<a href="#id1"><span class="problematic" id="id2">`</span></a>log`(1-p) $</p>
+<ul class="simple">
+<li><p>$ <span class="math">\frac{\partial }{\partial p}</span> <span class="math">\log`(:nbsphinx-math:</span>frac{p}{1-p}`) <span class="math">\underset{(log(u))'=\frac{u'}{u}}`= :nbsphinx-math:</span>frac{partial }{partial p}` (<span class="math">\frac{p}{1-p}</span>) <span class="math">\times `:nbsphinx-math:</span>frac{1-p}{p}` = <span class="math">\frac{1\times(1-p)-p(-1)}{(1-p)^2}</span> <span class="math">\times `:nbsphinx-math:</span>frac{1-p}{p}` = :nbsphinx-math:<a href="#id3"><span class="problematic" id="id4">`</span></a>frac{1}{p(1-p)}`$</p></li>
+<li><p><span class="math notranslate nohighlight">\(n \frac{\partial }{\partial p} \log(1-p) \underset{(log(u))'=\frac{u'}{u}}= n \frac{(-1)}{1-p}\)</span></p></li>
+</ul>
+<p>$:nbsphinx-math:<cite>Rightarrow `:nbsphinx-math:</cite>underset{1,ldots, n}`:nbsphinx-math:<cite>sum  `y_i :nbsphinx-math:</cite>frac{partial }{partial p}` <span class="math">\log`(:nbsphinx-math:</span>frac{p}{1-p}`) + n <span class="math">\frac{\partial }{\partial p}</span> <span class="math">\log`(1-p) = :nbsphinx-math:</span>underset{1,ldots, n}`:nbsphinx-math:<cite>sum  `y_i :nbsphinx-math:</cite>frac{1}{p(1-p)}` + n <span class="math">\frac{(-1)}{1-p}</span> $</p>
+<p><span class="math notranslate nohighlight">\(\Rightarrow \frac{\partial }{\partial \theta} \log(L_{\theta}(Y_1,Y_2,\ldots,Y_n)) = 0\)</span></p>
+<p><span class="math notranslate nohighlight">\(\iff \underset{1,\ldots, n}\sum  y_i \frac{1}{p(1-p)} + n  \frac{(-1)}{1-p} = 0\)</span></p>
+<p><span class="math notranslate nohighlight">\(\iff \underset{1,\ldots, n}\sum  y_i \frac{1}{p(1-p)}  = \frac{n}{1-p}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\iff \frac{1}{n}\underset{1,\ldots, n}\sum  y_i   = p\)</span></p>
+<p><span class="math notranslate nohighlight">\(\iff \hat{p} = \frac{1}{n}\underset{1,\ldots, n}\sum  y_i = \bar{y}\)</span></p>
+<p>We know now that the likelihood reaches a unique extremum with <span class="math notranslate nohighlight">\(\bar{y}\)</span></p>
+<p>Let’s verfiy if this extremum is a maximum.</p>
+<p>Usually, we would have compute: $:nbsphinx-math:<cite>frac{partial^2}{partial theta^2}</cite> <span class="math">\log`(L\_{:nbsphinx-math:</span>theta`}(Y_1,Y_2,:nbsphinx-math:<cite>ldots</cite>,Y_n)) $ to study the <strong>Fisher Information</strong> <span class="math notranslate nohighlight">\(I(\theta)\)</span></p>
+<p><span class="math notranslate nohighlight">\(I(\theta) = - \mathbb{E} \left[ \frac{\partial^2}{\partial \theta^2} \log(L_{\theta}(Y_1,Y_2,\ldots,Y_n)) \right]\)</span></p>
+<p>We will rather study the sign of <span class="math notranslate nohighlight">\(\frac{\partial }{\partial \theta} \log(L_{\theta}(Y_1,Y_2,\ldots,Y_n))\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{\partial }{\partial \theta} \log(L_{\theta}(Y_1,Y_2,\ldots,Y_n)) &gt; 0\)</span></p>
+<p><span class="math notranslate nohighlight">\(\iff \underset{1,\ldots, n}\sum  y_i \frac{1}{p(1-p)} + n  \frac{(-1)}{1-p} &gt; 0\)</span></p>
+<p><span class="math notranslate nohighlight">\(\iff \underset{1,\ldots, n}\sum  y_i \frac{1}{p(1-p)}  &gt; \frac{n}{1-p}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\iff \frac{1}{n}\underset{1,\ldots, n}\sum  y_i   &gt; p\)</span></p>
+<p>$:nbsphinx-math:<cite>iff `:nbsphinx-math:</cite>bar`{y} &gt; p $</p>
+<p>And, $:nbsphinx-math:<cite>frac{partial }{partial theta}</cite> <span class="math">\log`(L\_{:nbsphinx-math:</span>theta`}(Y_1,Y_2,:nbsphinx-math:<cite>ldots</cite>,Y_n)) &lt; 0 <span class="math">\iff `:nbsphinx-math:</span>bar`{y} &lt; p $</p>
+<p>Thus, If we construct a monotonicity table of the log-likelihood based on its partial derivative, <span class="math notranslate nohighlight">\(\bar{y}\)</span> is indeed a maximum.</p>
+<p>$:nbsphinx-math:<cite>mathbb{E}</cite> <span class="math">\left[ \hat{p} \right] `= p :nbsphinx-math:</span>underset{n infty}` :nbsphinx-math:<a href="#id5"><span class="problematic" id="id6">`</span></a>rightarrow <a href="#id7"><span class="problematic" id="id8">`</span></a>p $ (évident)</p>
+<p><span class="math notranslate nohighlight">\(\text{Var} \left[ \hat{p} \right] = \text{Var} \left[ \frac{1}{n} \sum Y_i \right] = \frac{1}{n^2} \text{Var} \left[  \sum Y_i \right] = \frac{1}{n^2} \sum \text{Var} \left[  Y_i \right] = \frac{1}{n^2} np(1-p) =  \frac{1}{n} p(1-p) = \frac{1}{n} I(\theta)\)</span></p>
+<p>On atteint la borne de Cramer-Rao, notre variance est la plus faible de tous les estimateurs de p.</p>
+<p><span class="math notranslate nohighlight">\(\text{Var} \left[ \hat{p} \right] = \frac{p(1-p)}{n} \underset{n \infty} \rightarrow 0\)</span></p>
+<p>$:nbsphinx-math:<cite>Rightarrow `:nbsphinx-math:</cite>hat{p}` $ est un Estimateur convergent Sans Biais de Variance Minimale (ESBVM). Il est parfait :)</p>
+</section>
+<section id="APPENDIX">
+<h2>APPENDIX<a class="headerlink" href="#APPENDIX" title="Permalink to this heading"></a></h2>
+<p>Rappel: La vraisemblance:</p>
+<p>Etant donnée un échantillon observé <span class="math notranslate nohighlight">\((x_1, x_2,\dots,x_n)\)</span> et une loi de probabilité <span class="math notranslate nohighlight">\(P(\theta)\)</span>, la vraisemblance quantifie la probabilité que les observations proviennent d’un échantillon théorique de loi <span class="math notranslate nohighlight">\(P(\theta)\)</span>.</p>
+<p>Exemple:</p>
+<p>On effectue 10 lancers d’une pièce.</p>
+<p>L’échantillon binaire observé est <span class="math notranslate nohighlight">\(0,1,1,0,1,1,1,0,0,1\)</span></p>
+<p>Pour un échantillon de taille 10 de la loi de Bernoulli de paramètre <span class="math notranslate nohighlight">\(p_j=p\)</span> la probabilité d’une telle réalisation est:</p>
+<p><span class="math notranslate nohighlight">\(p^6(1-p)^4\)</span></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>p</p></th>
+<th class="head"><p>0.2</p></th>
+<th class="head"><p>0.3</p></th>
+<th class="head"><p>0.4</p></th>
+<th class="head"><p>0.5</p></th>
+<th class="head"><p>0.6</p></th>
+<th class="head"><p>0.7</p></th>
+<th class="head"><p>0.8</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>p<sup>6(1-p)</sup>4</p></td>
+<td><p>2.6.10-5</p></td>
+<td><p>1.8.10-4</p></td>
+<td><p>5.3.10-4</p></td>
+<td><p>9.8.10-4</p></td>
+<td><p>1.2.10-3</p></td>
+<td><p>9.5.10-4</p></td>
+<td><p>4.2.10-4</p></td>
+</tr>
+</tbody>
+</table>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mf">.3</span> <span class="p">,</span> <span class="mf">.4</span> <span class="p">,</span> <span class="mf">.5</span> <span class="p">,</span> <span class="mf">.6</span> <span class="p">,</span> <span class="mf">.7</span> <span class="p">,</span> <span class="mf">.8</span><span class="p">]:</span>
+    <span class="n">likeli</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mi">6</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">likeli</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2.62144e-05
+0.0001750329
+0.0005308416
+0.0009765625
+0.0011943936
+0.0009529569
+0.0004194304
+</pre></div></div>
+</div>
+<p>Il est naturel de choisir commme estimation de <span class="math notranslate nohighlight">\(p\)</span> celle pour laquelle la probabilité de l’échantillon observé est la plus forte à savoir <span class="math notranslate nohighlight">\(p=0.6\)</span></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, David TBO.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

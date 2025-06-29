@@ -1,0 +1,9 @@
+Resampling methods notebooks
+============================
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   bootstrap.ipynb
+   permutationTests.ipynb   

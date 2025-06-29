@@ -1,0 +1,8 @@
+Extreme values
+==============
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
+   notebooks/index
