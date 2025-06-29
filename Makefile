@@ -4,9 +4,9 @@
 # You can set these variables from the command line, and also
 # from the environment for the first two.
 SPHINXOPTS    ?=
-SPHINXBUILD   ?= sphinx-build
+SPHINXBUILD   = sphinx-build
 SOURCEDIR     = docs_src
-BUILDDIR      = docs
+BUILDDIR      = docs_src/_build
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -18,3 +18,7 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+publish: html
+	rsync -av --delete "$(BUILDDIR)/html/" docs/
+	@echo "Copied to ./docs for GitHub Pages."

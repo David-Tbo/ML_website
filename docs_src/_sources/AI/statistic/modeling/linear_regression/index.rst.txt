@@ -1,8 +1,0 @@
-Linear models
-=============
-
-.. toctree::
-   :maxdepth: 1
-   :titlesonly:
-
-   notebooks/index

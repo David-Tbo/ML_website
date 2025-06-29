@@ -1,8 +1,0 @@
-Longitudinal Data Analysis notebooks
-====================================
-
-.. toctree::
-   :maxdepth: 1
-   :titlesonly:
-
-   longitudinal_data_analysis.ipynb

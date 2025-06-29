@@ -1,7 +1,0 @@
-Functional Data Analysis
-========================
-
-- concepts
-- frameworks
-- notebooks
-- presentations
