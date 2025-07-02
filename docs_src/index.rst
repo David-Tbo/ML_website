@@ -1,5 +1,5 @@
-Welcome to My first AI website
-===============================
+Welcome to website
+==================
 
 .. toctree::
    :maxdepth: 2
