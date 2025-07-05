@@ -6,14 +6,12 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clustering: KMeans &mdash; My AI website 0.1 documentation</title>
+  <title>Clustering: KMeans &mdash; Machine Learning and Deep Learning 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
       <script src="../../../../_static/doctools.js?v=888ff710"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
@@ -22,7 +20,9 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Clustering: DBSCAN" href="ML_labDauphine_unsupervised_3_DBSCAN.html" />
+    <link rel="prev" title="Clustering: HAC" href="ML_labDauphine_unsupervised_1_CAH.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +34,7 @@
           
           
           <a href="../../../../index.html" class="icon icon-home">
-            My AI website
+            Machine Learning and Deep Learning
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -44,29 +44,27 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Clustering: KMeans</a><ul>
-<li><a class="reference internal" href="#Complexity">Complexity</a></li>
-<li><a class="reference internal" href="#Evaluating-the-clustering-quality">Evaluating the clustering quality</a><ul>
-<li><a class="reference internal" href="#1.-Calinski-Harabasz-Index."><strong>1. Calinski-Harabasz Index</strong>.</a></li>
-<li><a class="reference internal" href="#Example-on-the-small-dataset">Example on the small dataset</a></li>
-<li><a class="reference internal" href="#2.-Silhouette-Score."><strong>2. Silhouette Score</strong>.</a></li>
-<li><a class="reference internal" href="#id1">Example on the small dataset</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#KMeans-with-Python-packages">KMeans with Python packages</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Machine Learning</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#notebooks">Notebooks</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Unsupervised learning</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#notebooks">Notebooks</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+</ul>
+</li>
+</ul>
+
         </div>
       </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../index.html">My AI website</a>
+          <a href="../../../../index.html">Machine Learning and Deep Learning</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -74,6 +72,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Machine Learning</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Unsupervised learning</a></li>
       <li class="breadcrumb-item active">Clustering: KMeans</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/AI/machine_learning/unsupervised_learning/notebooks/ML_labDauphine_unsupervised_2_Kmeans.ipynb.txt" rel="nofollow"> View page source</a>
@@ -85,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section id="Clustering:-KMeans">
-<h1>Clustering: KMeans<a class="headerlink" href="#Clustering:-KMeans" title="Permalink to this heading"></a></h1>
+<h1>Clustering: KMeans<a class="headerlink" href="#Clustering:-KMeans" title="Permalink to this heading">¶</a></h1>
 <p>The qualities to define a <strong>good clustering</strong>, are the <strong>homogeneity and separability</strong> of clusters, involves examining <strong>intra-class</strong> and <strong>inter-class dispersion</strong>.</p>
 <p>Clusters are considered <strong>homogeneous</strong> if their points are tightly grouped around their mean, meaning the <strong>intra-class variance is low</strong>.</p>
 <p>Clusters are considered <strong>well separated</strong> if the centers of the clusters are widely dispersed around the <strong>overall mean</strong>, meaning the <strong>inter-class variance is high</strong>.</p>
@@ -264,7 +264,7 @@
 </div>
 </div>
 <section id="Complexity">
-<h2>Complexity<a class="headerlink" href="#Complexity" title="Permalink to this heading"></a></h2>
+<h2>Complexity<a class="headerlink" href="#Complexity" title="Permalink to this heading">¶</a></h2>
 <p>📌 Definitions</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(n\)</span>: number of data points (here: <span class="math notranslate nohighlight">\(5\)</span>)</p></li>
@@ -322,14 +322,14 @@
 </div>
 </section>
 <section id="Evaluating-the-clustering-quality">
-<h2>Evaluating the clustering quality<a class="headerlink" href="#Evaluating-the-clustering-quality" title="Permalink to this heading"></a></h2>
+<h2>Evaluating the clustering quality<a class="headerlink" href="#Evaluating-the-clustering-quality" title="Permalink to this heading">¶</a></h2>
 <div class="line-block">
 <div class="line">Unlike supervised learning, clustering has no ground truth labels.</div>
 <div class="line">So we rely on internal validation indices that assess how well the clusters are formed.</div>
 </div>
 <p><strong>Two</strong> commonly used <strong>scores</strong> are:</p>
 <section id="1.-Calinski-Harabasz-Index.">
-<h3><strong>1. Calinski-Harabasz Index</strong>.<a class="headerlink" href="#1.-Calinski-Harabasz-Index." title="Permalink to this heading"></a></h3>
+<h3><strong>1. Calinski-Harabasz Index</strong>.<a class="headerlink" href="#1.-Calinski-Harabasz-Index." title="Permalink to this heading">¶</a></h3>
 <p>Also known as the Variance Ratio Criterion, this score balances the compactness within clusters and the separation between clusters.</p>
 <p>It is defined as:</p>
 <div class="math notranslate nohighlight">
@@ -353,7 +353,7 @@
 </ul>
 </section>
 <section id="Example-on-the-small-dataset">
-<h3>Example on the small dataset<a class="headerlink" href="#Example-on-the-small-dataset" title="Permalink to this heading"></a></h3>
+<h3>Example on the small dataset<a class="headerlink" href="#Example-on-the-small-dataset" title="Permalink to this heading">¶</a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Point</p></th>
@@ -443,7 +443,7 @@
 </ul>
 </section>
 <section id="2.-Silhouette-Score.">
-<h3><strong>2. Silhouette Score</strong>.<a class="headerlink" href="#2.-Silhouette-Score." title="Permalink to this heading"></a></h3>
+<h3><strong>2. Silhouette Score</strong>.<a class="headerlink" href="#2.-Silhouette-Score." title="Permalink to this heading">¶</a></h3>
 <p>This index compares how similar a point is to its own cluster (cohesion) vs. other clusters (separation).</p>
 <p>For each point <span class="math notranslate nohighlight">\(i\)</span>, the silhouette score <span class="math notranslate nohighlight">\(s(i)\)</span> is:</p>
 <div class="math notranslate nohighlight">
@@ -487,7 +487,7 @@
 </table>
 </section>
 <section id="id1">
-<h3>Example on the small dataset<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<h3>Example on the small dataset<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <p><strong>Silhouette Score Example</strong> on the small dataset:</p>
 <ul class="simple">
 <li><p>Cluster 1: <span class="math notranslate nohighlight">\(A (1,1), B (2,1)\)</span></p></li>
@@ -553,7 +553,7 @@
 </section>
 </section>
 <section id="KMeans-with-Python-packages">
-<h2>KMeans with Python packages<a class="headerlink" href="#KMeans-with-Python-packages" title="Permalink to this heading"></a></h2>
+<h2>KMeans with Python packages<a class="headerlink" href="#KMeans-with-Python-packages" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -773,7 +773,10 @@ Clustering Evaluation Metrics for different K:
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ML_labDauphine_unsupervised_1_CAH.html" class="btn btn-neutral float-left" title="Clustering: HAC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ML_labDauphine_unsupervised_3_DBSCAN.html" class="btn btn-neutral float-right" title="Clustering: DBSCAN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

@@ -6,14 +6,12 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clustering: Isolation Forest Visualzation Use Case &mdash; My AI website 0.1 documentation</title>
+  <title>Clustering: Isolation Forest Visualzation Use Case &mdash; Machine Learning and Deep Learning 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
       <script src="../../../../_static/doctools.js?v=888ff710"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
@@ -22,7 +20,9 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Clustering: DTW (Dynamic Time Warping)" href="ML_labDauphine_unsupervised_10_DTW.html" />
+    <link rel="prev" title="Clustering: Isolation Forest" href="ML_labDauphine_unsupervised_8_Isolation_Forest.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +34,7 @@
           
           
           <a href="../../../../index.html" class="icon icon-home">
-            My AI website
+            Machine Learning and Deep Learning
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -44,23 +44,27 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Clustering: Isolation Forest Visualzation Use Case</a><ul>
-<li><a class="reference internal" href="#Importing-Libraries-&amp;-Data">Importing Libraries &amp; Data</a></li>
-<li><a class="reference internal" href="#Building-an-Isolation-Forest-Model-(2-Features)">Building an Isolation Forest Model (2 Features)</a></li>
-<li><a class="reference internal" href="#Building-an-Isolation-Forest-Model-Using-Multiple-Features">Building an Isolation Forest Model Using Multiple Features</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Machine Learning</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#notebooks">Notebooks</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Unsupervised learning</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html#notebooks">Notebooks</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+</ul>
+</li>
+</ul>
+
         </div>
       </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../../index.html">My AI website</a>
+          <a href="../../../../index.html">Machine Learning and Deep Learning</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -68,6 +72,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Machine Learning</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Unsupervised learning</a></li>
       <li class="breadcrumb-item active">Clustering: Isolation Forest Visualzation Use Case</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/AI/machine_learning/unsupervised_learning/notebooks/ML_labDauphine_unsupervised_9_Isolation_Forest_use_case.ipynb.txt" rel="nofollow"> View page source</a>
@@ -79,10 +85,10 @@
            <div itemprop="articleBody">
              
   <section id="Clustering:-Isolation-Forest-Visualzation-Use-Case">
-<h1>Clustering: Isolation Forest Visualzation Use Case<a class="headerlink" href="#Clustering:-Isolation-Forest-Visualzation-Use-Case" title="Permalink to this heading"></a></h1>
+<h1>Clustering: Isolation Forest Visualzation Use Case<a class="headerlink" href="#Clustering:-Isolation-Forest-Visualzation-Use-Case" title="Permalink to this heading">¶</a></h1>
 <p>Based on Andy McDonald’s work (YouTube: <a class="reference external" href="https://www.youtube.com/watch?v=O9VvmWj-JAk">Andy McDonald</a>).</p>
 <section id="Importing-Libraries-&amp;-Data">
-<h2>Importing Libraries &amp; Data<a class="headerlink" href="#Importing-Libraries-&-Data" title="Permalink to this heading"></a></h2>
+<h2>Importing Libraries &amp; Data<a class="headerlink" href="#Importing-Libraries-&-Data" title="Permalink to this heading">¶</a></h2>
 <p>The idea is that anomalies are few and different, so the Isolation Forest algorithm isolates anomalies instead of profiling normal data points. It does this by randomly selecting a feature and then randomly selecting a split value between the maximum and minimum values of the selected feature. The number of splits required to isolate a point is the anomaly score, with lower scores indicating anomalies.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
@@ -324,7 +330,7 @@ memory usage: 164.2+ KB
 </div>
 </section>
 <section id="Building-an-Isolation-Forest-Model-(2-Features)">
-<h2>Building an Isolation Forest Model (2 Features)<a class="headerlink" href="#Building-an-Isolation-Forest-Model-(2-Features)" title="Permalink to this heading"></a></h2>
+<h2>Building an Isolation Forest Model (2 Features)<a class="headerlink" href="#Building-an-Isolation-Forest-Model-(2-Features)" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
@@ -1165,7 +1171,7 @@ Total Number of Values: 1000
 </div>
 </section>
 <section id="Building-an-Isolation-Forest-Model-Using-Multiple-Features">
-<h2>Building an Isolation Forest Model Using Multiple Features<a class="headerlink" href="#Building-an-Isolation-Forest-Model-Using-Multiple-Features" title="Permalink to this heading"></a></h2>
+<h2>Building an Isolation Forest Model Using Multiple Features<a class="headerlink" href="#Building-an-Isolation-Forest-Model-Using-Multiple-Features" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
@@ -1243,7 +1249,10 @@ Total Number of Values: 1000
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ML_labDauphine_unsupervised_8_Isolation_Forest.html" class="btn btn-neutral float-left" title="Clustering: Isolation Forest" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ML_labDauphine_unsupervised_10_DTW.html" class="btn btn-neutral float-right" title="Clustering: DTW (Dynamic Time Warping)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
