@@ -1,20 +1,20 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clustering: DBSCAN &mdash; Machine Learning and Deep Learning 0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
-      <script src="../../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
       <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -85,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section id="Clustering:-DBSCAN">
-<h1>Clustering: DBSCAN<a class="headerlink" href="#Clustering:-DBSCAN" title="Permalink to this heading">¶</a></h1>
+<h1>Clustering: DBSCAN<a class="headerlink" href="#Clustering:-DBSCAN" title="Link to this heading">¶</a></h1>
 <div class="line-block">
 <div class="line"><strong>DBSCAN</strong> (<strong>D</strong>ensity-<strong>B</strong>ased <strong>S</strong>patial <strong>C</strong>lustering of <strong>A</strong>pplications with <strong>N</strong>oise)</div>
 <div class="line">groups points that are closely packed together (i.e., with many nearby neighbors),</div>
@@ -235,90 +235,90 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">DBSCAN</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from sklearn.cluster import DBSCAN
 
-<span class="c1"># Step-by-step DBSCAN explanation with a small 2D dataset</span>
+# Step-by-step DBSCAN explanation with a small 2D dataset
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+import matplotlib.pyplot as plt
 
-<span class="c1"># 1. Define the dataset</span>
-<span class="c1"># Points: A(1,1), B(2,1), C(4,3), D(5,4), E(3,4)</span>
-<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># A</span>
-    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># B</span>
-    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>  <span class="c1"># C</span>
-    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># D</span>
-    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># E</span>
-<span class="p">])</span>
-<span class="n">labels_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+# 1. Define the dataset
+# Points: A(1,1), B(2,1), C(4,3), D(5,4), E(3,4)
+points = np.array([
+    [1, 1],  # A
+    [2, 1],  # B
+    [4, 3],  # C
+    [5, 4],  # D
+    [3, 4],  # E
+])
+labels_names = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;]
 
-<span class="c1"># 2. Visualize the points</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Step 1: Visualize the data points&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# 2. Visualize the points
+plt.figure(figsize=(5, 5))
+plt.scatter(points[:, 0], points[:, 1], color=&#39;blue&#39;)
+for i, txt in enumerate(labels_names):
+    plt.annotate(txt, (points[i, 0]+0.05, points[i, 1]+0.05), fontsize=12)
+plt.title(&quot;Step 1: Visualize the data points&quot;)
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.grid(True)
+plt.show()
 
-<span class="c1"># 3. Choose DBSCAN parameters</span>
-<span class="c1"># Let&#39;s set eps=1.5 (radius), min_samples=2 (minimum points to form a cluster)</span>
-<span class="n">eps</span> <span class="o">=</span> <span class="mf">1.5</span>
-<span class="n">min_samples</span> <span class="o">=</span> <span class="mi">2</span>
+# 3. Choose DBSCAN parameters
+# Let&#39;s set eps=1.5 (radius), min_samples=2 (minimum points to form a cluster)
+eps = 1.5
+min_samples = 2
 
-<span class="c1"># 4. Visualize the eps-neighborhood for point A</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Point A&#39;</span><span class="p">)</span>
-<span class="n">circle</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Circle</span><span class="p">((</span><span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">eps</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;eps-neighborhood&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Step 2: eps-neighborhood of point A&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# 4. Visualize the eps-neighborhood for point A
+plt.figure(figsize=(5, 5))
+plt.scatter(points[:, 0], points[:, 1], color=&#39;blue&#39;)
+plt.scatter(points[0, 0], points[0, 1], color=&#39;red&#39;, label=&#39;Point A&#39;)
+circle = plt.Circle((points[0, 0], points[0, 1]), eps, color=&#39;red&#39;, fill=False, linestyle=&#39;--&#39;, label=&#39;eps-neighborhood&#39;)
+plt.gca().add_patch(circle)
+for i, txt in enumerate(labels_names):
+    plt.annotate(txt, (points[i, 0]+0.05, points[i, 1]+0.05), fontsize=12)
+plt.title(&quot;Step 2: eps-neighborhood of point A&quot;)
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.legend()
+plt.grid(True)
+plt.show()
 
-<span class="c1"># 5. Run DBSCAN</span>
-<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">min_samples</span><span class="p">)</span>
-<span class="n">db_labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+# 5. Run DBSCAN
+db = DBSCAN(eps=eps, min_samples=min_samples)
+db_labels = db.fit_predict(points)
 
-<span class="c1"># 6. Visualize the clustering result</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:green&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:red&#39;</span><span class="p">,</span> <span class="s1">&#39;tab:purple&#39;</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)):</span>
-    <span class="k">if</span> <span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Noise&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="sa">f</span><span class="s1">&#39;Cluster </span><span class="si">{</span><span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.05</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Step 3: DBSCAN clustering result&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# 6. Visualize the clustering result
+colors = [&#39;tab:blue&#39;, &#39;tab:orange&#39;, &#39;tab:green&#39;, &#39;tab:red&#39;, &#39;tab:purple&#39;]
+plt.figure(figsize=(5, 5))
+for i in range(len(points)):
+    if db_labels[i] == -1:
+        plt.scatter(points[i, 0], points[i, 1], color=&#39;k&#39;, marker=&#39;x&#39;, s=100, label=&#39;Noise&#39; if i == 0 else &quot;&quot;)
+    else:
+        plt.scatter(points[i, 0], points[i, 1], color=colors[db_labels[i]], s=100, label=f&#39;Cluster {db_labels[i]+1}&#39; if f&#39;Cluster {db_labels[i]+1}&#39; not in plt.gca().get_legend_handles_labels()[1] else &quot;&quot;)
+    plt.annotate(labels_names[i], (points[i, 0]+0.05, points[i, 1]+0.05), fontsize=12)
+plt.title(&quot;Step 3: DBSCAN clustering result&quot;)
+plt.xlabel(&quot;X&quot;)
+plt.ylabel(&quot;Y&quot;)
+plt.legend()
+plt.grid(True)
+plt.show()
 
-<span class="c1"># 7. Print cluster assignments</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is classified as Noise.&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is assigned to Cluster </span><span class="si">{</span><span class="n">label</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+# 7. Print cluster assignments
+for i, name in enumerate(labels_names):
+    label = db_labels[i]
+    if label == -1:
+        print(f&quot;Point {name} is classified as Noise.&quot;)
+    else:
+        print(f&quot;Point {name} is assigned to Cluster {label+1}.&quot;)
 
-<span class="c1"># --- Explanations (in English) ---</span>
-<span class="c1"># Step 1: We plot the five points in 2D space.</span>
-<span class="c1"># Step 2: We illustrate the eps-neighborhood (radius=1.5) for point A. Any point within this circle is considered a neighbor.</span>
-<span class="c1"># Step 3: We run DBSCAN. Points with at least &#39;min_samples&#39; (here, 2) neighbors (including itself) within eps are core points and can form clusters.</span>
-<span class="c1">#         Points not belonging to any cluster are labeled as noise (black &#39;x&#39;).</span>
-<span class="c1">#         The plot shows the resulting clusters and noise points.</span>
-<span class="c1"># The printed output shows the cluster assignment for each point.</span>
+# --- Explanations (in English) ---
+# Step 1: We plot the five points in 2D space.
+# Step 2: We illustrate the eps-neighborhood (radius=1.5) for point A. Any point within this circle is considered a neighbor.
+# Step 3: We run DBSCAN. Points with at least &#39;min_samples&#39; (here, 2) neighbors (including itself) within eps are core points and can form clusters.
+#         Points not belonging to any cluster are labeled as noise (black &#39;x&#39;).
+#         The plot shows the resulting clusters and noise points.
+# The printed output shows the cluster assignment for each point.
 </pre></div>
 </div>
 </div>
@@ -359,86 +359,86 @@ Point E is assigned to Cluster 2.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">DBSCAN</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cdist</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.cluster import DBSCAN
+import numpy as np
+import pandas as pd
+from scipy.spatial.distance import cdist
 
-<span class="c1"># DBSCAN explanation step-by-step with a small dataset</span>
+# DBSCAN explanation step-by-step with a small dataset
 
-<span class="c1"># Dataset : 5 points in 2D</span>
-<span class="c1"># | Point | Coordinates |</span>
-<span class="c1"># | ----- | ----------- |</span>
-<span class="c1"># | A     | (1, 1)      |</span>
-<span class="c1"># | B     | (2, 1)      |</span>
-<span class="c1"># | C     | (4, 3)      |</span>
-<span class="c1"># | D     | (5, 4)      |</span>
-<span class="c1"># | E     | (3, 4)      |</span>
+# Dataset : 5 points in 2D
+# | Point | Coordinates |
+# | ----- | ----------- |
+# | A     | (1, 1)      |
+# | B     | (2, 1)      |
+# | C     | (4, 3)      |
+# | D     | (5, 4)      |
+# | E     | (3, 4)      |
 
 
-<span class="c1"># 1. Dataset preparation</span>
-<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># A</span>
-    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>  <span class="c1"># B</span>
-    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>  <span class="c1"># C</span>
-    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># D</span>
-    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>  <span class="c1"># E</span>
-<span class="p">])</span>
-<span class="n">labels_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+# 1. Dataset preparation
+points = np.array([
+    [1, 1],  # A
+    [2, 1],  # B
+    [4, 3],  # C
+    [5, 4],  # D
+    [3, 4],  # E
+])
+labels_names = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;]
 
-<span class="c1"># 2. Choix des paramètres DBSCAN</span>
-<span class="n">eps</span> <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># rayon de voisinage</span>
-<span class="n">min_samples</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># nombre minimum de points pour former un cluster</span>
+# 2. Choix des paramètres DBSCAN
+eps = 1.5  # rayon de voisinage
+min_samples = 2  # nombre minimum de points pour former un cluster
 
-<span class="c1"># 3. Calcul des voisins pour chaque point</span>
+# 3. Calcul des voisins pour chaque point
 
-<span class="n">dist_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="n">cdist</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">points</span><span class="p">),</span>
-    <span class="n">columns</span><span class="o">=</span><span class="n">labels_names</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">labels_names</span>
-<span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrice des distances euclidiennes :&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dist_matrix</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+dist_matrix = pd.DataFrame(
+    cdist(points, points),
+    columns=labels_names,
+    index=labels_names
+)
+print(&quot;Matrice des distances euclidiennes :&quot;)
+print(dist_matrix.round(2))
 
-<span class="c1"># 4. Application de DBSCAN</span>
-<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">min_samples</span><span class="p">)</span>
-<span class="n">db_labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+# 4. Application de DBSCAN
+db = DBSCAN(eps=eps, min_samples=min_samples)
+db_labels = db.fit_predict(points)
 
-<span class="c1"># 5. Explication étape par étape (en français)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Étape 1 : On considère chaque point individuellement.&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# 5. Explication étape par étape (en français)
+print(&quot;\nÉtape 1 : On considère chaque point individuellement.&quot;)
+for i, name in enumerate(labels_names):
+    print(f&quot;Point {name} : {points[i]}&quot;)
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Étape 2 : Pour chaque point, on regarde les voisins dans un rayon eps=</span><span class="si">{</span><span class="n">eps</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
-    <span class="n">neighbors</span> <span class="o">=</span> <span class="p">[</span><span class="n">labels_names</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">))</span> <span class="k">if</span> <span class="n">dist_matrix</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">eps</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> a pour voisins (dans eps) : </span><span class="si">{</span><span class="n">neighbors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+print(f&quot;\nÉtape 2 : Pour chaque point, on regarde les voisins dans un rayon eps={eps}.&quot;)
+for i, name in enumerate(labels_names):
+    neighbors = [labels_names[j] for j in range(len(points)) if dist_matrix.iloc[i, j] &lt;= eps and i != j]
+    print(f&quot;Point {name} a pour voisins (dans eps) : {neighbors}&quot;)
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Étape 3 : On identifie les points centraux (core points) :&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
-    <span class="n">neighbors_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dist_matrix</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">&lt;=</span> <span class="n">eps</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">neighbors_count</span> <span class="o">&gt;=</span> <span class="n">min_samples</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> est un point central (core point) (</span><span class="si">{</span><span class="n">neighbors_count</span><span class="si">}</span><span class="s2"> dans eps).&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> n&#39;est PAS un point central (</span><span class="si">{</span><span class="n">neighbors_count</span><span class="si">}</span><span class="s2"> dans eps).&quot;</span><span class="p">)</span>
+print(f&quot;\nÉtape 3 : On identifie les points centraux (core points) :&quot;)
+for i, name in enumerate(labels_names):
+    neighbors_count = sum(dist_matrix.iloc[i, :] &lt;= eps)
+    if neighbors_count &gt;= min_samples:
+        print(f&quot;Point {name} est un point central (core point) ({neighbors_count} dans eps).&quot;)
+    else:
+        print(f&quot;Point {name} n&#39;est PAS un point central ({neighbors_count} dans eps).&quot;)
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Étape 4 : Construction des clusters par propagation :&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels_names</span><span class="p">):</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="n">db_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> est du bruit (noise).&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> appartient au cluster </span><span class="si">{</span><span class="n">label</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+print(&quot;\nÉtape 4 : Construction des clusters par propagation :&quot;)
+for i, name in enumerate(labels_names):
+    label = db_labels[i]
+    if label == -1:
+        print(f&quot;Point {name} est du bruit (noise).&quot;)
+    else:
+        print(f&quot;Point {name} appartient au cluster {label+1}.&quot;)
 
-<span class="c1"># Résumé des clusters</span>
-<span class="n">clusters</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">db_labels</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">label</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">continue</span>
-    <span class="n">clusters</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">label</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Résumé des clusters trouvés :&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">clusters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# Résumé des clusters
+clusters = {}
+for i, label in enumerate(db_labels):
+    if label == -1:
+        continue
+    clusters.setdefault(label+1, []).append(labels_names[i])
+print(&quot;\nRésumé des clusters trouvés :&quot;)
+for k, v in clusters.items():
+    print(f&quot;Cluster {k} : {v}&quot;)
 </pre></div>
 </div>
 </div>
@@ -492,111 +492,111 @@ Cluster 2 : [&#39;C&#39;, &#39;D&#39;, &#39;E&#39;]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">DBSCAN</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">adjusted_rand_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">NearestNeighbors</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from sklearn.cluster import DBSCAN
+from sklearn.metrics import adjusted_rand_score
+from sklearn.neighbors import NearestNeighbors
 
-<span class="c1"># Import necessary libraries</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+# Import necessary libraries
+import matplotlib.pyplot as plt
 
-<span class="c1"># cluster.colors equivalent: using matplotlib colormaps</span>
-<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+# cluster.colors equivalent: using matplotlib colormaps
+import matplotlib.cm as cm
 
-<span class="c1"># --- DBSCAN ---</span>
+# --- DBSCAN ---
 
-<span class="c1"># --- A first simulated example ---</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">400</span>
+# --- A first simulated example ---
+np.random.seed(2)
+n = 400
 
-<span class="c1"># Generate 4 clusters with some noise</span>
-<span class="c1"># In R: runif(4, 0, 1) + rnorm(n, sd = 0.1)</span>
-<span class="c1"># In Python: np.random.uniform + np.random.normal</span>
-<span class="n">x_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">y_centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">x_centers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">y_centers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="p">])</span>
-<span class="n">true_clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+# Generate 4 clusters with some noise
+# In R: runif(4, 0, 1) + rnorm(n, sd = 0.1)
+# In Python: np.random.uniform + np.random.normal
+x_centers = np.random.uniform(0, 1, 4)
+y_centers = np.random.uniform(0, 1, 4)
+x = np.vstack([
+    np.column_stack((
+        np.full(100, x_centers[i]) + np.random.normal(0, 0.1, 100),
+        np.full(100, y_centers[i]) + np.random.normal(0, 0.1, 100)
+    )) for i in range(4)
+])
+true_clusters = np.repeat(np.arange(1, 5), 100)
 
-<span class="c1"># Plot the data colored by true clusters</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">true_clusters</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simulated data with true clusters&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# Plot the data colored by true clusters
+plt.figure(figsize=(6, 5))
+plt.scatter(x[:, 0], x[:, 1], c=true_clusters, cmap=&#39;Set2&#39;, marker=&#39;o&#39;)
+plt.title(&quot;Simulated data with true clusters&quot;)
+plt.show()
 
-<span class="c1"># --- How to choose hyperparameters? ---</span>
-<span class="c1"># Heuristics:</span>
-<span class="c1"># - Choose minPts = 2p (current recommendations) - or more if data is noisy</span>
-<span class="c1"># - Use a k-NN approach to choose epsilon</span>
+# --- How to choose hyperparameters? ---
+# Heuristics:
+# - Choose minPts = 2p (current recommendations) - or more if data is noisy
+# - Use a k-NN approach to choose epsilon
 
-<span class="c1"># For the example above, minPts = 4</span>
-<span class="c1"># Plot the k-NN distances to help choose epsilon</span>
-<span class="n">neighbors</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">neighbors_fit</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">distances</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">neighbors_fit</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">distances</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span>  <span class="c1"># 4th neighbor distance</span>
+# For the example above, minPts = 4
+# Plot the k-NN distances to help choose epsilon
+neighbors = NearestNeighbors(n_neighbors=4)
+neighbors_fit = neighbors.fit(x)
+distances, indices = neighbors_fit.kneighbors(x)
+distances = np.sort(distances[:, 3])  # 4th neighbor distance
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;4-NN distance&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Points sorted by distance&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;k-NN distance plot (k=4)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="c1"># From the plot, values around 0.05 seem suitable</span>
+plt.figure(figsize=(6, 4))
+plt.plot(distances)
+plt.ylabel(&quot;4-NN distance&quot;)
+plt.xlabel(&quot;Points sorted by distance&quot;)
+plt.title(&quot;k-NN distance plot (k=4)&quot;)
+plt.show()
+# From the plot, values around 0.05 seem suitable
 
-<span class="c1"># Run DBSCAN with eps=0.05, minPts=4</span>
-<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">labels_</span>
+# Run DBSCAN with eps=0.05, minPts=4
+db = DBSCAN(eps=0.05, min_samples=4).fit(x)
+labels = db.labels_
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="c1"># Noise is labeled as -1 in sklearn, so add 1 for color mapping</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;DBSCAN clustering (eps=0.05, minPts=4)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="c1"># Noise is shown in black</span>
+plt.figure(figsize=(6, 5))
+# Noise is labeled as -1 in sklearn, so add 1 for color mapping
+plt.scatter(x[:, 0], x[:, 1], c=labels + 1, cmap=&#39;Set2&#39;, marker=&#39;o&#39;)
+plt.title(&quot;DBSCAN clustering (eps=0.05, minPts=4)&quot;)
+plt.show()
+# Noise is shown in black
 
-<span class="c1"># Note: The k-NN approach for choosing epsilon can be slow if n is large</span>
-<span class="c1"># An alternative is to use a grid search</span>
-<span class="c1"># The Adjusted Rand Index (ARI) is used to compare results to true classes</span>
-<span class="c1"># (This is for illustration only; in real data, the partition is unknown)</span>
+# Note: The k-NN approach for choosing epsilon can be slow if n is large
+# An alternative is to use a grid search
+# The Adjusted Rand Index (ARI) is used to compare results to true classes
+# (This is for illustration only; in real data, the partition is unknown)
 
-<span class="n">minPts_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
-<span class="n">eps_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-<span class="n">res_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">minPts_grid</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">)))</span>
+minPts_grid = np.arange(1, 21)
+eps_grid = np.arange(0.01, 0.21, 0.01)
+res_mat = np.zeros((len(minPts_grid), len(eps_grid)))
 
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">minPts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">minPts_grid</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">eps</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">eps_grid</span><span class="p">):</span>
-        <span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="n">minPts</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">res_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">true_clusters</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
+for i, minPts in enumerate(minPts_grid):
+    for j, eps in enumerate(eps_grid):
+        db = DBSCAN(eps=eps, min_samples=minPts).fit(x)
+        res_mat[i, j] = adjusted_rand_score(true_clusters, db.labels_)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">res_mat</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span>
-           <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">eps_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">eps_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">minPts_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">minPts_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
-           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;ARI&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;eps&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;minPts&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ARI for different DBSCAN parameters&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.figure(figsize=(8, 6))
+plt.imshow(res_mat, aspect=&#39;auto&#39;, origin=&#39;lower&#39;,
+           extent=[eps_grid[0], eps_grid[-1], minPts_grid[0], minPts_grid[-1]],
+           cmap=&#39;viridis&#39;)
+plt.colorbar(label=&#39;ARI&#39;)
+plt.xlabel(&#39;eps&#39;)
+plt.ylabel(&#39;minPts&#39;)
+plt.title(&#39;ARI for different DBSCAN parameters&#39;)
+plt.show()
 
-<span class="c1"># Example with eps=0.09, minPts=15</span>
-<span class="n">db</span> <span class="o">=</span> <span class="n">DBSCAN</span><span class="p">(</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">labels_</span>
+# Example with eps=0.09, minPts=15
+db = DBSCAN(eps=0.09, min_samples=15).fit(x)
+labels = db.labels_
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;DBSCAN clustering (eps=0.09, minPts=15)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.figure(figsize=(6, 5))
+plt.scatter(x[:, 0], x[:, 1], c=labels + 1, cmap=&#39;Set2&#39;, marker=&#39;o&#39;)
+plt.title(&quot;DBSCAN clustering (eps=0.09, minPts=15)&quot;)
+plt.show()
 
-<span class="c1"># --- Explanations ---</span>
-<span class="c1"># - The code simulates 4 clusters and applies DBSCAN clustering.</span>
-<span class="c1"># - The k-NN distance plot helps to select a suitable epsilon value.</span>
-<span class="c1"># - Grid search with ARI helps to compare clustering results to the true labels.</span>
-<span class="c1"># - The final plots show the clustering results for different parameter choices.</span>
+# --- Explanations ---
+# - The code simulates 4 clusters and applies DBSCAN clustering.
+# - The k-NN distance plot helps to select a suitable epsilon value.
+# - Grid search with ARI helps to compare clustering results to the true labels.
+# - The final plots show the clustering results for different parameter choices.
 </pre></div>
 </div>
 </div>

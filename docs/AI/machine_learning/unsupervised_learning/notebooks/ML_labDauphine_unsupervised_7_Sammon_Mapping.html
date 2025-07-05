@@ -1,20 +1,20 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clustering: Sammon Mapping &mdash; Machine Learning and Deep Learning 0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
-      <script src="../../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
       <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -85,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section id="Clustering:-Sammon-Mapping">
-<h1>Clustering: Sammon Mapping<a class="headerlink" href="#Clustering:-Sammon-Mapping" title="Permalink to this heading">¶</a></h1>
+<h1>Clustering: Sammon Mapping<a class="headerlink" href="#Clustering:-Sammon-Mapping" title="Link to this heading">¶</a></h1>
 <p>📌 Goal of Sammon Mapping</p>
 <blockquote>
 <div><p>Sammon mapping is a non-linear dimensionality reduction technique. Like t-SNE, it maps high-dimensional data into a lower-dimensional space (typically 2D), but its objective is different:</p>
@@ -261,89 +261,89 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+from scipy.spatial.distance import pdist, squareform
 
-<span class="k">def</span> <span class="nf">sammon_mapping</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Simple Sammon mapping implementation (gradient descent-based).</span>
+def sammon_mapping(X, n_components=2, max_iter=500, tol=1e-9, alpha=0.3):
+    &quot;&quot;&quot;
+    Simple Sammon mapping implementation (gradient descent-based).
 
-<span class="sd">    Parameters:</span>
-<span class="sd">        X: array-like, shape (n_samples, n_features) - the original data</span>
-<span class="sd">        n_components: int - target dimension (usually 2)</span>
-<span class="sd">        max_iter: int - number of iterations</span>
-<span class="sd">        tol: float - convergence tolerance</span>
-<span class="sd">        alpha: float - learning rate</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        Y: array-like, shape (n_samples, n_components) - low-dimensional embedding</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">D_high</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>  <span class="c1"># Euclidean distance matrix in high-dimensional space</span>
-    <span class="n">D_high</span><span class="p">[</span><span class="n">D_high</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>    <span class="c1"># Avoid division by zero</span>
+    Parameters:
+        X: array-like, shape (n_samples, n_features) - the original data
+        n_components: int - target dimension (usually 2)
+        max_iter: int - number of iterations
+        tol: float - convergence tolerance
+        alpha: float - learning rate
+    Returns:
+        Y: array-like, shape (n_samples, n_components) - low-dimensional embedding
+    &quot;&quot;&quot;
+    n = X.shape[0]
+    D_high = squareform(pdist(X))  # Euclidean distance matrix in high-dimensional space
+    D_high[D_high == 0] = 1e-12    # Avoid division by zero
 
-    <span class="c1"># Initialize Y randomly (can also use PCA)</span>
-    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n_components</span><span class="p">))</span>
+    # Initialize Y randomly (can also use PCA)
+    rng = np.random.RandomState(42)
+    Y = rng.normal(size=(n, n_components))
 
-    <span class="c1"># Compute initial low-dimensional distances</span>
-    <span class="n">D_low</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-    <span class="n">D_low</span><span class="p">[</span><span class="n">D_low</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
+    # Compute initial low-dimensional distances
+    D_low = squareform(pdist(Y))
+    D_low[D_low == 0] = 1e-12
 
-    <span class="c1"># Sammon stress function</span>
-    <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">D_high</span><span class="p">)</span>
-    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">D_high</span> <span class="o">-</span> <span class="n">D_low</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">D_high</span><span class="p">)</span> <span class="o">/</span> <span class="n">scale</span>
+    # Sammon stress function
+    scale = np.sum(D_high)
+    E = np.sum(((D_high - D_low) ** 2) / D_high) / scale
 
-    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
-        <span class="n">dY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
-                    <span class="n">diff</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
-                    <span class="n">d</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)</span>
-                    <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">D_high</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">D_high</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
-                    <span class="n">dY</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">diff</span>
+    for it in range(max_iter):
+        dY = np.zeros_like(Y)
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    diff = Y[i] - Y[j]
+                    d = np.linalg.norm(diff)
+                    d = max(d, 1e-12)
+                    delta = (D_high[i, j] - d) / (D_high[i, j] * d)
+                    dY[i] += delta * diff
 
-        <span class="n">Y</span> <span class="o">+=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dY</span>
+        Y += alpha * dY
 
-        <span class="n">D_low</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-        <span class="n">D_low</span><span class="p">[</span><span class="n">D_low</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
-        <span class="n">E_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">D_high</span> <span class="o">-</span> <span class="n">D_low</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">D_high</span><span class="p">)</span> <span class="o">/</span> <span class="n">scale</span>
+        D_low = squareform(pdist(Y))
+        D_low[D_low == 0] = 1e-12
+        E_new = np.sum(((D_high - D_low) ** 2) / D_high) / scale
 
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">E</span> <span class="o">-</span> <span class="n">E_new</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
-            <span class="k">break</span>
-        <span class="n">E</span> <span class="o">=</span> <span class="n">E_new</span>
+        if np.abs(E - E_new) &lt; tol:
+            break
+        E = E_new
 
-    <span class="k">return</span> <span class="n">Y</span>
+    return Y
 
-<span class="c1"># -----------------------------</span>
-<span class="c1"># 📌 Apply on your toy dataset</span>
-<span class="c1"># -----------------------------</span>
-<span class="n">points</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-    <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="p">}</span>
+# -----------------------------
+# 📌 Apply on your toy dataset
+# -----------------------------
+points = {
+    &#39;A&#39;: (1, 1),
+    &#39;B&#39;: (2, 1),
+    &#39;C&#39;: (4, 3),
+    &#39;D&#39;: (5, 4),
+    &#39;E&#39;: (3, 4)
+}
 
-<span class="n">labels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">points</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">])</span>  <span class="c1"># shape (5, 2)</span>
+labels = list(points.keys())
+X = np.array([points[k] for k in labels])  # shape (5, 2)
 
-<span class="n">Y</span> <span class="o">=</span> <span class="n">sammon_mapping</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+Y = sammon_mapping(X, n_components=2)
 
-<span class="c1"># -----------------------------</span>
-<span class="c1"># 🎯 Visualize result</span>
-<span class="c1"># -----------------------------</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sammon Mapping (2D)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# -----------------------------
+# 🎯 Visualize result
+# -----------------------------
+plt.figure(figsize=(6, 6))
+for i, label in enumerate(labels):
+    plt.scatter(Y[i, 0], Y[i, 1], c=&#39;blue&#39;)
+    plt.text(Y[i, 0]+0.02, Y[i, 1]+0.02, label, fontsize=12)
+plt.title(&quot;Sammon Mapping (2D)&quot;)
+plt.axis(&#39;equal&#39;)
+plt.grid(True)
+plt.show()
 <br/></pre></div>
 </div>
 </div>
@@ -381,74 +381,74 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
-<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin
+from scipy.spatial.distance import pdist, squareform
+from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt
 
-<span class="k">class</span> <span class="nc">SammonMapping</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span> <span class="o">=</span> <span class="n">n_components</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span> <span class="o">=</span> <span class="n">max_iter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">tol</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+class SammonMapping(BaseEstimator, TransformerMixin):
+    def __init__(self, n_components=2, max_iter=500, tol=1e-9, learning_rate=0.3, random_state=42):
+        self.n_components = n_components
+        self.max_iter = max_iter
+        self.tol = tol
+        self.learning_rate = learning_rate
+        self.random_state = random_state
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
+    def fit(self, X, y=None):
+        self.X_ = np.array(X)
+        self.n_samples_ = self.X_.shape[0]
+        self.D_high_ = squareform(pdist(self.X_))
+        self.D_high_[self.D_high_ == 0] = 1e-12
+        self.scale_ = np.sum(self.D_high_)
+        return self
 
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
-        <span class="n">Y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">))</span>
+    def transform(self):
+        rng = np.random.RandomState(self.random_state)
+        Y = rng.normal(size=(self.n_samples_, self.n_components))
 
-        <span class="n">D_high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span>
-        <span class="n">D_low</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-        <span class="n">D_low</span><span class="p">[</span><span class="n">D_low</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
-        <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">D_high</span> <span class="o">-</span> <span class="n">D_low</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">D_high</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span>
+        D_high = self.D_high_
+        D_low = squareform(pdist(Y))
+        D_low[D_low == 0] = 1e-12
+        E = np.sum(((D_high - D_low) ** 2) / D_high) / self.scale_
 
-        <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">):</span>
-            <span class="n">dY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
-                        <span class="n">diff</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
-                        <span class="n">d</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)</span>
-                        <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">D_high</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">D_high</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
-                        <span class="n">dY</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">diff</span>
+        for it in range(self.max_iter):
+            dY = np.zeros_like(Y)
+            for i in range(self.n_samples_):
+                for j in range(self.n_samples_):
+                    if i != j:
+                        diff = Y[i] - Y[j]
+                        d = np.linalg.norm(diff)
+                        d = max(d, 1e-12)
+                        delta = (D_high[i, j] - d) / (D_high[i, j] * d)
+                        dY[i] += delta * diff
 
-            <span class="n">Y</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dY</span>
+            Y += self.learning_rate * dY
 
-            <span class="n">D_low</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-            <span class="n">D_low</span><span class="p">[</span><span class="n">D_low</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
-            <span class="n">E_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">D_high</span> <span class="o">-</span> <span class="n">D_low</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">D_high</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span>
+            D_low = squareform(pdist(Y))
+            D_low[D_low == 0] = 1e-12
+            E_new = np.sum(((D_high - D_low) ** 2) / D_high) / self.scale_
 
-            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">E</span> <span class="o">-</span> <span class="n">E_new</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">:</span>
-                <span class="k">break</span>
-            <span class="n">E</span> <span class="o">=</span> <span class="n">E_new</span>
+            if np.abs(E - E_new) &lt; self.tol:
+                break
+            E = E_new
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_</span> <span class="o">=</span> <span class="n">Y</span>
-        <span class="k">return</span> <span class="n">Y</span>
+        self.embedding_ = Y
+        return Y
 
-    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">()</span>
+    def fit_transform(self, X, y=None):
+        return self.fit(X).transform()
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt
 
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">sammon</span> <span class="o">=</span> <span class="n">SammonMapping</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">sammon</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+X, y = load_iris(return_X_y=True)
+sammon = SammonMapping(n_components=2)
+Y = sammon.fit_transform(X)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Y</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sammon Mapping (2D)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.scatter(Y[:, 0], Y[:, 1], c=y, cmap=&#39;viridis&#39;)
+plt.title(&quot;Sammon Mapping (2D)&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -456,77 +456,77 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
-<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin
+from scipy.spatial.distance import pdist, squareform
+from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt
 
-<span class="k">class</span> <span class="nc">SammonMapping</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span> <span class="o">=</span> <span class="n">n_components</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span> <span class="o">=</span> <span class="n">max_iter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">tol</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+class SammonMapping(BaseEstimator, TransformerMixin):
+    def __init__(self, n_components=2, max_iter=500, tol=1e-9, learning_rate=0.3, random_state=42):
+        self.n_components = n_components
+        self.max_iter = max_iter
+        self.tol = tol
+        self.learning_rate = learning_rate
+        self.random_state = random_state
 
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
+    def fit(self, X, y=None):
+        self.X_ = np.array(X)
+        self.n_samples_ = self.X_.shape[0]
+        self.D_high_ = squareform(pdist(self.X_))
+        self.D_high_[self.D_high_ == 0] = 1e-12
+        self.scale_ = np.sum(self.D_high_)
+        return self
 
-    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_state</span><span class="p">)</span>
-        <span class="n">Y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_components</span><span class="p">))</span>
+    def transform(self, X=None):
+        rng = np.random.RandomState(self.random_state)
+        Y = rng.normal(size=(self.n_samples_, self.n_components))
 
-        <span class="n">D_high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D_high_</span>
-        <span class="n">D_low</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-        <span class="n">D_low</span><span class="p">[</span><span class="n">D_low</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
-        <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">D_high</span> <span class="o">-</span> <span class="n">D_low</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">D_high</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span>
+        D_high = self.D_high_
+        D_low = squareform(pdist(Y))
+        D_low[D_low == 0] = 1e-12
+        E = np.sum(((D_high - D_low) ** 2) / D_high) / self.scale_
 
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">):</span>
-            <span class="n">dY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span><span class="p">):</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples_</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
-                        <span class="n">diff</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
-                        <span class="n">d</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mf">1e-12</span><span class="p">)</span>
-                        <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">D_high</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">D_high</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
-                        <span class="n">dY</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">diff</span>
+        for _ in range(self.max_iter):
+            dY = np.zeros_like(Y)
+            for i in range(self.n_samples_):
+                for j in range(self.n_samples_):
+                    if i != j:
+                        diff = Y[i] - Y[j]
+                        d = np.linalg.norm(diff)
+                        d = max(d, 1e-12)
+                        delta = (D_high[i, j] - d) / (D_high[i, j] * d)
+                        dY[i] += delta * diff
 
-            <span class="n">Y</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dY</span>
+            Y += self.learning_rate * dY
 
-            <span class="n">D_low</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
-            <span class="n">D_low</span><span class="p">[</span><span class="n">D_low</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-12</span>
-            <span class="n">E_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">D_high</span> <span class="o">-</span> <span class="n">D_low</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">D_high</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_</span>
+            D_low = squareform(pdist(Y))
+            D_low[D_low == 0] = 1e-12
+            E_new = np.sum(((D_high - D_low) ** 2) / D_high) / self.scale_
 
-            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">E</span> <span class="o">-</span> <span class="n">E_new</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">tol</span><span class="p">:</span>
-                <span class="k">break</span>
-            <span class="n">E</span> <span class="o">=</span> <span class="n">E_new</span>
+            if np.abs(E - E_new) &lt; self.tol:
+                break
+            E = E_new
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">embedding_</span> <span class="o">=</span> <span class="n">Y</span>
-        <span class="k">return</span> <span class="n">Y</span>
+        self.embedding_ = Y
+        return Y
 
-    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    def fit_transform(self, X, y=None):
+        return self.fit(X).transform(X)
 
-<span class="c1"># === Load data and apply Sammon mapping ===</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">sammon</span> <span class="o">=</span> <span class="n">SammonMapping</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">sammon</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+# === Load data and apply Sammon mapping ===
+X, y = load_iris(return_X_y=True)
+sammon = SammonMapping(n_components=2)
+Y = sammon.fit_transform(X)
 
-<span class="c1"># === Plot the result ===</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Y</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sammon Mapping (2D)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Component 1&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Component 2&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# === Plot the result ===
+plt.figure(figsize=(6, 6))
+plt.scatter(Y[:, 0], Y[:, 1], c=y, cmap=&#39;viridis&#39;, edgecolor=&#39;k&#39;)
+plt.title(&quot;Sammon Mapping (2D)&quot;)
+plt.xlabel(&quot;Component 1&quot;)
+plt.ylabel(&quot;Component 2&quot;)
+plt.grid(True)
+plt.show()
 <br/></pre></div>
 </div>
 </div>
@@ -556,34 +556,34 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Jeu de données jouet (3 clusters en 3D)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">4.9</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">8.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">7.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">]</span>
-<span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Jeu de données jouet (3 clusters en 3D)
+X = np.array([
+    [1.0, 2.0, 3.0],
+    [1.1, 2.1, 3.1],
+    [0.9, 1.9, 2.9],
+    [5.0, 5.0, 5.0],
+    [5.1, 5.1, 5.1],
+    [4.9, 4.9, 4.9],
+    [8.0, 1.0, 2.0],
+    [8.1, 1.1, 2.1],
+    [7.9, 0.9, 1.9]
+])
 
-<span class="c1"># Étiquettes factices pour la visualisation (3 groupes)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+# Étiquettes factices pour la visualisation (3 groupes)
+y = np.array([0, 0, 0, 1, 1, 1, 2, 2, 2])
 
-<span class="c1"># Appliquer Sammon Mapping</span>
-<span class="n">sammon</span> <span class="o">=</span> <span class="n">SammonMapping</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="n">sammon</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+# Appliquer Sammon Mapping
+sammon = SammonMapping(n_components=2)
+Y = sammon.fit_transform(X)
 
-<span class="c1"># Afficher le résultat</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Y</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sammon Mapping (jeu de données jouet)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Composante 1&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Composante 2&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# Afficher le résultat
+plt.figure(figsize=(6, 6))
+plt.scatter(Y[:, 0], Y[:, 1], c=y, cmap=&#39;viridis&#39;, edgecolor=&#39;k&#39;)
+plt.title(&quot;Sammon Mapping (jeu de données jouet)&quot;)
+plt.xlabel(&quot;Composante 1&quot;)
+plt.ylabel(&quot;Composante 2&quot;)
+plt.grid(True)
+plt.show()
 <br/></pre></div>
 </div>
 </div>

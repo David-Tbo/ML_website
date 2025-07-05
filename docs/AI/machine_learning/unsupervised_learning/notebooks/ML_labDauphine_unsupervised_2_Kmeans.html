@@ -1,20 +1,20 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clustering: KMeans &mdash; Machine Learning and Deep Learning 0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
-      <script src="../../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
       <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -85,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section id="Clustering:-KMeans">
-<h1>Clustering: KMeans<a class="headerlink" href="#Clustering:-KMeans" title="Permalink to this heading">¶</a></h1>
+<h1>Clustering: KMeans<a class="headerlink" href="#Clustering:-KMeans" title="Link to this heading">¶</a></h1>
 <p>The qualities to define a <strong>good clustering</strong>, are the <strong>homogeneity and separability</strong> of clusters, involves examining <strong>intra-class</strong> and <strong>inter-class dispersion</strong>.</p>
 <p>Clusters are considered <strong>homogeneous</strong> if their points are tightly grouped around their mean, meaning the <strong>intra-class variance is low</strong>.</p>
 <p>Clusters are considered <strong>well separated</strong> if the centers of the clusters are widely dispersed around the <strong>overall mean</strong>, meaning the <strong>inter-class variance is high</strong>.</p>
@@ -207,52 +207,52 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
 
-<span class="c1"># Define the points</span>
-<span class="n">points</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-    <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="p">}</span>
+# Define the points
+points = {
+    &#39;A&#39;: (1, 1),
+    &#39;B&#39;: (2, 1),
+    &#39;C&#39;: (4, 3),
+    &#39;D&#39;: (5, 4),
+    &#39;E&#39;: (3, 4)
+}
 
-<span class="c1"># Final clusters from KMeans result</span>
-<span class="n">cluster_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
-<span class="n">cluster_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+# Final clusters from KMeans result
+cluster_1 = [&#39;A&#39;, &#39;B&#39;]
+cluster_2 = [&#39;C&#39;, &#39;D&#39;, &#39;E&#39;]
 
-<span class="c1"># Final centroids</span>
-<span class="n">centroids</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.67</span><span class="p">)</span>
-<span class="p">}</span>
+# Final centroids
+centroids = {
+    &#39;C1&#39;: (1.5, 1),
+    &#39;C2&#39;: (4.0, 3.67)
+}
 
-<span class="c1"># Plot setup</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+# Plot setup
+plt.figure(figsize=(8, 6))
 
-<span class="c1"># Plot Cluster 1</span>
-<span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">cluster_1</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">points</span><span class="p">[</span><span class="n">point</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">point</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">point</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">point</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+# Plot Cluster 1
+for point in cluster_1:
+    plt.scatter(*points[point], color=&#39;blue&#39;)
+    plt.text(points[point][0] + 0.1, points[point][1], point, fontsize=12)
 
-<span class="c1"># Plot Cluster 2</span>
-<span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">cluster_2</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">points</span><span class="p">[</span><span class="n">point</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">point</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="n">point</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">point</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+# Plot Cluster 2
+for point in cluster_2:
+    plt.scatter(*points[point], color=&#39;green&#39;)
+    plt.text(points[point][0] + 0.1, points[point][1], point, fontsize=12)
 
-<span class="c1"># Plot centroids</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">centroids</span><span class="p">[</span><span class="s1">&#39;C1&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centroid 1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">centroids</span><span class="p">[</span><span class="s1">&#39;C2&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centroid 2&#39;</span><span class="p">)</span>
+# Plot centroids
+plt.scatter(*centroids[&#39;C1&#39;], color=&#39;blue&#39;, marker=&#39;X&#39;, s=200, label=&#39;Centroid 1&#39;)
+plt.scatter(*centroids[&#39;C2&#39;], color=&#39;green&#39;, marker=&#39;X&#39;, s=200, label=&#39;Centroid 2&#39;)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;KMeans Clustering - Final Step (K=2)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X-axis&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y-axis&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+plt.title(&quot;KMeans Clustering - Final Step (K=2)&quot;)
+plt.xlabel(&quot;X-axis&quot;)
+plt.ylabel(&quot;Y-axis&quot;)
+plt.grid(True)
+plt.legend()
+plt.axis(&#39;equal&#39;)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.show()
 <br/></pre></div>
 </div>
 </div>
@@ -264,7 +264,7 @@
 </div>
 </div>
 <section id="Complexity">
-<h2>Complexity<a class="headerlink" href="#Complexity" title="Permalink to this heading">¶</a></h2>
+<h2>Complexity<a class="headerlink" href="#Complexity" title="Link to this heading">¶</a></h2>
 <p>📌 Definitions</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(n\)</span>: number of data points (here: <span class="math notranslate nohighlight">\(5\)</span>)</p></li>
@@ -322,14 +322,14 @@
 </div>
 </section>
 <section id="Evaluating-the-clustering-quality">
-<h2>Evaluating the clustering quality<a class="headerlink" href="#Evaluating-the-clustering-quality" title="Permalink to this heading">¶</a></h2>
+<h2>Evaluating the clustering quality<a class="headerlink" href="#Evaluating-the-clustering-quality" title="Link to this heading">¶</a></h2>
 <div class="line-block">
 <div class="line">Unlike supervised learning, clustering has no ground truth labels.</div>
 <div class="line">So we rely on internal validation indices that assess how well the clusters are formed.</div>
 </div>
 <p><strong>Two</strong> commonly used <strong>scores</strong> are:</p>
 <section id="1.-Calinski-Harabasz-Index.">
-<h3><strong>1. Calinski-Harabasz Index</strong>.<a class="headerlink" href="#1.-Calinski-Harabasz-Index." title="Permalink to this heading">¶</a></h3>
+<h3><strong>1. Calinski-Harabasz Index</strong>.<a class="headerlink" href="#1.-Calinski-Harabasz-Index." title="Link to this heading">¶</a></h3>
 <p>Also known as the Variance Ratio Criterion, this score balances the compactness within clusters and the separation between clusters.</p>
 <p>It is defined as:</p>
 <div class="math notranslate nohighlight">
@@ -353,7 +353,7 @@
 </ul>
 </section>
 <section id="Example-on-the-small-dataset">
-<h3>Example on the small dataset<a class="headerlink" href="#Example-on-the-small-dataset" title="Permalink to this heading">¶</a></h3>
+<h3>Example on the small dataset<a class="headerlink" href="#Example-on-the-small-dataset" title="Link to this heading">¶</a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Point</p></th>
@@ -443,7 +443,7 @@
 </ul>
 </section>
 <section id="2.-Silhouette-Score.">
-<h3><strong>2. Silhouette Score</strong>.<a class="headerlink" href="#2.-Silhouette-Score." title="Permalink to this heading">¶</a></h3>
+<h3><strong>2. Silhouette Score</strong>.<a class="headerlink" href="#2.-Silhouette-Score." title="Link to this heading">¶</a></h3>
 <p>This index compares how similar a point is to its own cluster (cohesion) vs. other clusters (separation).</p>
 <p>For each point <span class="math notranslate nohighlight">\(i\)</span>, the silhouette score <span class="math notranslate nohighlight">\(s(i)\)</span> is:</p>
 <div class="math notranslate nohighlight">
@@ -487,7 +487,7 @@
 </table>
 </section>
 <section id="id1">
-<h3>Example on the small dataset<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
+<h3>Example on the small dataset<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <p><strong>Silhouette Score Example</strong> on the small dataset:</p>
 <ul class="simple">
 <li><p>Cluster 1: <span class="math notranslate nohighlight">\(A (1,1), B (2,1)\)</span></p></li>
@@ -553,35 +553,35 @@
 </section>
 </section>
 <section id="KMeans-with-Python-packages">
-<h2>KMeans with Python packages<a class="headerlink" href="#KMeans-with-Python-packages" title="Permalink to this heading">¶</a></h2>
+<h2>KMeans with Python packages<a class="headerlink" href="#KMeans-with-Python-packages" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score, confusion_matrix
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import os
 
-<span class="c1"># Define the cluster colors using the Dark2 palette</span>
-<span class="c1"># cluster_colors = Dark2_8.hex_colors</span>
+# Define the cluster colors using the Dark2 palette
+# cluster_colors = Dark2_8.hex_colors
 
-<span class="c1"># Read the data from &#39;blobs.txt&#39; into a pandas DataFrame</span>
-<span class="c1"># The file has no header and is comma-separated</span>
-<span class="n">path_name</span> <span class="o">=</span> <span class="s1">&#39;/Users/davidtbo/Library/Mobile Documents/com~apple~CloudDocs/data/external&#39;</span>
-<span class="n">blobs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_name</span><span class="p">,</span><span class="s1">&#39;blobs.txt&#39;</span><span class="p">),</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">blobs</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span> <span class="s1">&#39;V2&#39;</span><span class="p">,</span> <span class="s1">&#39;V3&#39;</span><span class="p">]</span>  <span class="c1"># Assign column names</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;blobs: </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">blobs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# Read the data from &#39;blobs.txt&#39; into a pandas DataFrame
+# The file has no header and is comma-separated
+path_name = &#39;/Users/davidtbo/Library/Mobile Documents/com~apple~CloudDocs/data/external&#39;
+blobs = pd.read_csv(filepath_or_buffer=os.path.join(path_name,&#39;blobs.txt&#39;), header=None)
+blobs.columns = [&#39;V1&#39;, &#39;V2&#39;, &#39;V3&#39;]  # Assign column names
+print(f&quot;blobs: \n {blobs.head()}&quot;)
 
-<span class="c1"># Create a scatter plot using seaborn</span>
-<span class="c1"># V1 (first column) is mapped to the x-axis, V2 (second column) is mapped to the y-axis</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">blobs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">blobs</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+# Create a scatter plot using seaborn
+# V1 (first column) is mapped to the x-axis, V2 (second column) is mapped to the y-axis
+sns.scatterplot(x=blobs.iloc[:, 0], y=blobs.iloc[:, 1])
 
-<span class="c1"># Display the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# Display the plot
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -610,108 +610,108 @@ blobs:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assuming &#39;cluster_colors&#39; is a list or array of colors for plotting</span>
-<span class="c1"># Create dummy &#39;cluster_colors&#39; for demonstration if it&#39;s not defined</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">cluster_colors</span>
-<span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating dummy &#39;cluster_colors&#39; list for demonstration.&quot;</span><span class="p">)</span>
-    <span class="n">cluster_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;brown&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">,</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;olive&#39;</span><span class="p">,</span> <span class="s1">&#39;cyan&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Assuming &#39;cluster_colors&#39; is a list or array of colors for plotting
+# Create dummy &#39;cluster_colors&#39; for demonstration if it&#39;s not defined
+try:
+    cluster_colors
+except NameError:
+    print(&quot;Creating dummy &#39;cluster_colors&#39; list for demonstration.&quot;)
+    cluster_colors = [&#39;red&#39;, &#39;blue&#39;, &#39;green&#39;, &#39;purple&#39;, &#39;orange&#39;, &#39;brown&#39;, &#39;pink&#39;, &#39;gray&#39;, &#39;olive&#39;, &#39;cyan&#39;]
 
 
-<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">blobs</span><span class="p">[[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span> <span class="s1">&#39;V2&#39;</span><span class="p">]])</span>
+kmeans = KMeans(n_clusters=3, init=&#39;k-means++&#39;, n_init=10, random_state=42)
+kmeans.fit(blobs[[&#39;V1&#39;, &#39;V2&#39;]])
 
-<span class="c1"># Summary of cluster sizes (using value_counts for pandas Series)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cluster sizes:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+# Summary of cluster sizes (using value_counts for pandas Series)
+print(&quot;Cluster sizes:&quot;)
+print(pd.Series(kmeans.labels_).value_counts())
 
-<span class="c1"># Plotting the clusters</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;V1&#39;</span><span class="p">],</span> <span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;V2&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="n">cluster_colors</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;K-means Clustering (k=3)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;V1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;V2&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# Plotting the clusters
+plt.figure(figsize=(8, 6))
+plt.scatter(blobs[&#39;V1&#39;], blobs[&#39;V2&#39;], c=[cluster_colors[label] for label in kmeans.labels_], s=5)
+plt.title(&#39;K-means Clustering (k=3)&#39;)
+plt.xlabel(&#39;V1&#39;)
+plt.ylabel(&#39;V2&#39;)
+plt.show()
 
-<span class="c1"># Confusion Matrix</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Confusion Matrix:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">blobs</span><span class="p">[</span><span class="s1">&#39;V3&#39;</span><span class="p">],</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">))</span>
+# Confusion Matrix
+print(&quot;\nConfusion Matrix:&quot;)
+print(confusion_matrix(blobs[&#39;V3&#39;], kmeans.labels_))
 
-<span class="c1"># What if K was unknown?</span>
-<span class="c1"># Selecting the number of clusters with some classical criteria:</span>
-<span class="c1"># - Percentage of explained variance (explained variance ratio)</span>
-<span class="c1"># - Calinski-Harabasz index</span>
-<span class="c1"># - Silhouette index</span>
-<span class="c1"># K varies between 1 and 10</span>
-<span class="n">kmeans_indices</span> <span class="o">=</span> <span class="p">[]</span>
+# What if K was unknown?
+# Selecting the number of clusters with some classical criteria:
+# - Percentage of explained variance (explained variance ratio)
+# - Calinski-Harabasz index
+# - Silhouette index
+# K varies between 1 and 10
+kmeans_indices = []
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
-    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-    <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">blobs</span><span class="p">[[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span> <span class="s1">&#39;V2&#39;</span><span class="p">]])</span>
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters=i, init=&#39;k-means++&#39;, n_init=10, random_state=42)
+    kmeans.fit(blobs[[&#39;V1&#39;, &#39;V2&#39;]])
 
-    <span class="c1"># Explained variance ratio</span>
-    <span class="c1"># Note: Scikit-learn&#39;s KMeans does not directly provide between-group sum of squares or total sum of squares.</span>
-    <span class="c1"># A common proxy for the explained variance ratio is related to the inertia (within-cluster sum of squares).</span>
-    <span class="c1"># Lower inertia generally means tighter clusters. We&#39;ll calculate the within-cluster sum of squares.</span>
-    <span class="n">within_ss</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">inertia_</span>
+    # Explained variance ratio
+    # Note: Scikit-learn&#39;s KMeans does not directly provide between-group sum of squares or total sum of squares.
+    # A common proxy for the explained variance ratio is related to the inertia (within-cluster sum of squares).
+    # Lower inertia generally means tighter clusters. We&#39;ll calculate the within-cluster sum of squares.
+    within_ss = kmeans.inertia_
 
-    <span class="c1"># Calinski-Harabasz index</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># Calinski-Harabasz requires at least 2 clusters</span>
-      <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">calinski_harabasz_score</span>
-      <span class="n">ch_index</span> <span class="o">=</span> <span class="n">calinski_harabasz_score</span><span class="p">(</span><span class="n">blobs</span><span class="p">[[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span> <span class="s1">&#39;V2&#39;</span><span class="p">]],</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="n">ch_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="c1"># Not applicable for k=1</span>
-
-
-    <span class="c1"># Calculate silhouette score for each observation</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># Silhouette score requires at least 2 clusters</span>
-      <span class="n">s_data_set</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">blobs</span><span class="p">[[</span><span class="s1">&#39;V1&#39;</span><span class="p">,</span> <span class="s1">&#39;V2&#39;</span><span class="p">]],</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="n">s_data_set</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="c1"># Not applicable for k=1</span>
-
-    <span class="n">kmeans_indices</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">within_ss</span><span class="p">,</span> <span class="n">ch_index</span><span class="p">,</span> <span class="n">s_data_set</span><span class="p">])</span>
-
-<span class="n">kmeans_indices_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">kmeans_indices</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Within-cluster Sum of Squares (Inertia)&#39;</span><span class="p">,</span> <span class="s1">&#39;Calinski-Harabasz Index&#39;</span><span class="p">,</span> <span class="s1">&#39;Average Silhouette Score&#39;</span><span class="p">])</span>
-<span class="n">kmeans_indices_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span> <span class="c1"># Set index to represent K values</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Clustering Evaluation Metrics for different K:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">kmeans_indices_df</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
-
-<span class="c1"># Illustration of the different indices</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-
-<span class="c1"># Plot Within-cluster Sum of Squares (Inertia)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kmeans_indices_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">kmeans_indices_df</span><span class="p">[</span><span class="s1">&#39;Within-cluster Sum of Squares (Inertia)&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Within-cluster Sum of Squares vs. K&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of clusters (K)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Within-cluster Sum of Squares&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    # Calinski-Harabasz index
+    if i &gt; 1: # Calinski-Harabasz requires at least 2 clusters
+      from sklearn.metrics import calinski_harabasz_score
+      ch_index = calinski_harabasz_score(blobs[[&#39;V1&#39;, &#39;V2&#39;]], kmeans.labels_)
+    else:
+      ch_index = np.nan # Not applicable for k=1
 
 
-<span class="c1"># Plot Calinski-Harabasz Index</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kmeans_indices_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">kmeans_indices_df</span><span class="p">[</span><span class="s1">&#39;Calinski-Harabasz Index&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Calinski-Harabasz Index vs. K&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of clusters (K)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Calinski-Harabasz Index&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    # Calculate silhouette score for each observation
+    if i &gt; 1: # Silhouette score requires at least 2 clusters
+      s_data_set = silhouette_score(blobs[[&#39;V1&#39;, &#39;V2&#39;]], kmeans.labels_)
+    else:
+      s_data_set = np.nan # Not applicable for k=1
+
+    kmeans_indices.append([within_ss, ch_index, s_data_set])
+
+kmeans_indices_df = pd.DataFrame(kmeans_indices, columns=[&#39;Within-cluster Sum of Squares (Inertia)&#39;, &#39;Calinski-Harabasz Index&#39;, &#39;Average Silhouette Score&#39;])
+kmeans_indices_df.index = range(1, 11) # Set index to represent K values
+
+print(&quot;\nClustering Evaluation Metrics for different K:&quot;)
+print(kmeans_indices_df.to_string())
+
+# Illustration of the different indices
+plt.figure(figsize=(18, 5))
+
+# Plot Within-cluster Sum of Squares (Inertia)
+plt.subplot(1, 3, 1)
+plt.plot(kmeans_indices_df.index, kmeans_indices_df[&#39;Within-cluster Sum of Squares (Inertia)&#39;], marker=&#39;o&#39;)
+plt.title(&#39;Within-cluster Sum of Squares vs. K&#39;)
+plt.xlabel(&#39;Number of clusters (K)&#39;)
+plt.ylabel(&#39;Within-cluster Sum of Squares&#39;)
+plt.xticks(range(1, 11))
+plt.grid(True)
 
 
-<span class="c1"># Plot Average Silhouette Score</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kmeans_indices_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">kmeans_indices_df</span><span class="p">[</span><span class="s1">&#39;Average Silhouette Score&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Average Silhouette Score vs. K&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of clusters (K)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Average Silhouette Score&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+# Plot Calinski-Harabasz Index
+plt.subplot(1, 3, 2)
+plt.plot(kmeans_indices_df.index, kmeans_indices_df[&#39;Calinski-Harabasz Index&#39;], marker=&#39;o&#39;)
+plt.title(&#39;Calinski-Harabasz Index vs. K&#39;)
+plt.xlabel(&#39;Number of clusters (K)&#39;)
+plt.ylabel(&#39;Calinski-Harabasz Index&#39;)
+plt.xticks(range(1, 11))
+plt.grid(True)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+# Plot Average Silhouette Score
+plt.subplot(1, 3, 3)
+plt.plot(kmeans_indices_df.index, kmeans_indices_df[&#39;Average Silhouette Score&#39;], marker=&#39;o&#39;)
+plt.title(&#39;Average Silhouette Score vs. K&#39;)
+plt.xlabel(&#39;Number of clusters (K)&#39;)
+plt.ylabel(&#39;Average Silhouette Score&#39;)
+plt.xticks(range(1, 11))
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
 </pre></div>
 </div>
 </div>

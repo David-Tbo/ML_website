@@ -1,20 +1,20 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clustering: Gaussian Mixed Mixture (GMM) &mdash; Machine Learning and Deep Learning 0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
-      <script src="../../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
       <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -85,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section id="Clustering:-Gaussian-Mixed-Mixture-(GMM)">
-<h1>Clustering: Gaussian Mixed Mixture (GMM)<a class="headerlink" href="#Clustering:-Gaussian-Mixed-Mixture-(GMM)" title="Permalink to this heading">¶</a></h1>
+<h1>Clustering: Gaussian Mixed Mixture (GMM)<a class="headerlink" href="#Clustering:-Gaussian-Mixed-Mixture-(GMM)" title="Link to this heading">¶</a></h1>
 <p>🎯 <strong>Goal</strong></p>
 <div class="line-block">
 <div class="line">We want to <strong>approximate the distribution of the data as a mixture of two Gaussians (K = 2).</strong></div>
@@ -271,44 +271,44 @@ Then:
 </tbody>
 </table>
 <section id="Example-with-basic-Python-codes">
-<h2>Example with basic Python codes<a class="headerlink" href="#Example-with-basic-Python-codes" title="Permalink to this heading">¶</a></h2>
+<h2>Example with basic Python codes<a class="headerlink" href="#Example-with-basic-Python-codes" title="Link to this heading">¶</a></h2>
 <p>📌 <strong>Step 1: Initialization of parameters</strong></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[89]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-<span class="c1"># Load the dataset</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+# Load the dataset
+X = np.array([[1,1] , [2,1], [4,3], [5,4], [3,4]])
+print(X)
 
-<span class="c1"># for reproducibility</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+# for reproducibility
+np.random.seed(4)
 
-<span class="c1"># number of clusters</span>
-<span class="n">K</span> <span class="o">=</span> <span class="mi">2</span>
+# number of clusters
+K = 2
 
-<span class="c1"># randomly initialize the means by selecting K random points from the dataset</span>
-<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># shape (2, 4)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial means:&quot;</span><span class="p">)</span>
-<span class="n">mu1</span> <span class="o">=</span> <span class="n">mu</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mu1 : </span><span class="si">{</span><span class="n">mu1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">mu2</span> <span class="o">=</span> <span class="n">mu</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mu2 : </span><span class="si">{</span><span class="n">mu2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# randomly initialize the means by selecting K random points from the dataset
+indices = np.random.choice(len(X), size=K, replace=False)
+mu = X[indices].copy()  # shape (2, 4)
+print(&quot;Initial means:&quot;)
+mu1 = mu[:1]
+print(f&quot;mu1 : {mu1}&quot;)
+mu2 = mu[1:]
+print(f&quot;mu2 : {mu2}&quot;)
 
-<span class="c1"># covariance matrices (identity matrices for simplicity)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial covariance matrix:&quot;</span><span class="p">)</span>
-<span class="n">cov1</span> <span class="o">=</span> <span class="n">cov2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cov1</span><span class="p">)</span>
+# covariance matrices (identity matrices for simplicity)
+print(&quot;Initial covariance matrix:&quot;)
+cov1 = cov2 = np.eye(X.shape[1])
+print(cov1)
 
-<span class="n">pi1</span> <span class="o">=</span> <span class="n">pi2</span> <span class="o">=</span> <span class="mf">.5</span>  <span class="c1"># equal priors for both clusters</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial weights (priors):&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pi1 : </span><span class="si">{</span><span class="n">pi1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pi2 : </span><span class="si">{</span><span class="n">pi2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+pi1 = pi2 = .5  # equal priors for both clusters
+print(&quot;Initial weights (priors):&quot;)
+print(f&quot;pi1 : {pi1}&quot;)
+print(f&quot;pi2 : {pi2}&quot;)
 </pre></div>
 </div>
 </div>
@@ -338,43 +338,43 @@ pi2 : 0.5
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[90]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># E-step: calculate responsibilities</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># E-step: calculate responsibilities
+from scipy.stats import multivariate_normal
 
-<span class="c1"># Define the Gaussians</span>
-<span class="n">rv1</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mu1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">cov</span><span class="o">=</span><span class="n">cov1</span><span class="p">)</span>
-<span class="n">rv2</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mu2</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">cov</span><span class="o">=</span><span class="n">cov2</span><span class="p">)</span>
+# Define the Gaussians
+rv1 = multivariate_normal(mean=mu1.flatten(), cov=cov1)
+rv2 = multivariate_normal(mean=mu2.flatten(), cov=cov2)
 
-<span class="n">gammas</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list to store responsibilities</span>
+gammas = []  # list to store responsibilities
 
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
-    <span class="c1"># Compute likelihood under each Gaussian</span>
-    <span class="n">p1</span> <span class="o">=</span> <span class="n">pi1</span> <span class="o">*</span> <span class="n">rv1</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># = joint proba to observe x and x is in the cluster 1 = prior × likelihood = responsibility numerator for cluster 1</span>
-    <span class="n">p2</span> <span class="o">=</span> <span class="n">pi2</span> <span class="o">*</span> <span class="n">rv2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># = joint proba to observe x and x is in the cluster 2 = prior × likelihood = responsibility numerator for cluster 2</span>
+for x in X:
+    # Compute likelihood under each Gaussian
+    p1 = pi1 * rv1.pdf(x) # = joint proba to observe x and x is in the cluster 1 = prior × likelihood = responsibility numerator for cluster 1
+    p2 = pi2 * rv2.pdf(x) # = joint proba to observe x and x is in the cluster 2 = prior × likelihood = responsibility numerator for cluster 2
 
-    <span class="c1"># Normalize to get gamma (posterior probability for cluster 1)</span>
-    <span class="n">gamma1</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">/</span> <span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">)</span> <span class="c1"># if gamma1 is above 0.5, then x is more likely to belong to cluster 1</span>
-    <span class="n">gamma2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">gamma1</span>
-    <span class="n">gammas</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">gamma1</span><span class="p">,</span> <span class="n">gamma2</span><span class="p">])</span>
+    # Normalize to get gamma (posterior probability for cluster 1)
+    gamma1 = p1 / (p1 + p2) # if gamma1 is above 0.5, then x is more likely to belong to cluster 1
+    gamma2 = 1 - gamma1
+    gammas.append([gamma1, gamma2])
 
-<span class="c1"># Convert to array for easier inspection</span>
-<span class="n">gammas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gammas</span><span class="p">)</span>
+# Convert to array for easier inspection
+gammas = np.array(gammas)
 
-<span class="c1"># Show results</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gammas</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Gamma (Cluster 1)&quot;</span><span class="p">,</span> <span class="s2">&quot;Gamma (Cluster 2)&quot;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;X</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="c1"># Extra: two ways to calculate the probability of a point belonging to cluster 1 P(x_i | C_1))</span>
-<span class="c1"># 1. Using the formula for multivariate Gaussian distribution</span>
-<span class="n">prob1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">**</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">cov1</span><span class="p">)))</span> <span class="o">*</span> \
-    <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">mu1</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">cov1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">mu1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Probability for cluster 1: </span><span class="si">{</span><span class="n">prob1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# Show results
+df = pd.DataFrame(gammas, columns=[&quot;Gamma (Cluster 1)&quot;, &quot;Gamma (Cluster 2)&quot;])
+df.insert(0, &quot;Point&quot;, [f&quot;X{i}&quot; for i in range(1, len(X)+1)])
+print(df)
+# Extra: two ways to calculate the probability of a point belonging to cluster 1 P(x_i | C_1))
+# 1. Using the formula for multivariate Gaussian distribution
+prob1 = (1 / np.sqrt((2 * np.pi) ** X.shape[1] * np.linalg.det(cov1))) * \
+    np.exp(-0.5 * np.sum((X - mu1) @ np.linalg.inv(cov1) * (X - mu1), axis=1))
+print(f&quot;Probability for cluster 1: {prob1}&quot;)
 
-<span class="c1"># 2. Using scipy&#39;s multivariate_normal for the same calculation</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
-<span class="n">rv1</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mu1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">cov</span><span class="o">=</span><span class="n">cov1</span><span class="p">)</span>
-<span class="n">prob1</span> <span class="o">=</span> <span class="n">rv1</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Probability for cluster 1: </span><span class="si">{</span><span class="n">prob1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# 2. Using scipy&#39;s multivariate_normal for the same calculation
+from scipy.stats import multivariate_normal
+rv1 = multivariate_normal(mean=mu1.flatten(), cov=cov1)
+prob1 = rv1.pdf(X)
+print(f&quot;Probability for cluster 1: {prob1}&quot;)
 </pre></div>
 </div>
 </div>
@@ -400,43 +400,43 @@ Probability for cluster 1: [1.59154943e-01 9.65323526e-02 2.39279779e-04 5.93115
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[91]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- M-step ---&quot;</span><span class="p">)</span>
-<span class="n">gamma1</span> <span class="o">=</span> <span class="n">gammas</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Reshape for matrix operations</span>
-<span class="n">gamma2</span> <span class="o">=</span> <span class="n">gammas</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">N1</span> <span class="o">=</span> <span class="n">gamma1</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">N2</span> <span class="o">=</span> <span class="n">gamma2</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&quot;\n--- M-step ---&quot;)
+gamma1 = gammas[:, 0].reshape(-1, 1)  # Reshape for matrix operations
+gamma2 = gammas[:, 1].reshape(-1, 1)
+N1 = gamma1.sum()
+N2 = gamma2.sum()
 
-<span class="c1"># Updated means</span>
-<span class="n">mu1_new</span> <span class="o">=</span> <span class="p">(</span><span class="n">gamma1</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">N1</span>
-<span class="n">mu2_new</span> <span class="o">=</span> <span class="p">(</span><span class="n">gamma2</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">N2</span>
+# Updated means
+mu1_new = (gamma1 * X).sum(axis=0) / N1
+mu2_new = (gamma2 * X).sum(axis=0) / N2
 
-<span class="c1"># Updated covariances</span>
-<span class="n">cov1_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">cov2_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
-    <span class="n">diff1</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mu1_new</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">diff2</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mu2_new</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">cov1_new</span> <span class="o">+=</span> <span class="n">gamma1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">diff1</span> <span class="o">@</span> <span class="n">diff1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-    <span class="n">cov2_new</span> <span class="o">+=</span> <span class="n">gamma2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">diff2</span> <span class="o">@</span> <span class="n">diff2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+# Updated covariances
+cov1_new = np.zeros((X.shape[1], X.shape[1]))
+cov2_new = np.zeros((X.shape[1], X.shape[1]))
+for i in range(len(X)):
+    diff1 = (X[i] - mu1_new).reshape(-1, 1)
+    diff2 = (X[i] - mu2_new).reshape(-1, 1)
+    cov1_new += gamma1[i] * (diff1 @ diff1.T)
+    cov2_new += gamma2[i] * (diff2 @ diff2.T)
 
-<span class="n">cov1_new</span> <span class="o">/=</span> <span class="n">N1</span>
-<span class="n">cov2_new</span> <span class="o">/=</span> <span class="n">N2</span>
+cov1_new /= N1
+cov2_new /= N2
 
-<span class="c1"># Updated weights. It&#39;s the MLE estimate for the priors.</span>
-<span class="n">pi1_new</span> <span class="o">=</span> <span class="n">N1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">pi2_new</span> <span class="o">=</span> <span class="n">N2</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+# Updated weights. It&#39;s the MLE estimate for the priors.
+pi1_new = N1 / len(X)
+pi2_new = N2 / len(X)
 
-<span class="c1"># Show updated parameters</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- M-step ---&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Updated means:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mu1_new: </span><span class="si">{</span><span class="n">mu1_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mu2_new: </span><span class="si">{</span><span class="n">mu2_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Updated covariances:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cov1_new:</span><span class="se">\n</span><span class="si">{</span><span class="n">cov1_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cov2_new:</span><span class="se">\n</span><span class="si">{</span><span class="n">cov2_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Updated priors:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pi1_new: </span><span class="si">{</span><span class="n">pi1_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pi2_new: </span><span class="si">{</span><span class="n">pi2_new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# Show updated parameters
+print(&quot;\n--- M-step ---&quot;)
+print(&quot;Updated means:&quot;)
+print(f&quot;mu1_new: {mu1_new}&quot;)
+print(f&quot;mu2_new: {mu2_new}&quot;)
+print(&quot;\nUpdated covariances:&quot;)
+print(f&quot;cov1_new:\n{cov1_new}&quot;)
+print(f&quot;cov2_new:\n{cov2_new}&quot;)
+print(&quot;\nUpdated priors:&quot;)
+print(f&quot;pi1_new: {pi1_new}&quot;)
+print(f&quot;pi2_new: {pi2_new}&quot;)
 </pre></div>
 </div>
 </div>
@@ -470,90 +470,90 @@ pi2_new: 0.5970292693263132
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[95]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import multivariate_normal
 
-<span class="c1"># Dataset</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+# Dataset
+X = np.array([[1, 1], [2, 1], [4, 3], [5, 4], [3, 4]])
 
-<span class="c1"># Initialization</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">K</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">mu1</span> <span class="o">=</span> <span class="n">mu</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">mu2</span> <span class="o">=</span> <span class="n">mu</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-<span class="n">cov1</span> <span class="o">=</span> <span class="n">cov2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">pi1</span> <span class="o">=</span> <span class="n">pi2</span> <span class="o">=</span> <span class="mf">0.5</span>
+# Initialization
+np.random.seed(4)
+K = 2
+indices = np.random.choice(len(X), size=K, replace=False)
+mu = X[indices].copy()
+mu1 = mu[:1]
+mu2 = mu[1:]
+cov1 = cov2 = np.eye(X.shape[1])
+pi1 = pi2 = 0.5
 
-<span class="c1"># EM loop</span>
-<span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
-    <span class="c1"># E-step</span>
-    <span class="n">rv1</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mu1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">cov</span><span class="o">=</span><span class="n">cov1</span><span class="p">,</span> <span class="n">allow_singular</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">rv2</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mu2</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">cov</span><span class="o">=</span><span class="n">cov2</span><span class="p">,</span> <span class="n">allow_singular</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+# EM loop
+max_iter = 10
+for iteration in range(max_iter):
+    # E-step
+    rv1 = multivariate_normal(mean=mu1.flatten(), cov=cov1, allow_singular=True)
+    rv2 = multivariate_normal(mean=mu2.flatten(), cov=cov2, allow_singular=True)
 
-    <span class="n">gammas</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
-        <span class="n">p1</span> <span class="o">=</span> <span class="n">pi1</span> <span class="o">*</span> <span class="n">rv1</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">p2</span> <span class="o">=</span> <span class="n">pi2</span> <span class="o">*</span> <span class="n">rv2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">gamma1</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">/</span> <span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">)</span>
-        <span class="n">gamma2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">gamma1</span>
-        <span class="n">gammas</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">gamma1</span><span class="p">,</span> <span class="n">gamma2</span><span class="p">])</span>
-    <span class="n">gammas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gammas</span><span class="p">)</span>
+    gammas = []
+    for x in X:
+        p1 = pi1 * rv1.pdf(x)
+        p2 = pi2 * rv2.pdf(x)
+        gamma1 = p1 / (p1 + p2)
+        gamma2 = 1 - gamma1
+        gammas.append([gamma1, gamma2])
+    gammas = np.array(gammas)
 
-    <span class="c1"># M-step</span>
-    <span class="n">gamma1</span> <span class="o">=</span> <span class="n">gammas</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">gamma2</span> <span class="o">=</span> <span class="n">gammas</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">N1</span> <span class="o">=</span> <span class="n">gamma1</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-    <span class="n">N2</span> <span class="o">=</span> <span class="n">gamma2</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    # M-step
+    gamma1 = gammas[:, 0].reshape(-1, 1)
+    gamma2 = gammas[:, 1].reshape(-1, 1)
+    N1 = gamma1.sum()
+    N2 = gamma2.sum()
 
-    <span class="n">mu1_new</span> <span class="o">=</span> <span class="p">(</span><span class="n">gamma1</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">N1</span>
-    <span class="n">mu2_new</span> <span class="o">=</span> <span class="p">(</span><span class="n">gamma2</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">N2</span>
+    mu1_new = (gamma1 * X).sum(axis=0) / N1
+    mu2_new = (gamma2 * X).sum(axis=0) / N2
 
-    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-6</span>
-    <span class="n">cov1_new</span> <span class="o">+=</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">cov2_new</span> <span class="o">+=</span> <span class="n">epsilon</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
-        <span class="n">diff1</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mu1_new</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">diff2</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mu2_new</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">cov1_new</span> <span class="o">+=</span> <span class="n">gamma1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">diff1</span> <span class="o">@</span> <span class="n">diff1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="n">cov2_new</span> <span class="o">+=</span> <span class="n">gamma2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">diff2</span> <span class="o">@</span> <span class="n">diff2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    epsilon = 1e-6
+    cov1_new += epsilon * np.eye(X.shape[1])
+    cov2_new += epsilon * np.eye(X.shape[1])
+    for i in range(len(X)):
+        diff1 = (X[i] - mu1_new).reshape(-1, 1)
+        diff2 = (X[i] - mu2_new).reshape(-1, 1)
+        cov1_new += gamma1[i] * (diff1 @ diff1.T)
+        cov2_new += gamma2[i] * (diff2 @ diff2.T)
 
-    <span class="n">cov1_new</span> <span class="o">/=</span> <span class="n">N1</span>
-    <span class="n">cov2_new</span> <span class="o">/=</span> <span class="n">N2</span>
+    cov1_new /= N1
+    cov2_new /= N2
 
-    <span class="n">pi1_new</span> <span class="o">=</span> <span class="n">N1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="n">pi2_new</span> <span class="o">=</span> <span class="n">N2</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    pi1_new = N1 / len(X)
+    pi2_new = N2 / len(X)
 
-    <span class="c1"># Update parameters for next iteration</span>
-    <span class="n">mu1</span><span class="p">,</span> <span class="n">mu2</span> <span class="o">=</span> <span class="n">mu1_new</span><span class="p">,</span> <span class="n">mu2_new</span>
-    <span class="n">cov1</span><span class="p">,</span> <span class="n">cov2</span> <span class="o">=</span> <span class="n">cov1_new</span><span class="p">,</span> <span class="n">cov2_new</span>
-    <span class="n">pi1</span><span class="p">,</span> <span class="n">pi2</span> <span class="o">=</span> <span class="n">pi1_new</span><span class="p">,</span> <span class="n">pi2_new</span>
+    # Update parameters for next iteration
+    mu1, mu2 = mu1_new, mu2_new
+    cov1, cov2 = cov1_new, cov2_new
+    pi1, pi2 = pi1_new, pi2_new
 
-<span class="c1"># -------------------------------</span>
-<span class="c1"># Final results display</span>
-<span class="c1"># -------------------------------</span>
+# -------------------------------
+# Final results display
+# -------------------------------
 
-<span class="c1"># Table of responsibilities</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">gammas</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Gamma (Cluster 1)&quot;</span><span class="p">,</span> <span class="s2">&quot;Gamma (Cluster 2)&quot;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Point&quot;</span><span class="p">,</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;X</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final responsibilities (posterior probabilities):&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+# Table of responsibilities
+df = pd.DataFrame(gammas, columns=[&quot;Gamma (Cluster 1)&quot;, &quot;Gamma (Cluster 2)&quot;])
+df.insert(0, &quot;Point&quot;, [f&quot;X{i}&quot; for i in range(1, len(X)+1)])
+print(&quot;\nFinal responsibilities (posterior probabilities):&quot;)
+print(df)
 
-<span class="c1"># Probability of a point belonging to cluster 1 — manual method</span>
-<span class="n">prob1_manual</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">**</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">cov1</span><span class="p">)))</span> <span class="o">*</span> \
-    <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">mu1</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">cov1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">mu1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Probability of belonging to cluster 1 (manual formula):&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob1_manual</span><span class="p">)</span>
+# Probability of a point belonging to cluster 1 — manual method
+prob1_manual = (1 / np.sqrt((2 * np.pi) ** X.shape[1] * np.linalg.det(cov1))) * \
+    np.exp(-0.5 * np.sum((X - mu1) @ np.linalg.inv(cov1) * (X - mu1), axis=1))
+print(&quot;\nProbability of belonging to cluster 1 (manual formula):&quot;)
+print(prob1_manual)
 
-<span class="c1"># Probability of a point belonging to cluster 1 — scipy method</span>
-<span class="n">rv1</span> <span class="o">=</span> <span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mu1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">cov</span><span class="o">=</span><span class="n">cov1</span><span class="p">)</span>
-<span class="n">prob1_scipy</span> <span class="o">=</span> <span class="n">rv1</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Probability of belonging to cluster 1 (scipy):&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob1_scipy</span><span class="p">)</span>
+# Probability of a point belonging to cluster 1 — scipy method
+rv1 = multivariate_normal(mean=mu1.flatten(), cov=cov1)
+prob1_scipy = rv1.pdf(X)
+print(&quot;\nProbability of belonging to cluster 1 (scipy):&quot;)
+print(prob1_scipy)
 <br/></pre></div>
 </div>
 </div>
@@ -580,59 +580,59 @@ Probability of belonging to cluster 1 (scipy):
 </div>
 </section>
 <section id="Example-with-sklearn-on-the-Iris-dataset">
-<h2>Example with sklearn on the Iris dataset<a class="headerlink" href="#Example-with-sklearn-on-the-Iris-dataset" title="Permalink to this heading">¶</a></h2>
+<h2>Example with sklearn on the Iris dataset<a class="headerlink" href="#Example-with-sklearn-on-the-Iris-dataset" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[92]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="kn">import</span> <span class="n">GaussianMixture</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn import datasets
+from sklearn.mixture import GaussianMixture
+import numpy as np
+import pandas as pd
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+import matplotlib.pyplot as plt
 
-<span class="c1"># Load the iris dataset</span>
-<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
-<span class="n">species</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span>
+# Load the iris dataset
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+species = iris.target_names
 
-<span class="c1"># Fit Gaussian Mixture Models with 1 to 10 components and compute BIC</span>
-<span class="n">bics</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Bayesian Information Criterion, BIC = -2log(L) + k log(n), where k is the number of parameters, n is the number of data points and L is the likelihood of the model given the data.</span>
-<span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
-    <span class="n">gmm</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">gmm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-    <span class="n">bics</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gmm</span><span class="o">.</span><span class="n">bic</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
-    <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gmm</span><span class="p">)</span>
+# Fit Gaussian Mixture Models with 1 to 10 components and compute BIC
+bics = [] # Bayesian Information Criterion, BIC = -2log(L) + k log(n), where k is the number of parameters, n is the number of data points and L is the likelihood of the model given the data.
+models = []
+for n in range(1, 11):
+    gmm = GaussianMixture(n_components=n, covariance_type=&#39;full&#39;, random_state=0)
+    gmm.fit(X)
+    bics.append(gmm.bic(X))
+    models.append(gmm)
 
-<span class="c1"># Plot BIC values</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">bics</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of components&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BIC&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;BIC for GMM on Iris dataset&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+# Plot BIC values
+plt.plot(range(1, 11), bics, marker=&#39;o&#39;)
+plt.xlabel(&#39;Number of components&#39;)
+plt.ylabel(&#39;BIC&#39;)
+plt.title(&#39;BIC for GMM on Iris dataset&#39;)
+plt.show()
 
-<span class="c1"># According to BIC, the best model has 2 components</span>
-<span class="n">best_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">bics</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best number of components according to BIC: </span><span class="si">{</span><span class="n">best_n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+# According to BIC, the best model has 2 components
+best_n = np.argmin(bics) + 1
+print(f&quot;Best number of components according to BIC: {best_n}&quot;)
 
-<span class="c1"># Fit GMM with 2 components</span>
-<span class="n">gmm_best</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">best_n</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">gmm_best</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="n">gmm_best</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+# Fit GMM with 2 components
+gmm_best = GaussianMixture(n_components=best_n, covariance_type=&#39;full&#39;, random_state=0)
+gmm_best.fit(X)
+labels = gmm_best.predict(X)
 
-<span class="c1"># Contingency table between predicted classes and true species</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rownames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Predicted&#39;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;True Species&#39;</span><span class="p">])</span>
+# Contingency table between predicted classes and true species
+pd.crosstab(labels, y, rownames=[&#39;Predicted&#39;], colnames=[&#39;True Species&#39;])
 
-<span class="c1"># If we force a model with 3 components (as in the R code)</span>
-<span class="n">gmm_3</span> <span class="o">=</span> <span class="n">GaussianMixture</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">covariance_type</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">gmm_3</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">labels_3</span> <span class="o">=</span> <span class="n">gmm_3</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+# If we force a model with 3 components (as in the R code)
+gmm_3 = GaussianMixture(n_components=3, covariance_type=&#39;full&#39;, random_state=0)
+gmm_3.fit(X)
+labels_3 = gmm_3.predict(X)
 
-<span class="c1"># Contingency table for 3 components</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">labels_3</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rownames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Predicted (3 classes)&#39;</span><span class="p">],</span> <span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;True Species&#39;</span><span class="p">])</span>
+# Contingency table for 3 components
+pd.crosstab(labels_3, y, rownames=[&#39;Predicted (3 classes)&#39;], colnames=[&#39;True Species&#39;])
 </pre></div>
 </div>
 </div>

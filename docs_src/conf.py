@@ -38,6 +38,13 @@ exclude_patterns = [
     '_build',
     'Thumbs.db',
     '.DS_Store',
+    '**/.venv/**',
+    '**/.venv',
+    '**/.venv/*',
+    '**/.venv/**/*',
+    'AI/**/.venv',
+    'AI/**/.venv/*',
+    'AI/**/.venv/**/*',
     'AI/AI_agents/**',
     'AI/Big_Data/**',
     'AI/computer_vision/**',
@@ -48,6 +55,8 @@ exclude_patterns = [
     'AI/machine_learning 2/supervised_learning/**',
     'AI/NLP/**',
     'AI/reinforcement_learning/**',
+    'AI/probabilities/**',
+    'AI/statistic/**',
     '**/.ipynb_checkpoints/**',
 ]
 

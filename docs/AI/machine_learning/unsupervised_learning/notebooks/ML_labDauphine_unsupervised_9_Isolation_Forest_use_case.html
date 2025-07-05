@@ -1,20 +1,20 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clustering: Isolation Forest Visualzation Use Case &mdash; Machine Learning and Deep Learning 0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
-      <script src="../../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
       <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -85,19 +85,19 @@
            <div itemprop="articleBody">
              
   <section id="Clustering:-Isolation-Forest-Visualzation-Use-Case">
-<h1>Clustering: Isolation Forest Visualzation Use Case<a class="headerlink" href="#Clustering:-Isolation-Forest-Visualzation-Use-Case" title="Permalink to this heading">¶</a></h1>
+<h1>Clustering: Isolation Forest Visualzation Use Case<a class="headerlink" href="#Clustering:-Isolation-Forest-Visualzation-Use-Case" title="Link to this heading">¶</a></h1>
 <p>Based on Andy McDonald’s work (YouTube: <a class="reference external" href="https://www.youtube.com/watch?v=O9VvmWj-JAk">Andy McDonald</a>).</p>
 <section id="Importing-Libraries-&amp;-Data">
-<h2>Importing Libraries &amp; Data<a class="headerlink" href="#Importing-Libraries-&-Data" title="Permalink to this heading">¶</a></h2>
+<h2>Importing Libraries &amp; Data<a class="headerlink" href="#Importing-Libraries-&-Data" title="Link to this heading">¶</a></h2>
 <p>The idea is that anomalies are few and different, so the Isolation Forest algorithm isolates anomalies instead of profiling normal data points. It does this by randomly selecting a feature and then randomly selecting a split value between the maximum and minimum values of the selected feature. The number of splits required to isolate a point is the anomaly score, with lower scores indicating anomalies.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">IsolationForest</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.ensemble import IsolationForest
 </pre></div>
 </div>
 </div>
@@ -105,7 +105,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;/Users/davidtbo/Library/Mobile Documents/com~apple~CloudDocs/data/external/german_credit.csv&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df = pd.read_csv(r&#39;/Users/davidtbo/Library/Mobile Documents/com~apple~CloudDocs/data/external/german_credit.csv&#39;)
 </pre></div>
 </div>
 </div>
@@ -113,7 +113,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df.describe()
 </pre></div>
 </div>
 </div>
@@ -238,7 +238,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df.info()
 </pre></div>
 </div>
 </div>
@@ -281,7 +281,7 @@ memory usage: 164.2+ KB
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df = df.dropna()
 </pre></div>
 </div>
 </div>
@@ -289,7 +289,7 @@ memory usage: 164.2+ KB
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df.info()
 </pre></div>
 </div>
 </div>
@@ -330,12 +330,12 @@ memory usage: 164.2+ KB
 </div>
 </section>
 <section id="Building-an-Isolation-Forest-Model-(2-Features)">
-<h2>Building an Isolation Forest Model (2 Features)<a class="headerlink" href="#Building-an-Isolation-Forest-Model-(2-Features)" title="Permalink to this heading">¶</a></h2>
+<h2>Building an Isolation Forest Model (2 Features)<a class="headerlink" href="#Building-an-Isolation-Forest-Model-(2-Features)" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anomaly_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;credit_amount&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>anomaly_inputs = [&#39;credit_amount&#39;, &#39;age&#39;]
 </pre></div>
 </div>
 </div>
@@ -343,7 +343,7 @@ memory usage: 164.2+ KB
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_IF</span> <span class="o">=</span> <span class="n">IsolationForest</span><span class="p">(</span><span class="n">contamination</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_IF = IsolationForest(contamination=0.05, random_state=42)
 </pre></div>
 </div>
 </div>
@@ -351,7 +351,7 @@ memory usage: 164.2+ KB
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_IF</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">anomaly_inputs</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model_IF.fit(df[anomaly_inputs])
 </pre></div>
 </div>
 </div>
@@ -985,7 +985,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;anomaly_scores&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_IF</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">anomaly_inputs</span><span class="p">])</span> <span class="c1"># &lt;0 is an outlier, &gt;0 is an inlier</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df[&#39;anomaly_scores&#39;] = model_IF.decision_function(df[anomaly_inputs]) # &lt;0 is an outlier, &gt;0 is an inlier
 </pre></div>
 </div>
 </div>
@@ -993,7 +993,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;anomaly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_IF</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">anomaly_inputs</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df[&#39;anomaly&#39;] = model_IF.predict(df[anomaly_inputs])
 </pre></div>
 </div>
 </div>
@@ -1001,7 +1001,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s1">&#39;credit_amount&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;anomaly_scores&#39;</span><span class="p">,</span><span class="s1">&#39;anomaly&#39;</span><span class="p">]</span> <span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df.loc[:, [&#39;credit_amount&#39;, &#39;age&#39;,&#39;anomaly_scores&#39;,&#39;anomaly&#39;] ]
 </pre></div>
 </div>
 </div>
@@ -1121,25 +1121,25 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">outlier_plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">outlier_method_name</span><span class="p">,</span> <span class="n">x_var</span><span class="p">,</span> <span class="n">y_var</span><span class="p">,</span>
-                 <span class="n">xaxis_limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">yaxis_limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def outlier_plot(data, outlier_method_name, x_var, y_var,
+                 xaxis_limits=[0,1], yaxis_limits=[0,1]):
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outlier Method: </span><span class="si">{</span><span class="n">outlier_method_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    print(f&#39;Outlier Method: {outlier_method_name}&#39;)
 
-    <span class="n">method</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">outlier_method_name</span><span class="si">}</span><span class="s1">_anomaly&#39;</span>
+    method = f&#39;{outlier_method_name}_anomaly&#39;
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of anomalous values </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;anomaly&#39;</span><span class="p">]</span><span class="o">==-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of non anomalous values  </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;anomaly&#39;</span><span class="p">]</span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total Number of Values: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    print(f&quot;Number of anomalous values {len(data[data[&#39;anomaly&#39;]==-1])}&quot;)
+    print(f&quot;Number of non anomalous values  {len(data[data[&#39;anomaly&#39;]== 1])}&quot;)
+    print(f&#39;Total Number of Values: {len(data)}&#39;)
 
-    <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s1">&#39;anomaly&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;anomaly&#39;</span><span class="p">,</span> <span class="n">hue_order</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">x_var</span><span class="p">,</span> <span class="n">y_var</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outlier Method: </span><span class="si">{</span><span class="n">outlier_method_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="n">xaxis_limits</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">yaxis_limits</span><span class="p">)</span>
-    <span class="n">axes</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Outliers</span><span class="se">\n</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;anomaly&#39;</span><span class="p">]</span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2"> points&quot;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Inliers</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;anomaly&#39;</span><span class="p">]</span><span class="o">==</span><span class="w">  </span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="s2"> points&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">g</span>
+    g = sns.FacetGrid(data, col=&#39;anomaly&#39;, height=4, hue=&#39;anomaly&#39;, hue_order=[1,-1])
+    g.map(sns.scatterplot, x_var, y_var)
+    g.fig.suptitle(f&#39;Outlier Method: {outlier_method_name}&#39;, y=1.10, fontweight=&#39;bold&#39;)
+    g.set(xlim=xaxis_limits, ylim=yaxis_limits)
+    axes = g.axes.flatten()
+    axes[0].set_title(f&quot;Outliers\n{len(data[data[&#39;anomaly&#39;]== -1])} points&quot;)
+    axes[1].set_title(f&quot;Inliers\n {len(data[data[&#39;anomaly&#39;]==  1])} points&quot;)
+    return g
 </pre></div>
 </div>
 </div>
@@ -1147,7 +1147,7 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outlier_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;Isolation Forest&#39;</span><span class="p">,</span> <span class="s1">&#39;credit_amount&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20000</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">]);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>outlier_plot(df, &#39;Isolation Forest&#39;, &#39;credit_amount&#39;, &#39;age&#39;, [0, 20000], [0, 80]);
 </pre></div>
 </div>
 </div>
@@ -1171,12 +1171,12 @@ Total Number of Values: 1000
 </div>
 </section>
 <section id="Building-an-Isolation-Forest-Model-Using-Multiple-Features">
-<h2>Building an Isolation Forest Model Using Multiple Features<a class="headerlink" href="#Building-an-Isolation-Forest-Model-Using-Multiple-Features" title="Permalink to this heading">¶</a></h2>
+<h2>Building an Isolation Forest Model Using Multiple Features<a class="headerlink" href="#Building-an-Isolation-Forest-Model-Using-Multiple-Features" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anomaly_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span><span class="s1">&#39;credit_amount&#39;</span><span class="p">,</span><span class="s1">&#39;installment_commitment&#39;</span><span class="p">,</span><span class="s1">&#39;residence_since&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;existing_credits&#39;</span><span class="p">,</span><span class="s1">&#39;num_dependents&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>anomaly_inputs = [&#39;duration&#39;,&#39;credit_amount&#39;,&#39;installment_commitment&#39;,&#39;residence_since&#39;,&#39;age&#39;,&#39;existing_credits&#39;,&#39;num_dependents&#39;]
 </pre></div>
 </div>
 </div>
@@ -1184,11 +1184,11 @@ Total Number of Values: 1000
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anomaly_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;duration&#39;</span><span class="p">,</span><span class="s1">&#39;credit_amount&#39;</span><span class="p">,</span><span class="s1">&#39;installment_commitment&#39;</span><span class="p">,</span><span class="s1">&#39;residence_since&#39;</span><span class="p">,</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;existing_credits&#39;</span><span class="p">,</span><span class="s1">&#39;num_dependents&#39;</span><span class="p">]</span>
-<span class="n">model_IF</span> <span class="o">=</span> <span class="n">IsolationForest</span><span class="p">(</span><span class="n">contamination</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model_IF</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">anomaly_inputs</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;anomaly_scores&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_IF</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">anomaly_inputs</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;anomaly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model_IF</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">anomaly_inputs</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>anomaly_inputs = [&#39;duration&#39;,&#39;credit_amount&#39;,&#39;installment_commitment&#39;,&#39;residence_since&#39;,&#39;age&#39;,&#39;existing_credits&#39;,&#39;num_dependents&#39;]
+model_IF = IsolationForest(contamination=0.05, random_state=42)
+model_IF.fit(df[anomaly_inputs])
+df[&#39;anomaly_scores&#39;] = model_IF.decision_function(df[anomaly_inputs])
+df[&#39;anomaly&#39;] = model_IF.predict(df[anomaly_inputs])
 <br/></pre></div>
 </div>
 </div>
@@ -1196,7 +1196,7 @@ Total Number of Values: 1000
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outlier_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;Isolation Forest&#39;</span><span class="p">,</span> <span class="s1">&#39;credit_amount&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20000</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">]);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>outlier_plot(df, &#39;Isolation Forest&#39;, &#39;credit_amount&#39;, &#39;age&#39;, [0, 20000], [0, 80]);
 </pre></div>
 </div>
 </div>
@@ -1222,8 +1222,8 @@ Total Number of Values: 1000
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#ff7f0e&#39;</span><span class="p">,</span> <span class="s1">&#39;#1f77b4&#39;</span><span class="p">]</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="n">anomaly_inputs</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;anomaly&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>palette = [&#39;#ff7f0e&#39;, &#39;#1f77b4&#39;]
+sns.pairplot(df, vars=anomaly_inputs, hue=&#39;anomaly&#39;, palette=palette)
 </pre></div>
 </div>
 </div>

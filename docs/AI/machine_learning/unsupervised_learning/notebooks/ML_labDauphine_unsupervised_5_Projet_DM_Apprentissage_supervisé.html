@@ -1,20 +1,20 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" data-content_root="../../../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Devoir maison - Apprentissage supervisé &mdash; Machine Learning and Deep Learning 0.1 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/nbsphinx-code-cells.css?v=2aa19091" />
 
   
-      <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js?v=e031e9a9"></script>
-      <script src="../../../../_static/doctools.js?v=888ff710"></script>
-      <script src="../../../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
       <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -72,20 +72,20 @@
            <div itemprop="articleBody">
              
   <section id="Devoir-maison---Apprentissage-supervisé">
-<h1>Devoir maison - Apprentissage supervisé<a class="headerlink" href="#Devoir-maison---Apprentissage-supervisé" title="Permalink to this heading">¶</a></h1>
+<h1>Devoir maison - Apprentissage supervisé<a class="headerlink" href="#Devoir-maison---Apprentissage-supervisé" title="Link to this heading">¶</a></h1>
 </section>
 <section id="Cours-enseigné-par-Fabrice-Rossi">
-<h1>Cours enseigné par Fabrice Rossi<a class="headerlink" href="#Cours-enseigné-par-Fabrice-Rossi" title="Permalink to this heading">¶</a></h1>
+<h1>Cours enseigné par Fabrice Rossi<a class="headerlink" href="#Cours-enseigné-par-Fabrice-Rossi" title="Link to this heading">¶</a></h1>
 <section id="Université-Paris-Dauphine">
-<h2>Université Paris-Dauphine<a class="headerlink" href="#Université-Paris-Dauphine" title="Permalink to this heading">¶</a></h2>
+<h2>Université Paris-Dauphine<a class="headerlink" href="#Université-Paris-Dauphine" title="Link to this heading">¶</a></h2>
 </section>
 <section id="Executive-Master-Statistique-&amp;-Big-Data">
-<h2>Executive Master Statistique &amp; Big Data<a class="headerlink" href="#Executive-Master-Statistique-&-Big-Data" title="Permalink to this heading">¶</a></h2>
+<h2>Executive Master Statistique &amp; Big Data<a class="headerlink" href="#Executive-Master-Statistique-&-Big-Data" title="Link to this heading">¶</a></h2>
 </section>
 <section id="Auteur:-David-Thébault">
-<h2>Auteur: David Thébault<a class="headerlink" href="#Auteur:-David-Thébault" title="Permalink to this heading">¶</a></h2>
+<h2>Auteur: David Thébault<a class="headerlink" href="#Auteur:-David-Thébault" title="Link to this heading">¶</a></h2>
 <section id="Introduction">
-<h3>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this heading">¶</a></h3>
+<h3>Introduction<a class="headerlink" href="#Introduction" title="Link to this heading">¶</a></h3>
 <p>Ce projet s’inscrit dans le cadre de l’Executive Master Statistique et Big Data de Paris-Dauphine et la validation des connaissances en apprentissage supervisé.</p>
 <p>Nous utiliserons les techniques et méthodes enseignées pour:</p>
 <ul class="simple">
@@ -97,18 +97,18 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Chargement des différents jeux de données</span>
-<span class="c1"># Le nombre de fichiers à charger étant conséquents, nous utiliserons un chargement global selon le répertoire.</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Chargement des différents jeux de données
+# Le nombre de fichiers à charger étant conséquents, nous utiliserons un chargement global selon le répertoire.
 
-<span class="kn">import</span> <span class="nn">os</span>
+import os
 
-<span class="c1"># récupérer le chemin du répertoire courant</span>
-<span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le répertoire courant est : &quot;</span> <span class="o">+</span> <span class="n">path</span><span class="p">)</span>
+# récupérer le chemin du répertoire courant
+path = os.getcwd()
+print(&quot;Le répertoire courant est : &quot; + path)
 
-<span class="c1"># récupérer le nom du répertoire courant</span>
-<span class="n">repn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le nom du répertoire est : &quot;</span> <span class="o">+</span> <span class="n">repn</span><span class="p">)</span>
+# récupérer le nom du répertoire courant
+repn = os.path.basename(path)
+print(&quot;Le nom du répertoire est : &quot; + repn)
 </pre></div>
 </div>
 </div>
@@ -125,14 +125,14 @@ Le nom du répertoire est : 17_Apprentissage_supervisé
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Liste des fichiers de notre répertoire</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Liste des fichiers de notre répertoire
 
-<span class="c1">#list = os.listdir(&#39;.&#39;)</span>
-<span class="c1">#print(list)</span>
+#list = os.listdir(&#39;.&#39;)
+#print(list)
 
-<span class="c1"># Méthode 2: Liste des fichiers du répertoire</span>
-<span class="n">FichList</span> <span class="o">=</span> <span class="p">[</span> <span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">f</span><span class="p">))</span> <span class="p">]</span>
-<span class="c1">#print(FichList)</span>
+# Méthode 2: Liste des fichiers du répertoire
+FichList = [ f for f in os.listdir(&#39;.&#39;) if os.path.isfile(os.path.join(&#39;.&#39;,f)) ]
+#print(FichList)
 </pre></div>
 </div>
 </div>
@@ -140,7 +140,7 @@ Le nom du répertoire est : 17_Apprentissage_supervisé
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_data</span> <span class="o">=</span> <span class="s1">&#39;./project-9/project-9-files&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>path_data = &#39;./project-9/project-9-files&#39;
 </pre></div>
 </div>
 </div>
@@ -148,8 +148,8 @@ Le nom du répertoire est : 17_Apprentissage_supervisé
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path_data</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>list = os.listdir(path_data)
+print(list)
 </pre></div>
 </div>
 </div>
@@ -165,8 +165,8 @@ Le nom du répertoire est : 17_Apprentissage_supervisé
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FichList</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">list</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">f</span><span class="p">))]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">FichList</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>FichList = [f for f in list if os.path.isfile(os.path.join(&#39;.&#39;,f))]
+print(FichList)
 </pre></div>
 </div>
 </div>
@@ -182,8 +182,8 @@ Le nom du répertoire est : 17_Apprentissage_supervisé
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import pandas as pd
 <br/></pre></div>
 </div>
 </div>
@@ -226,14 +226,14 @@ code_eco_sect.csv
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">liste</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># initialisation de la liste qui va nous servir à stocker les fichiers</span>
-<span class="k">for</span> <span class="n">path</span><span class="p">,</span> <span class="n">subdirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">path_data</span><span class="p">):</span> <span class="c1"># objet contenant un path,subdirs et les files</span>
-    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span> <span class="c1"># pour tous les fichiers</span>
-        <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;.csv&#39;</span><span class="p">:</span> <span class="c1"># si le fichier se termine par .csv</span>
-            <span class="c1">#print(os.path.join(path, name)) # alors affiche son répertoire/name</span>
-            <span class="n">liste</span> <span class="o">=</span> <span class="n">liste</span> <span class="o">+</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">)]</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>liste = [] # initialisation de la liste qui va nous servir à stocker les fichiers
+for path, subdirs, files in os.walk(path_data): # objet contenant un path,subdirs et les files
+    for name in files: # pour tous les fichiers
+        if name[-4:] == &#39;.csv&#39;: # si le fichier se termine par .csv
+            #print(os.path.join(path, name)) # alors affiche son répertoire/name
+            liste = liste + [os.path.join(path, name)]
+            print(name)
+print(liste)
 </pre></div>
 </div>
 </div>
@@ -241,24 +241,24 @@ code_eco_sect.csv
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>file_count = len(liste)
 
-<span class="c1"># create empty list</span>
-<span class="n">dataframes_list</span> <span class="o">=</span> <span class="p">[]</span>
+# create empty list
+dataframes_list = []
 
-<span class="c1"># append datasets to the list</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">file_count</span><span class="p">):</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">liste</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-    <span class="n">dataframes_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+# append datasets to the list
+for i in range(file_count):
+    df = pd.read_csv(liste[i])
+    dataframes_list.append(df)
 
-<span class="c1"># display datsets</span>
-<span class="c1">#for dataset in dataframes_list:</span>
-<span class="c1">#    display(dataset)</span>
+# display datsets
+#for dataset in dataframes_list:
+#    display(dataset)
 
-<span class="c1"># len(liste) = 27</span>
-<span class="n">dataframes_list</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+# len(liste) = 27
+dataframes_list[10]
 
-<span class="c1"># on pourrait renommer les dataframes avec leur nom d&#39;origine...</span>
+# on pourrait renommer les dataframes avec leur nom d&#39;origine...
 </pre></div>
 </div>
 </div>
@@ -471,7 +471,7 @@ code_eco_sect.csv
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">liste</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>range(len(liste))
 </pre></div>
 </div>
 </div>
@@ -488,7 +488,7 @@ range(0, 27)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">concat</span><span class="p">([</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">],</span> <span class="n">keys</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d = concat([read_csv(f, index_col=0, header=None, axis=1) for f in files], keys=files)
 </pre></div>
 </div>
 </div>
@@ -602,7 +602,7 @@ During handling of the above exception, another exception occurred:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df
 </pre></div>
 </div>
 </div>
