@@ -1,4 +1,6 @@
 docs/_sources/
 docs/_build/
 _build/
+docs_src/_build/
 docs_src/_sources/
+.DS_Store
